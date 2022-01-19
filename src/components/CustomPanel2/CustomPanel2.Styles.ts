@@ -3,8 +3,8 @@ import styled from 'react-emotion';
 export const CustomPanel2Styles = styled('div')
   `
     color: #fff;
-    padding: 2px;
     border-left: 0.5px solid black;
+    padding: 8px;
 
     .scheduler-panes {
       margin: 10px;

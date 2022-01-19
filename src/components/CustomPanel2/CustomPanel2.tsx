@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CustomPanel2Styles } from './CustomPanel2.Styles';
 import PatientInformationPane from './Panes/PatientInformationPane/PatientInformationPane';
-import PatientInteractionPane from './Panes/PatientInteractionPane/PatientInteractionPane';
 import CareManagementPane from './Panes/CareManagementPane/CareManagementPane';
 import TelehealthPane from './Panes/TelehealthPane/TelehealthPane';
 import { FlexInfo } from '../Interface';
@@ -21,25 +20,13 @@ const CustomPanel2 = ({ flexInfo }: CustomPanel2Props) => {
   if (workerSkills[0] === EDUCATION) {
     return (
         <CustomPanel2Styles>
-          <div className='container'>
-            <div className='grid-one'>
-              <PatientInteractionPane/>
-            </div>
-            <div className='grid-two'>
-            <PatientInformationPane/>
-            </div>
-            <div className='grid-three'>
-              <CareManagementPane/>
-            </div>
-            <div className='grid-four'>
-              <TelehealthPane/>
-            </div>
-          </div>
+          <Grid container spacing={8}>
+            <Grid item xs={12} sm={6}><PatientInformationPane/></Grid>
+            <Grid item xs={12} sm={6}><CareManagementPane/></Grid>
+            <Grid item xs={12} sm={4}><TelehealthPane/></Grid>
+            <Grid item xs={12} sm={8}><AppointmentSchedulingPane/></Grid>
+          </Grid>
         </CustomPanel2Styles>
-        // interaction details
-        // primary information
-        // care management programs
-        // patitent care information
     );
   } else if (workerSkills[0] === SCHEDULING) {
     return (

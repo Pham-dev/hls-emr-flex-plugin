@@ -52,7 +52,7 @@ export default class HlsEmrPlugin extends FlexPlugin {
     //flex.AgentDesktopView.Panel1.Content.add(<CustomTaskListContainer key="HlsEmrPlugin-component" />, options);
     flex.AgentDesktopView.Panel1.Content.add(<div key="hello-component">{"Hello World"}</div>, options);
     flex.AgentDesktopView.Panel2.Content.add(<CustomPanel2 key="CustomPanel2-component" flexInfo={flexInfo} /> , options);
-    flex.CRMContainer.Content.replace(isScheduler ? <div key="empty-div-component"/> : <CustomCRMContainer key="CustomCRMContainer-component" flexInfo={flexInfo} />, options);
+    flex.CRMContainer.Content.replace(isScheduler ? <div key="empty-div-component"/> : <div key="empty-div-component"/>, options);
     flex.TaskInfoPanel.Content.add(<div key="hello"></div>)
     
   }
