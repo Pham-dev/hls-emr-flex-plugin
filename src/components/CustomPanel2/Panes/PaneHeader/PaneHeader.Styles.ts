@@ -7,4 +7,5 @@ export const PaneHeaderStyles = styled('div')
     background-color: #0066b2;  
     padding-left: 6px;
     font-weight: 900;
+    border-radius: 5px 5px 0px 0px;
   `;

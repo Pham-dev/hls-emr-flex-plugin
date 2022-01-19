@@ -7,7 +7,7 @@ import TelehealthPane from './Panes/TelehealthPane/TelehealthPane';
 import { FlexInfo } from '../Interface';
 import { EDUCATION, SCHEDULING } from '../constants';
 import { Grid } from '@material-ui/core';
-import AppointmentSchedulingPane from '../CustomCRMContainer/AppointmentSchedulingPane/AppointmentSchedulingPane';
+import AppointmentSchedulingPane from './Panes/AppointmentSchedulingPane/AppointmentSchedulingPane';
 
 interface CustomPanel2Props {
   flexInfo: FlexInfo;
@@ -37,6 +37,8 @@ const CustomPanel2 = ({ flexInfo }: CustomPanel2Props) => {
         </Grid>
       </CustomPanel2Styles>      
     );
+  } else {
+    throw new Error("Unknown Worker Skill!");
   }
 }
 

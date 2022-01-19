@@ -1,4 +1,4 @@
-import PaneHeader from "../../CustomPanel2/Panes/PaneHeader/PaneHeader";
+import PaneHeader from "../PaneHeader/PaneHeader";
 import { AppointmentSchedulingPaneStyles } from "./AppointmentSchedulingPane.Styles";
 
 interface AppointmentSchedulingPaneProps {

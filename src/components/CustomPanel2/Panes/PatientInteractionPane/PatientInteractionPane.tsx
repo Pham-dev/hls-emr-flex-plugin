@@ -7,9 +7,8 @@ interface PatientInteractionPaneProps {
 
 const PatientInteractionPane = ({}: PatientInteractionPaneProps) => {
   return (
-    <div>
+    <PatientInteractionPaneStyles>
       <PaneHeader text="Interaction Details"/>
-      <PatientInteractionPaneStyles>
         <ul>
           <li className="interaction">
             <span>{"💬  01/05/2022"}{" 08:32 am"}<br/></span>
@@ -25,8 +24,7 @@ const PatientInteractionPane = ({}: PatientInteractionPaneProps) => {
             <span><strong>{"Current"}</strong></span>
           </li>
         </ul>
-      </PatientInteractionPaneStyles>
-    </div>
+    </PatientInteractionPaneStyles>
   );
 }
 
