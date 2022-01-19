@@ -3,7 +3,6 @@ import styled from 'react-emotion';
 export const PatientInformationPaneBodyStyles = styled('div')
   `
     background-color: white;
-    color: black;
 
     .patient-name {
       color: black;
@@ -13,6 +12,7 @@ export const PatientInformationPaneBodyStyles = styled('div')
     }
 
     .patient-info {
+      color: black;
       display: flex;
       display: -webkit-box;
       display: -moz-box;

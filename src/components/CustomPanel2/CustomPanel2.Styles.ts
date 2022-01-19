@@ -4,6 +4,11 @@ export const CustomPanel2Styles = styled('div')
   `
     color: #fff;
     padding: 2px;
+    border-left: 0.5px solid black;
+
+    .scheduler-panes {
+      margin: 10px;
+    }
     
     .container {
       display: flex;

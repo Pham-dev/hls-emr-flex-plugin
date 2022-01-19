@@ -1,13 +1,31 @@
 import React from 'react';
 import { VERSION } from '@twilio/flex-ui';
-import { FlexPlugin, loadCSS } from 'flex-plugin';
-
-import CustomTaskListContainer from './components/CustomTaskList/CustomTaskList.Container';
+import { FlexPlugin } from 'flex-plugin';
 import reducers, { namespace } from './states';
 import CustomPanel2 from './components/CustomPanel2/CustomPanel2';
 import CustomCRMContainer from './components/CustomCRMContainer/CustomCRMContainer';
 
 const PLUGIN_NAME = 'HlsEmrPlugin';
+
+function getFlexObject(workerClient) {
+  return {
+    skills: workerClient.attributes.routing.skills,
+    full_name: workerClient.attributes.full_name,
+    name: workerClient.name,
+    email: workerClient.attributes.email,
+    workspaceSid: workerClient.workspaceSid,
+    token: workerClient._config.token,
+    accountSid: workerClient.accountSid,
+    sid: workerClient.sid
+  }
+}
+
+function getIsActiveReservation(workerClient) {
+  console.log("Worker CLient", workerClient)
+  console.log(workerClient.name)
+  console.log(workerClient.reservervations)
+  return workerClient.reservervations;
+}
 
 export default class HlsEmrPlugin extends FlexPlugin {
   constructor() {
@@ -23,14 +41,19 @@ export default class HlsEmrPlugin extends FlexPlugin {
    */
   async init(flex, manager) {
     this.registerReducers(manager);
-    flex.AgentDesktopView.Panel1.defaultProps.tasks= "helo"
+    flex.AgentDesktopView.Panel1.defaultProps.tasks= "helo";
+
+    const flexInfo = getFlexObject(manager.workerClient);
+    const isScheduler = flexInfo.skills[0] === 'Scheduling' ? true : false;
+    console.log(isScheduler);
 
     const options = { sortOrder: -1 };
-    loadCSS('https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css');
+
     //flex.AgentDesktopView.Panel1.Content.add(<CustomTaskListContainer key="HlsEmrPlugin-component" />, options);
     flex.AgentDesktopView.Panel1.Content.add(<div key="hello-component">{"Hello World"}</div>, options);
-    flex.AgentDesktopView.Panel2.Content.add(<CustomPanel2 key="CustomPanel2-component"/>, options);
-    flex.CRMContainer.Content.replace(<CustomCRMContainer key="CustomCRMContainer-component"/>, options);
+    flex.AgentDesktopView.Panel2.Content.add(<CustomPanel2 key="CustomPanel2-component" flexInfo={flexInfo} /> , options);
+    flex.CRMContainer.Content.replace(isScheduler ? <div key="empty-div-component"/> : <CustomCRMContainer key="CustomCRMContainer-component" flexInfo={flexInfo} />, options);
+    flex.TaskInfoPanel.Content.add(<div key="hello"></div>)
     
   }
 
