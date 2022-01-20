@@ -25,7 +25,8 @@
     "noUnusedParameters": false
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",  
+    "functions"
   ],
   "exclude": [
     "./**/*.test.ts",

@@ -38,8 +38,3 @@ export const PatientInformationPaneBodyStyles = styled('div')
       margin-right: 8px;
     }  
   `;
-
-  export const PatientInformationPaneContainerStyles = styled('div')
-  `
-    font-family: sans-serif;
-  `;

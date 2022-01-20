@@ -5,7 +5,7 @@ import CustomPanel2 from './CustomPanel2';
 
 // Use Redux to attach these states to the component
 const mapStateToProps = (state) => ({
-  isOpen: state['hls-emr'].customTaskList.isOpen,
+  isOpen: state['hello-world'].customTaskList.isOpen,
 });
 
 // Just matches the Dispatch which is the action to perform on the component
