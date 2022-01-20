@@ -2,9 +2,10 @@ import React from 'react';
 import { VERSION } from '@twilio/flex-ui';
 import { FlexPlugin } from 'flex-plugin';
 import reducers, { namespace } from './states';
-import CustomPanel2 from './components/CustomPanel2/CustomPanel2';
 import PatientInteractionPane from './components/CustomPanel2/Panes/PatientInteractionPane/PatientInteractionPane';
 import NoTasksPanel2 from './components/NoTasksPanel2/NoTasksPanel2';
+import CustomTaskListContainer from './components/CustomTaskList/CustomTaskList.Container';
+import CustomPanel2Container from './components/CustomPanel2/CustomPanel2.Container';
 
 const PLUGIN_NAME = 'HlsEmrPlugin';
 
@@ -19,13 +20,6 @@ function getFlexObject(workerClient) {
     accountSid: workerClient.accountSid,
     sid: workerClient.sid
   }
-}
-
-function getIsActiveReservation(workerClient) {
-  console.log("Worker CLient", workerClient)
-  console.log(workerClient.name)
-  console.log(workerClient.reservervations)
-  return workerClient.reservervations;
 }
 
 export default class HlsEmrPlugin extends FlexPlugin {
@@ -46,18 +40,17 @@ export default class HlsEmrPlugin extends FlexPlugin {
     const flexInfo = getFlexObject(manager.workerClient);
     const options = { sortOrder: -1 };
     const tasks = manager.store.getState().flex.worker.tasks;
+
     
-    tasks.forEach(
-      (value, key) => {
-        console.log(value.status);
-        if (value.taskStatus === "assigned") {
-          flex.AgentDesktopView.Panel2.Content.add(<CustomPanel2 key={`CustomPanel2-Worker-${key}-component`} flexInfo={flexInfo} /> , options);
-        }
-      }
-    );
-    
-    if (!tasks.length) flex.AgentDesktopView.Panel2.Content.replace(<NoTasksPanel2 key="No-Panel2" flexInfo={flexInfo}></NoTasksPanel2> , options);
+    console.log(manager.store.getState());
     flex.CRMContainer.Content.replace(<div key="empty-div-component"/>, options);
+    if (!tasks.size) {
+      //flex.AgentDesktopView.Panel2.Content.add(<CustomTaskListContainer key="hello"/>, options);
+      // flex.AgentDesktopView.Panel2.Content.add(<NoTasksPanel2 key="No-Panel2" flexInfo={flexInfo}></NoTasksPanel2> , options);
+      flex.AgentDesktopView.Panel2.Content.add(<CustomPanel2Container key={"CustomPanel2-component"} flexInfo={flexInfo}/> , options);
+    } else {
+      flex.AgentDesktopView.Panel2.Content.add(<CustomPanel2Container key={"CustomPanel2-component"} flexInfo={flexInfo}/> , options);
+    }
     flex.TaskInfoPanel.Content.add(<PatientInteractionPane key="PatientInteractionPane-component"/>, options);
   }
 

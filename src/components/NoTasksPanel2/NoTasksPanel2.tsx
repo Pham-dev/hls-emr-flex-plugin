@@ -14,7 +14,6 @@ const theme = createMuiTheme({
 });
 
 const NoTasksPanel2 = () => {
-
   return (
     <NoTasksPanel2Styles>
       <MuiThemeProvider theme={theme} >
