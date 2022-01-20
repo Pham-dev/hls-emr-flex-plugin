@@ -5,6 +5,8 @@ import { CustomTaskListComponentStyles } from './CustomTaskList.Styles';
 
 // It is recommended to keep components stateless and use redux for managing states
 const CustomTaskList = (props) => {
+  console.log("Props CustomTaskList", props);
+  console.log(props.dismissBar);
   if (!props.isOpen) {
     return null;
   }
