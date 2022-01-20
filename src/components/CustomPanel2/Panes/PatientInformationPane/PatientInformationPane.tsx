@@ -1,5 +1,5 @@
 import PaneHeader from "../PaneHeader/PaneHeader";
-import { PatientInformationPaneContainerStyles, PatientInformationPaneBodyStyles } from "./PatientInformationPane.Styles";
+import { PatientInformationPaneBodyStyles } from "./PatientInformationPane.Styles";
 
 interface PatientInformationPaneProps {
   className?: string;
@@ -9,7 +9,7 @@ const PatientInformationPane = ({className = ''}: PatientInformationPaneProps) =
   return (
     <PatientInformationPaneBodyStyles>
       <PaneHeader text="Patient Information"/>
-      <div className="patient-name"><strong>{"Name:"}</strong> Mary Ann Doe</div>
+      <span className="patient-name"><strong>{"Name:"}</strong> Mary Ann Doe</span>
       <ul className="patient-info">
         <li className="patient-list-item"><strong>Phone Number: </strong>256-123-4567{" "}</li>
         <li className="patient-list-item"><strong>Email: </strong><a>mdoe@gmail.com </a></li>

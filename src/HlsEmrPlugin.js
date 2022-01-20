@@ -4,6 +4,7 @@ import { FlexPlugin } from 'flex-plugin';
 import reducers, { namespace } from './states';
 import CustomPanel2 from './components/CustomPanel2/CustomPanel2';
 import PatientInteractionPane from './components/CustomPanel2/Panes/PatientInteractionPane/PatientInteractionPane';
+import NoTasksPanel2 from './components/NoTasksPanel2/NoTasksPanel2';
 
 const PLUGIN_NAME = 'HlsEmrPlugin';
 
@@ -40,13 +41,23 @@ export default class HlsEmrPlugin extends FlexPlugin {
    * @param manager { import('@twilio/flex-ui').Manager }
    */
   async init(flex, manager) {
+    // console.log(manager.store.getState());
     this.registerReducers(manager);
     const flexInfo = getFlexObject(manager.workerClient);
-    const isScheduler = flexInfo.skills[0] === 'Scheduling' ? true : false;
-
     const options = { sortOrder: -1 };
-    flex.AgentDesktopView.Panel2.Content.add(<CustomPanel2 key="CustomPanel2-component" flexInfo={flexInfo} /> , options);
-    flex.CRMContainer.Content.replace(isScheduler ? <div key="empty-div-component"/> : <div key="empty-div-component"/>, options);
+    const tasks = manager.store.getState().flex.worker.tasks;
+    
+    tasks.forEach(
+      (value, key) => {
+        console.log(value.status);
+        if (value.taskStatus === "assigned") {
+          flex.AgentDesktopView.Panel2.Content.add(<CustomPanel2 key={`CustomPanel2-Worker-${key}-component`} flexInfo={flexInfo} /> , options);
+        }
+      }
+    );
+    
+    if (!tasks.length) flex.AgentDesktopView.Panel2.Content.replace(<NoTasksPanel2 key="No-Panel2" flexInfo={flexInfo}></NoTasksPanel2> , options);
+    flex.CRMContainer.Content.replace(<div key="empty-div-component"/>, options);
     flex.TaskInfoPanel.Content.add(<PatientInteractionPane key="PatientInteractionPane-component"/>, options);
   }
 
