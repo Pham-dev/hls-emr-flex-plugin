@@ -2,20 +2,23 @@ import PaneHeader from "../PaneHeader/PaneHeader";
 import { PatientInteractionPaneStyles } from "./PatientInteractionPane.Styles";
 
 interface PatientInteractionPaneProps {
-
+  timeStamps: { 
+    date: string, 
+    time: string 
+  };
 }
 
-const PatientInteractionPane = ({}: PatientInteractionPaneProps) => {
+const PatientInteractionPane = ({timeStamps}: PatientInteractionPaneProps) => {
   return (
     <PatientInteractionPaneStyles>
       <PaneHeader text="Interaction Details"/>
         <ul>
           <li className="interaction">
-            <span>{"💬  01/05/2022"}{" 08:32 am"}<br/></span>
+            <span>{"💬 "}{timeStamps.date}{" "}{timeStamps.time}<br/></span>
             <span>{"Website Chatbot triage"}</span>
           </li>
           <li className="interaction">
-            <span>{"💬  01/05/2022"}{" 08:34 am"}<br/></span>
+            <span>{"💬 "}{timeStamps.date}{" "}{timeStamps.time}<br/></span>
             <span>{"Chat with Scheduler"}</span>
           </li>
           <li className="interaction">

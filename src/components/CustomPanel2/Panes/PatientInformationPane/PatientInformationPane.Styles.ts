@@ -11,13 +11,19 @@ export const PatientInformationPaneBodyStyles = styled('div')
       0 22.3px 17.9px rgba(0, 0, 0, 0.072),
       0 41.8px 33.4px rgba(0, 0, 0, 0.086),
       0 100px 80px rgba(0, 0, 0, 0.12);
-    padding-bottom: 5px;
+    
+    .information {
+      padding: 8px;
+    }
+    
     .patient-name {
-      color: black;
       text-align: left;
       margin-left: 8px;
       padding-top: 4px;
+      text-align: center;
+      font-size: 18px;
     }
+    
 
     .patient-info {
       color: black;
@@ -32,9 +38,14 @@ export const PatientInformationPaneBodyStyles = styled('div')
       -webkit-flex-wrap: wrap;
       flex-wrap: wrap;
     }
+
     .patient-list-item {
       margin-top: 8px;
       margin-left: 8px;
       margin-right: 8px;
-    }  
+    }
+
+    strong {
+      font-weight: bold;
+    }
   `;
