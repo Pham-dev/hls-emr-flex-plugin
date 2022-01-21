@@ -3,7 +3,6 @@ import { VERSION } from '@twilio/flex-ui';
 import { FlexPlugin } from 'flex-plugin';
 import reducers, { namespace } from './states';
 import PatientInteractionPane from './components/CustomPanel2/Panes/PatientInteractionPane/PatientInteractionPane';
-import NoTasksPanel2 from './components/NoTasksPanel2/NoTasksPanel2';
 import CustomTaskListContainer from './components/CustomTaskList/CustomTaskList.Container';
 import CustomPanel2Container from './components/CustomPanel2/CustomPanel2.Container';
 
@@ -41,17 +40,15 @@ export default class HlsEmrPlugin extends FlexPlugin {
     const options = { sortOrder: -1 };
     const tasks = manager.store.getState().flex.worker.tasks;
 
-    
-    console.log(manager.store.getState());
+    //console.log(manager.store.getState());
     flex.CRMContainer.Content.replace(<div key="empty-div-component"/>, options);
-    if (!tasks.size) {
-      //flex.AgentDesktopView.Panel2.Content.add(<CustomTaskListContainer key="hello"/>, options);
-      // flex.AgentDesktopView.Panel2.Content.add(<NoTasksPanel2 key="No-Panel2" flexInfo={flexInfo}></NoTasksPanel2> , options);
-      flex.AgentDesktopView.Panel2.Content.add(<CustomPanel2Container key={"CustomPanel2-component"} flexInfo={flexInfo}/> , options);
-    } else {
-      flex.AgentDesktopView.Panel2.Content.add(<CustomPanel2Container key={"CustomPanel2-component"} flexInfo={flexInfo}/> , options);
+    flex.AgentDesktopView.Panel2.Content.add(<CustomPanel2Container key={"CustomPanel2-component"} flexInfo={flexInfo} flex={flex}/> , options);
+    flex.AgentDesktopView.defaultProps.splitterOptions = {
+      minimumSecondPanelSize: "840px",
+      minimumFirstPanelSize: "360px",
+      initialFirstPanelSize: "440px"
     }
-    flex.TaskInfoPanel.Content.add(<PatientInteractionPane key="PatientInteractionPane-component"/>, options);
+    //flex.TaskInfoPanel.Content.add(<PatientInteractionPane key="PatientInteractionPane-component"/>, options);
   }
 
   /**

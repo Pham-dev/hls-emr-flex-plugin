@@ -9,6 +9,7 @@ import { Grid } from '@material-ui/core';
 import AppointmentSchedulingPane from './Panes/AppointmentSchedulingPane/AppointmentSchedulingPane';
 import { withTaskContext } from '@twilio/flex-ui';
 import NoTasksPanel2 from '../NoTasksPanel2/NoTasksPanel2';
+import PatientInteractionPane from './Panes/PatientInteractionPane/PatientInteractionPane';
 
 const hasAssignedTask = (tasks) => {
   for (let task of tasks) {
@@ -21,13 +22,16 @@ const hasAssignedTask = (tasks) => {
 // It is recommended to keep components stateless and use redux for managing states
 const CustomPanel2 = (props) => {
   const workerSkills = props.flexInfo.skills;
+  // console.log("props", props);
 
-  if (props.tasks.size && hasAssignedTask(props.tasks)) {
+  if (props.tasks.size && hasAssignedTask(props.tasks) && props.task && props.task.attributes) {
+    const timeStamps = { date: props.task.dateCreated.toDateString(), time: props.task.dateCreated.toTimeString() };
+    props.flex.TaskInfoPanel.Content.replace(<PatientInteractionPane key="PatientInteractionPane-component" timeStamps={timeStamps}/>, { sortOrder: -1 });
     if (workerSkills[0] === EDUCATION) {
       return (
           <CustomPanel2Styles>
-            <Grid container spacing={8}>
-              <Grid item xs={12} sm={6}><PatientInformationPane/></Grid>
+            <Grid container spacing={16}>
+              <Grid item xs={12} sm={6}><PatientInformationPane patientName={props.task.attributes.name}/></Grid>
               <Grid item xs={12} sm={6}><CareManagementPane/></Grid>
               <Grid item xs={12} sm={4}><TelehealthPane/></Grid>
               <Grid item xs={12} sm={8}><AppointmentSchedulingPane/></Grid>

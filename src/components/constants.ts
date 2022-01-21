@@ -1,2 +1,2 @@
-export const EDUCATION = 'Education';
-export const SCHEDULING = 'Scheduling';
+export const EDUCATION: string = 'Education';
+export const SCHEDULING: string = 'Scheduling';
