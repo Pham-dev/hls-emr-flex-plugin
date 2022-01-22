@@ -4,6 +4,7 @@ import { PatientInformationPaneBodyStyles } from "./PatientInformationPane.Style
 
 
 const PatientInformationPane = ({patientName = ''}) => {
+  console.log("PATIENT",patientName)
   return (
     <PatientInformationPaneBodyStyles>
       <PaneHeader text="Patient Information"/>

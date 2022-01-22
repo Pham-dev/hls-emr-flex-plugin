@@ -48,7 +48,8 @@ export default class HlsEmrPlugin extends FlexPlugin {
       minimumFirstPanelSize: "360px",
       initialFirstPanelSize: "440px"
     }
-    //flex.TaskInfoPanel.Content.add(<PatientInteractionPane key="PatientInteractionPane-component"/>, options);
+    // flex.TaskInfoPanel.Content.replace(<PatientInteractionPane key="PatientInteractionPane-component"/>, options);
+    // flex.TaskInfoPanel.Content.replace(<div key="empty-component"/>, options);
   }
 
   /**

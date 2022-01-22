@@ -24,7 +24,7 @@ const CustomPanel2 = (props) => {
   const workerSkills = props.flexInfo.skills;
   // console.log("props", props);
 
-  if (props.tasks.size && hasAssignedTask(props.tasks) && props.task && props.task.attributes) {
+  if (props && props.tasks.size && hasAssignedTask(props.tasks) && props.task && props.task.attributes) {
     const timeStamps = { date: props.task.dateCreated.toDateString(), time: props.task.dateCreated.toTimeString() };
     props.flex.TaskInfoPanel.Content.replace(<PatientInteractionPane key="PatientInteractionPane-component" timeStamps={timeStamps}/>, { sortOrder: -1 });
     if (workerSkills[0] === EDUCATION) {
@@ -33,7 +33,7 @@ const CustomPanel2 = (props) => {
             <Grid container spacing={16}>
               <Grid item xs={12} sm={6}><PatientInformationPane patientName={props.task.attributes.name}/></Grid>
               <Grid item xs={12} sm={6}><CareManagementPane/></Grid>
-              <Grid item xs={12} sm={4}><TelehealthPane/></Grid>
+              <Grid item xs={12} sm={4}><TelehealthPane nurseName={props.flexInfo.full_name}/></Grid>
               <Grid item xs={12} sm={8}><AppointmentSchedulingPane/></Grid>
             </Grid>
           </CustomPanel2Styles>
@@ -42,7 +42,7 @@ const CustomPanel2 = (props) => {
       return (
         <CustomPanel2Styles>
           <Grid direction='column' container className="scheduler">
-            <Grid item className="scheduler-panes"><PatientInformationPane/></Grid>
+            <Grid item className="scheduler-panes"><PatientInformationPane patientName={props.task.attributes.name}/></Grid>
             <Grid item className="scheduler-panes"><AppointmentSchedulingPane/></Grid>
           </Grid>
         </CustomPanel2Styles>      

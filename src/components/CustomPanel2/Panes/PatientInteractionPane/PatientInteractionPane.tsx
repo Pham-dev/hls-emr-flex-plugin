@@ -9,6 +9,7 @@ interface PatientInteractionPaneProps {
 }
 
 const PatientInteractionPane = ({timeStamps}: PatientInteractionPaneProps) => {
+  console.log("HELLO",timeStamps)
   return (
     <PatientInteractionPaneStyles>
       <PaneHeader text="Interaction Details"/>
