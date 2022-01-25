@@ -17,6 +17,12 @@ export const CareManagementPaneContentStyles = styled('div')
   `
     padding: 7px;
     color: black;
+
+    .enroll-btn {
+      background-color: #001489;
+      color: white;
+    }
+
     .checkboxes {
       
     }

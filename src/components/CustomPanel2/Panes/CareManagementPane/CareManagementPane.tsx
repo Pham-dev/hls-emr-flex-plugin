@@ -1,5 +1,6 @@
 import PaneHeader from "../PaneHeader/PaneHeader";
 import { CareManagementPaneContentStyles, CareManagementPaneStyles } from "./CareManagementPane.Styles";
+import Button from '@material-ui/core/Button';
 
 interface CareManagementPaneProps {}
 
@@ -17,6 +18,7 @@ const CareManagementPane = ({}: CareManagementPaneProps) => {
           <input className="check-item" type="checkbox" id="javascript" name="fav_language" value="JavaScript"/>
           <label> Exercise Made Easy</label>
         </div>
+        <Button className="enroll-btn" color="primary" variant="contained">Enroll</Button>
       </CareManagementPaneContentStyles>
     </CareManagementPaneStyles>
   );

@@ -5,6 +5,7 @@ import reducers, { namespace } from './states';
 import PatientInteractionPane from './components/CustomPanel2/Panes/PatientInteractionPane/PatientInteractionPane';
 import CustomTaskListContainer from './components/CustomTaskList/CustomTaskList.Container';
 import CustomPanel2Container from './components/CustomPanel2/CustomPanel2.Container';
+import { CustomTheme } from './CustomTheme';
 
 const PLUGIN_NAME = 'HlsEmrPlugin';
 
@@ -38,8 +39,15 @@ export default class HlsEmrPlugin extends FlexPlugin {
     this.registerReducers(manager);
     const flexInfo = getFlexObject(manager.workerClient);
     const options = { sortOrder: -1 };
-    const tasks = manager.store.getState().flex.worker.tasks;
+    const configuration = {
+      colorTheme: CustomTheme
+    };
 
+    flex.MainHeader.defaultProps.logoUrl = "https://code.hq.twilio.com/raw/salesengineering/owl-health/master/app/src/images/logoOwlHealthLg.png?token=AAABIT7DURXTJWI32VHOKJDB7BCPY"
+
+    manager.updateConfig(configuration);
+    manager.strings.NoTasksTitle = "Task Status";
+    manager.strings.NoTasks = "No Patient Tasks";
     //console.log(manager.store.getState());
     flex.CRMContainer.Content.replace(<div key="empty-div-component"/>, options);
     flex.AgentDesktopView.Panel2.Content.add(<CustomPanel2Container key={"CustomPanel2-component"} flexInfo={flexInfo} flex={flex}/> , options);
@@ -48,8 +56,6 @@ export default class HlsEmrPlugin extends FlexPlugin {
       minimumFirstPanelSize: "360px",
       initialFirstPanelSize: "440px"
     }
-    // flex.TaskInfoPanel.Content.replace(<PatientInteractionPane key="PatientInteractionPane-component"/>, options);
-    // flex.TaskInfoPanel.Content.replace(<div key="empty-component"/>, options);
   }
 
   /**

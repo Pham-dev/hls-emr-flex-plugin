@@ -4,6 +4,8 @@ export const PatientInformationPaneBodyStyles = styled('div')
   `
     background-color: white;
     border-radius: 5px 5px 5px 5px;
+    color: black;
+    
     box-shadow:
       0 2.8px 2.2px rgba(0, 0, 0, 0.034),
       0 6.7px 5.3px rgba(0, 0, 0, 0.048),
@@ -16,30 +18,27 @@ export const PatientInformationPaneBodyStyles = styled('div')
       padding: 8px;
     }
     
-    .patient-name {
-      text-align: left;
-      margin-left: 8px;
-      padding-top: 4px;
-      text-align: center;
-      font-size: 18px;
+    .divider {
+      height: 2px;
     }
     
-
+    .patient-name {
+      margin-left: 8px;
+      padding-top: 4px;
+      text-align: left;
+      font-size: 18px;
+      color: #F22F46;
+    }
+    
     .patient-info {
-      color: black;
-      display: flex;
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -moz-flex;
-      display: -webkit-flex;
-      display: flex;
-      -ms-box-orient: horizontal;
-      -webkit-flex-wrap: wrap;
-      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .insurance-info {
     }
 
     .patient-list-item {
+      display: inline-block;
       margin-top: 8px;
       margin-left: 8px;
       margin-right: 8px;

@@ -1,3 +1,4 @@
+import { EDUCATION } from "../../../constants";
 import PaneHeader from "../PaneHeader/PaneHeader";
 import { PatientInteractionPaneStyles } from "./PatientInteractionPane.Styles";
 
@@ -6,10 +7,11 @@ interface PatientInteractionPaneProps {
     date: string, 
     time: string 
   };
+  workerSkill: string;
 }
 
-const PatientInteractionPane = ({timeStamps}: PatientInteractionPaneProps) => {
-  console.log("HELLO",timeStamps)
+const PatientInteractionPane = ({timeStamps, workerSkill}: PatientInteractionPaneProps) => {
+  console.log("HELLO", workerSkill);
   return (
     <PatientInteractionPaneStyles>
       <PaneHeader text="Interaction Details"/>
@@ -22,11 +24,12 @@ const PatientInteractionPane = ({timeStamps}: PatientInteractionPaneProps) => {
             <span>{"💬 "}{timeStamps.date}{" "}{timeStamps.time}<br/></span>
             <span>{"Chat with Scheduler"}</span>
           </li>
-          <li className="interaction">
+          {workerSkill === EDUCATION && <li className="interaction">
             <span>{"🎥  01/05/2022"}{" 08:49 am"}<br/></span>
             <span>{"Video with Nurse Educator"}<br/></span>
             <span><strong>{"Current"}</strong></span>
           </li>
+          }
         </ul>
     </PatientInteractionPaneStyles>
   );

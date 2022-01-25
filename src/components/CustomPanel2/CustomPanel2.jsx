@@ -26,7 +26,7 @@ const CustomPanel2 = (props) => {
 
   if (props && props.tasks.size && hasAssignedTask(props.tasks) && props.task && props.task.attributes) {
     const timeStamps = { date: props.task.dateCreated.toDateString(), time: props.task.dateCreated.toTimeString() };
-    props.flex.TaskInfoPanel.Content.replace(<PatientInteractionPane key="PatientInteractionPane-component" timeStamps={timeStamps}/>, { sortOrder: -1 });
+    props.flex.TaskInfoPanel.Content.replace(<PatientInteractionPane key="PatientInteractionPane-component" timeStamps={timeStamps} workerSkill={workerSkills[0]}/>, { sortOrder: -1 });
     if (workerSkills[0] === EDUCATION) {
       return (
           <CustomPanel2Styles>
