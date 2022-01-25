@@ -34,7 +34,9 @@ export const PatientInformationPaneBodyStyles = styled('div')
       margin-bottom: 8px;
     }
 
-    .insurance-info {
+    .info {
+      display: flex;
+      flex-direction: column;
     }
 
     .patient-list-item {

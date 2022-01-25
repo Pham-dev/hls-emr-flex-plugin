@@ -31,10 +31,10 @@ const CustomPanel2 = (props) => {
       return (
           <CustomPanel2Styles>
             <Grid container spacing={16}>
-              <Grid item xs={12} sm={6}><PatientInformationPane patientName={props.task.attributes.name}/></Grid>
+              <Grid item xs={12} sm={6}><PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/></Grid>
               <Grid item xs={12} sm={6}><CareManagementPane/></Grid>
               <Grid item xs={12} sm={4}><TelehealthPane nurseName={props.flexInfo.full_name}/></Grid>
-              <Grid item xs={12} sm={8}><AppointmentSchedulingPane/></Grid>
+              <Grid item xs={12} sm={8}><AppointmentSchedulingPane skill={EDUCATION}/></Grid>
             </Grid>
           </CustomPanel2Styles>
       );
@@ -42,7 +42,7 @@ const CustomPanel2 = (props) => {
       return (
         <CustomPanel2Styles>
           <Grid direction='column' container className="scheduler">
-            <Grid item className="scheduler-panes"><PatientInformationPane patientName={props.task.attributes.name}/></Grid>
+            <Grid item className="scheduler-panes"><PatientInformationPane patientName={props.task.attributes.name} skill={SCHEDULING}/></Grid>
             <Grid item className="scheduler-panes"><AppointmentSchedulingPane/></Grid>
           </Grid>
         </CustomPanel2Styles>      

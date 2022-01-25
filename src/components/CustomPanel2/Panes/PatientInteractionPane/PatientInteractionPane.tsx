@@ -24,11 +24,12 @@ const PatientInteractionPane = ({timeStamps, workerSkill}: PatientInteractionPan
             <span>{"💬 "}{timeStamps.date}{" "}{timeStamps.time}<br/></span>
             <span>{"Chat with Scheduler"}</span>
           </li>
-          {workerSkill === EDUCATION && <li className="interaction">
-            <span>{"🎥  01/05/2022"}{" 08:49 am"}<br/></span>
-            <span>{"Video with Nurse Educator"}<br/></span>
-            <span><strong>{"Current"}</strong></span>
-          </li>
+          {workerSkill === EDUCATION && 
+            <li className="interaction">
+              <span>{"🎥  01/05/2022"}{" 08:49 am"}<br/></span>
+              <span>{"Video with Nurse Educator"}<br/></span>
+              <span><strong>{"Current"}</strong></span>
+            </li>
           }
         </ul>
     </PatientInteractionPaneStyles>
