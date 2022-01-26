@@ -20,7 +20,7 @@ const NoTasksPanel2 = () => {
       <MuiThemeProvider theme={theme}>
         <NoTasksPanel2Styles>
           <Paper className="paper">
-            <img width="30%" src="https://code.hq.twilio.com/raw/salesengineering/owl-health/master/app/src/images/logoOwlHealthLg.png?token=AAABIT7DURXTJWI32VHOKJDB7BCPY"/>
+            <img width="30%" src="https://hls-site-4115-dev.twil.io/owlhealth/images/logoOwlHealth.png"/>
             <Typography component="h4" color="secondary">
               No Assigned Tasks, please wait for a task or accept one.
             </Typography>

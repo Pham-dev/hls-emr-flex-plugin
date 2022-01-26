@@ -43,7 +43,7 @@ export default class HlsEmrPlugin extends FlexPlugin {
       colorTheme: CustomTheme
     };
 
-    flex.MainHeader.defaultProps.logoUrl = "https://code.hq.twilio.com/raw/salesengineering/owl-health/master/app/src/images/logoOwlHealthLg.png?token=AAABIT7DURXTJWI32VHOKJDB7BCPY"
+    flex.MainHeader.defaultProps.logoUrl = "https://hls-site-4115-dev.twil.io/owlhealth/images/logoOwlHealth.png"
 
     manager.updateConfig(configuration);
     manager.strings.NoTasksTitle = "Task Status";
