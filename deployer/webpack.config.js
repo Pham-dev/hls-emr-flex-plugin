@@ -1,9 +1,9 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/DeployApp.tsx',
+    entry: './src/index.js',
     output: {
-        filename: 'index.js',
+        filename: 'out.js',
         path: path.resolve(__dirname, 'assets')
     },
     resolve: {

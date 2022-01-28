@@ -5,9 +5,11 @@ exports.handler = void 0;
 require("@twilio-labs/serverless-runtime-types");
 const handler = function (context, event, callback) {
     const resp = new Twilio.Response();
-    resp.setBody({ message: "Hello World" });
-    console.log(context, event);
+    resp.setBody({ message: "Hello Leonss" });
+    console.log("context", context);
+    console.log("event", event);
+    console.log(process.env);
     resp.setStatusCode(200);
-    callback(null, resp);
+    return callback(null, resp);
 };
 exports.handler = handler;
