@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "backend": "twilio-run -p 3001",
-    "frontend": "react-scripts start",
+    "backend": "twilio-run start --functions-folder ./build/functions -p 3001",
+    "frontend": "BROWSER='google chrome' react-scripts start",
     "dev": "concurrently \"npm run frontend\" \"npx tsc --watch\" \"npm run backend\"",
     "deploy": "twilio-run deploy",
     "build-assets": "webpack --config webpack.config.js",

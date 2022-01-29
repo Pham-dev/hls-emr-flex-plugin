@@ -1,4 +1,5 @@
 import React from 'react';
+import AccountForm from './components/AccountForm/AccountForm';
 import Layout from './components/Layout/Layout';
 import './index.css'
 
@@ -16,10 +17,9 @@ import './index.css'
   return (
     <Layout>
       {/*  */}
-      <button onClick={deploy} className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-        Button
-      </button>
-      hello
+      {/* step 1: Your Twilio Account  */}
+      <AccountForm/>
+      {/* step 2: Set up your application */}
     </Layout>
   );
 }

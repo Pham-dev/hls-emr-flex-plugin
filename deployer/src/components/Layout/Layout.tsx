@@ -9,7 +9,9 @@ const Layout = ({children}: LayoutProps) => {
   return (
     <>
       <NavBar/>
-      {children}
+      <div className="grid grid-cols-10 gap-px">
+        {children}
+      </div>
     </>
   );
 };

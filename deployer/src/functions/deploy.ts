@@ -13,7 +13,7 @@ export const handler: ServerlessFunctionSignature = function(
   callback: ServerlessCallback
 ) {
   const resp = new Twilio.Response();
-  resp.setBody({ message: "Hello Leonss" });
+  resp.setBody({ message: "Hello Leons" });
   console.log("context", context);
   console.log("event", event);
   console.log(process.env);

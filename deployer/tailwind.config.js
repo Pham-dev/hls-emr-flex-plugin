@@ -12,6 +12,8 @@ module.exports = {
       'tangerine': '#F47C22',
       'egg-yolk': '#FFDD35',
       'orchid': '#8C5BD8',
+      'light-gray': '#f6f6f6',
+      'deploy-blue': '#030b5d',
     },
     extend: {},
   },
