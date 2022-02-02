@@ -2,11 +2,14 @@ import styled from 'react-emotion';
 
 export const PaneHeaderStyles = styled('div')
   `
-    text-align: left;
+    text-align: center;
     font-size: 16px;
-    background-color: #001489;  
+    background-color: #057d9e;  
     padding-left: 6px;
     font-weight: 900;
-    border-radius: 5px 5px 0px 0px;
     color: white;
+    height: 25px;
+    line-height: 25px;
+    padding-top: 4px;
+    padding-bottom: 4px;
   `;
