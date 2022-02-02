@@ -10,7 +10,7 @@ export const AppointmentSchedulingPaneStyles = styled('div')
       0 22.3px 17.9px rgba(0, 0, 0, 0.072),
       0 41.8px 33.4px rgba(0, 0, 0, 0.086),
       0 100px 80px rgba(0, 0, 0, 0.12);
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 0px 0px 5px 5px;
     .open-emr {
       width: 100%;
       position:relative;
