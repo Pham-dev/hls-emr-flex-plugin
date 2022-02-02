@@ -1,6 +1,9 @@
 # Twilio Serverless
 .twiliodeployinfo
 
+# Typescript Build Directory
+./build
+
 # Logs
 logs
 *.log
