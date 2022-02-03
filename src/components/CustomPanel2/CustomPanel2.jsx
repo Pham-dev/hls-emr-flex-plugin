@@ -30,9 +30,9 @@ const CustomPanel2 = (props) => {
     if (workerSkills[0] === EDUCATION) {
       return (
           <CustomPanel2Styles>
-            <Grid container spacing={16}>
-              <Grid item xs={12} sm={6}><PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/></Grid>
-              <Grid item xs={12} sm={6}><CareManagementPane/></Grid>
+            <Grid container spacing={16} grid-auto-rows={"1fr"}>
+              <Grid item xs={12} sm={4}><CareManagementPane/></Grid>
+              <Grid item xs={12} sm={8}><PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/></Grid>
               <Grid item xs={12} sm={4}><TelehealthPane nurseName={props.flexInfo.full_name}/></Grid>
               <Grid item xs={12} sm={8}><AppointmentSchedulingPane skill={EDUCATION}/></Grid>
             </Grid>

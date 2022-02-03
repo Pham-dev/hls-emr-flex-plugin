@@ -9,8 +9,8 @@ interface PaneHeaderProps {
 const PaneHeader = ({className = '', text}: PaneHeaderProps) => {
   return (
     <PaneHeaderStyles>
-      <div className={'' + className}>
-        {text}
+      <div className={'header-text' + className}>
+        {text.toUpperCase()}
       </div>
     </PaneHeaderStyles>
   );
