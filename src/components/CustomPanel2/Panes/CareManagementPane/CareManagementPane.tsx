@@ -1,10 +1,20 @@
 import PaneHeader from "../PaneHeader/PaneHeader";
 import { CareManagementPaneContentStyles, CareManagementPaneStyles } from "./CareManagementPane.Styles";
 import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import { teal, tealHover } from "../../../../CustomTheme";
 
-interface CareManagementPaneProps {}
+const styles = () => ({
+  button: {
+    background: teal,
+    '&:hover': {
+      background: tealHover,
+    },
+  }
+});
 
-const CareManagementPane = ({}: CareManagementPaneProps) => {
+const CareManagementPane = (props: { classes: any; }) => {
+  const { classes } = props;
   return (
     <CareManagementPaneStyles>
       <PaneHeader text="Care Management Programs"/>
@@ -18,10 +28,10 @@ const CareManagementPane = ({}: CareManagementPaneProps) => {
           <input className="check-item" type="checkbox" id="javascript" name="fav_language" value="JavaScript"/>
           <label> Exercise Made Easy</label>
         </div>
-        <Button className="enroll-btn" color="primary" variant="contained">Enroll</Button>
+        <Button className={classes.button} color="primary" variant="contained">Enroll</Button>
       </CareManagementPaneContentStyles>
     </CareManagementPaneStyles>
   );
 }
 
-export default CareManagementPane;
+export default withStyles(styles)(CareManagementPane);
