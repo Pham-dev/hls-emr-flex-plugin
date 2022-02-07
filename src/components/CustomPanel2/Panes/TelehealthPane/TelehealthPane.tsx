@@ -9,7 +9,7 @@ const TelehealthPane = ({ nurseName }: TelehealthPaneProps) => {
   return (
     <TelehealthPaneStyles>
       <PaneHeader text="Telehealth"/>
-      <iframe className="telehealth"  allow="camera; microphone" src={`https://telehealth-v2-6571-dev.twil.io/provider/index.html?token=InHvwJHNi0lW_a0lSV8WzP0qXzt4biyH5H-Q_g80QQM&name=${nurseName}`}></iframe>
+      <iframe className="telehealth"  allow="camera; microphone" src={`https://telehealth-v2-6571-dev.twil.io/provider/index.html?token=kSAraK1uhpYH42GaRsn8QRx6MMmDF0LCPbiV_9lXlvw&name=${nurseName}`}></iframe>
     </TelehealthPaneStyles>
   );
 }
