@@ -25,7 +25,16 @@ const AccountForm = () => {
               <span className='pr-2'>Set up your application</span>
             </div>
             <div className='pl-4 mb-1'>
-              <div>
+              <div className="verify-account-sid">
+                <label htmlFor={'ACCOUNT_SID'}>
+                  <span className='text-red mr-2'>*</span>
+                  <span>Verify Account SID</span>
+                </label>
+              </div>
+              <div className='mb-2'>
+                <input  className='w-100 px-2 py-2 rounded-md border' type={'text'} required name={'ACCOUNT_SID'}></input>
+              </div>
+              <div className="verify-account-sid">
                 <label htmlFor={'ACCOUNT_SID'}>
                   <span className='text-red mr-2'>*</span>
                   <span>Verify Account SID</span>

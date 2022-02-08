@@ -1,4 +1,5 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
+import InstallerCard from '../InstallerCard/InstallerCard';
 import NavBar from '../NavBar/NavBar';
 
 interface LayoutProps {
@@ -7,12 +8,14 @@ interface LayoutProps {
 
 const Layout = ({children}: LayoutProps) => {
   return (
-    <>
+    <div>
       <NavBar/>
-      <div className="grid grid-cols-10 gap-px">
+      {/* <div className="grid grid-cols-10 gap-px"> */}
+      <InstallerCard>
         {children}
-      </div>
-    </>
+      </InstallerCard>
+      {/* </div> */}
+    </div>
   );
 };
 
