@@ -1,4 +1,5 @@
-import { Typography, Divider } from "@material-ui/core";
+import { Typography, Divider, Icon as MIcon } from "@material-ui/core";
+import { Icon } from "@twilio/flex-ui";
 import { SCHEDULING } from "../../../../components/constants";
 import PaneHeader from "../PaneHeader/PaneHeader";
 import { PatientInformationPaneBodyStyles } from "./PatientInformationPane.Styles";
@@ -13,13 +14,51 @@ const PatientInformationPane = ({ patientName = '', skill }: PatientInformationP
     <PatientInformationPaneBodyStyles>
       <PaneHeader text="Patient Information"/>
       <div className="information">
-        <Typography className="patient-name" component={"h1"}><strong>{patientName}</strong></Typography>
+        {/* SCHEDULER */}
+        <div className="scheduler-patient">
+          <div className="column1">
+            <div className="flex-row-container">
+              <Icon icon="AgentsViewBold" />
+              <Typography className="patient-info" component={"h1"}><strong>{"Name: "}{patientName}</strong></Typography>
+            </div>
+            <div className="flex-row-container">
+              <MIcon>key</MIcon>
+              <Typography className="patient-info" component={"h1"}><strong>{"MRN: "}</strong>12-34-56 </Typography>
+            </div>
+            <Divider className="divider"/>
+            <div className="flex-row-container">
+              <Icon icon="CallBold" />
+              <Typography className="patient-info"><strong>{"Phone: "}</strong>256-123-4567</Typography>
+            </div>
+            <div className="flex-row-container">
+                <Icon icon="Email" />
+              <Typography className="patient-info"><strong>{"Email: "}</strong><a>mdoe@example.com</a></Typography>
+            </div>
+            <div className="flex-row-container">
+              <MIcon>home</MIcon>
+              <Typography className="patient-info"><strong>{"Address: "}</strong>123 Panorama Drive Broomfield CO 80020 </Typography>
+            </div>
+          </div>
+
+          <div className="column2 vertical-divider"></div>
+
+          <div className="column3">
+            <div className="flex-insurance-container">
+              <Icon icon="GenericTaskBold"/>
+              <Typography className="insurance-info">Insurance Info:</Typography>
+            </div>
+            <Typography className="insurance-content"><strong>{"Primary Insurance: "}</strong>256-123-4567</Typography>
+            <Typography className="insurance-content"><strong>{"ID #: "}</strong><a>A1234 12345</a></Typography>
+            <Typography className="insurance-content"><strong>{"Group #: "}</strong>12-34-56 </Typography>
+            <Typography className="insurance-content"><strong>{"Payer #: "}</strong>12345 1234</Typography>
+          </div>
+        </div>
+
         {skill === SCHEDULING ?
           <ul className="patient-info">
-            <li className="patient-list-item"><strong>{"Phone Number: "}</strong>256-123-4567</li>
-            <li className="patient-list-item"><strong>{"Email: "}</strong><a>mdoe@example.com</a></li>
-            <li className="patient-list-item"><strong>{"MRN: "}</strong>12-34-56 </li>
-            <li className="patient-list-item"><strong>{"Address: "}</strong>123 Panorama Drive Broomfield CO 80020 </li>
+            
+            
+            
           </ul>
           : 
           <ul className="patient-info">
@@ -27,13 +66,9 @@ const PatientInformationPane = ({ patientName = '', skill }: PatientInformationP
             <li className="patient-list-item"><strong>{"Chief Complaint: "}</strong>Diabetes, Type 2 </li>
           </ul>
         }
-        <Divider className="divider"/>
         {skill === SCHEDULING ?
           <ul className="">
-            <li className="patient-list-item"><strong>{"Primary Insurance: "}</strong>256-123-4567</li>
-            <li className="patient-list-item"><strong>{"ID #: "}</strong><a>A1234 12345</a></li>
-            <li className="patient-list-item"><strong>{"Group #: "}</strong>12-34-56 </li>
-            <li className="patient-list-item"><strong>{"Payer #: "}</strong>12345 1234</li>
+            
           </ul> 
           :
           <ul className="info">
