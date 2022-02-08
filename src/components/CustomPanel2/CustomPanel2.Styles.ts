@@ -17,6 +17,14 @@ export const CustomPanel2Styles = styled('div')
       flex-direction: row;
       padding: 0;
     }
+    
+    .first-row {
+      display: flex;
+      gap: 22px;
+    }
+
+    .flex-item {
+    }
 
     .grid-one {
       margin: 4px;

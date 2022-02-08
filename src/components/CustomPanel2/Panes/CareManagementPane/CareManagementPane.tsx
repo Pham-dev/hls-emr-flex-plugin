@@ -10,7 +10,7 @@ const styles = () => ({
     '&:hover': {
       background: tealHover,
     },
-    margin: "10px 0px 10px 0px",
+    margin: "22px 0px 0px 0px",
     width: "80%"
   }
 });

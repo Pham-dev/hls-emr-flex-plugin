@@ -8,9 +8,10 @@ export const PaneHeaderStyles = styled('div')
     padding-left: 6px;
     font-weight: 900;
     color: white;
-    height: 35px;
-    line-height: 35px;
+    height: 40px;
+    line-height: 40px;
     padding-top: 4px;
+    white-space: nowrap;
     .header-text {
       padding-left: 8px;
       font-family: arial

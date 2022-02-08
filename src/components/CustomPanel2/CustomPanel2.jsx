@@ -10,6 +10,7 @@ import AppointmentSchedulingPane from './Panes/AppointmentSchedulingPane/Appoint
 import { withTaskContext } from '@twilio/flex-ui';
 import NoTasksPanel2 from '../NoTasksPanel2/NoTasksPanel2';
 import PatientInteractionPane from './Panes/PatientInteractionPane/PatientInteractionPane';
+import AgentChecklistPane from './Panes/AgentChecklistPane/AgentChecklistPane';
 
 const hasAssignedTask = (tasks) => {
   for (let task of tasks) {
@@ -42,7 +43,12 @@ const CustomPanel2 = (props) => {
       return (
         <CustomPanel2Styles>
           <Grid direction='column' container className="scheduler">
-            <Grid item className="scheduler-panes"><PatientInformationPane patientName={props.task.attributes.name} skill={SCHEDULING}/></Grid>
+            <Grid item className="scheduler-panes">
+              <div className='first-row'>
+                <PatientInformationPane className="flex-item" patientName={props.task.attributes.name} skill={SCHEDULING}/>
+                <AgentChecklistPane className="flex-item" />
+              </div>
+            </Grid>
             <Grid item className="scheduler-panes"><AppointmentSchedulingPane/></Grid>
           </Grid>
         </CustomPanel2Styles>      
