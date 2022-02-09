@@ -18,5 +18,14 @@ ARG TWILIO_AUTH_TOKEN=token
 RUN twilio plugins:install @twilio-labs/plugin-serverless
 RUN twilio plugins:install @twilio-labs/plugin-flex
 
+WORKDIR /hls-deploy
+COPY Dockerfile package.json .env /hls-deploy
+COPY ./* /hls-deploy/
+
+RUN npm install
+
+EXPOSE 3000
+
 # Deploy to plugin
-RUN twilio flex:plugins:deploy --changelog "Deploy to Flex"
+#twilio flex:plugins:deploy --changelog "Deploy to Flex"
+CMD ["twilio", "flex:plugins:deploy", "--changelog", "deploy to flex"]
