@@ -8,7 +8,6 @@ export const CustomPanel2Styles = styled('div')
     font-size: 12px;
 
     .scheduler-panes {
-      margin: 10px;
     }
     
     .container {
@@ -24,6 +23,38 @@ export const CustomPanel2Styles = styled('div')
     }
 
     .flex-item {
+    }
+
+    .flex-col {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .flex-row {
+      display: flex;
+      flex-direction: row;
+      gap: 22px;
+    }
+
+    .first-row {
+      display: flex;
+      gap: 22px;
+      height: 80%;
+    }
+
+    .scheduler {
+      gap: 22px;
+    }
+
+    .item1 {
+      flex-grow: 2;
+    }
+
+    .flex-item {
+      
+      flex-grow: 1;
+      flex-basis: calc(100% / 2);
     }
 
     .grid-one {
