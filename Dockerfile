@@ -18,4 +18,5 @@ ARG TWILIO_AUTH_TOKEN=token
 RUN twilio plugins:install @twilio-labs/plugin-serverless
 RUN twilio plugins:install @twilio-labs/plugin-flex
 
-# Todo React Build Step
+# Deploy to plugin
+RUN twilio flex:plugins:deploy --changelog "Deploy to Flex"

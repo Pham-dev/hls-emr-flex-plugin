@@ -1,6 +1,20 @@
-# Your custom Twilio Flex Plugin
+# HLS Flex Plugin Providers
 
 Twilio Flex Plugins allow you to customize the appearance and behavior of [Twilio Flex](https://www.twilio.com/flex). If you want to learn more about the capabilities and how to use the API, check out our [Flex documentation](https://www.twilio.com/docs/flex).
+
+## Deploying this plugin to your Twilio Flex instance
+
+### Create a Flex account
+
+1. Ensure you sign up or login to your Twilio account.
+2. While in your Twilio console, go to the Overview of the Flex section under the Develop tab on the left-hand panel.
+3. Click on the "Create my Flex account" button on the page.
+4. Follow the steps to verify your email and phone and then after a couple minutes you should have a working-bare-bones Flex instance on your account.
+
+### Deploy the Plugin to your Flex Instance
+1. 
+
+
 
 ## Setup
 
