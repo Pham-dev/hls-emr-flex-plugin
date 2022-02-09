@@ -3,7 +3,6 @@ import { VERSION } from '@twilio/flex-ui';
 import { FlexPlugin } from 'flex-plugin';
 import reducers, { namespace } from './states';
 import PatientInteractionPane from './components/CustomPanel2/Panes/PatientInteractionPane/PatientInteractionPane';
-import CustomTaskListContainer from './components/CustomTaskList/CustomTaskList.Container';
 import CustomPanel2Container from './components/CustomPanel2/CustomPanel2.Container';
 import { CustomTheme } from './CustomTheme';
 
