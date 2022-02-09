@@ -19,7 +19,7 @@ RUN twilio plugins:install @twilio-labs/plugin-serverless
 RUN twilio plugins:install @twilio-labs/plugin-flex
 
 WORKDIR /hls-deploy
-COPY Dockerfile package.json .env /hls-deploy
+COPY Dockerfile package.json /hls-deploy
 COPY ./* /hls-deploy/
 
 RUN npm install
