@@ -10,6 +10,7 @@ import AppointmentSchedulingPane from './Panes/AppointmentSchedulingPane/Appoint
 import { withTaskContext } from '@twilio/flex-ui';
 import NoTasksPanel2 from '../NoTasksPanel2/NoTasksPanel2';
 import PatientInteractionPane from './Panes/PatientInteractionPane/PatientInteractionPane';
+import PreventativeCarePane from './Panes/PreventativeCarePane/PreventativeCarePane';
 
 const hasAssignedTask = (tasks) => {
   for (let task of tasks) {
@@ -41,10 +42,13 @@ const CustomPanel2 = (props) => {
     } else if (workerSkills[0] === SCHEDULING) {
       return (
         <CustomPanel2Styles>
-          <Grid direction='column' container className="scheduler">
-            <Grid item className="scheduler-panes"><PatientInformationPane patientName={props.task.attributes.name} skill={SCHEDULING}/></Grid>
-            <Grid item className="scheduler-panes"><AppointmentSchedulingPane/></Grid>
-          </Grid>
+          <div className="flex-col">
+            <div className="flex-row">
+              <PatientInformationPane className="flex-item item1" patientName={props.task.attributes.name} skill={SCHEDULING}/>
+              <PreventativeCarePane className="flex-item item2" />
+            </div>
+            <AppointmentSchedulingPane/>
+          </div>
         </CustomPanel2Styles>      
       );
     } else {

@@ -24,11 +24,11 @@ const CareManagementPane = (props: { classes: any; }) => {
       <CareManagementPaneContentStyles>
         <div className="checkboxes">
           <input className="check-item" type="checkbox" id="Diabetes Management" name="fav_language" value="HTML"/>
-          <label> Diabetes Management 🎂</label><br/>
+          <label> Diabetes Management </label><br/>
           <input className="check-item" type="checkbox" id="css" name="fav_language" value="CSS"/>
-          <label> Healthy Eating Habits 🥦</label><br/>
+          <label> Healthy Eating Habits </label><br/>
           <input className="check-item" type="checkbox" id="javascript" name="fav_language" value="JavaScript"/>
-          <label> Exercise Made Easy 🏃‍♀️</label>
+          <label> Exercise Made Easy </label>
         </div>
         <Button className={classes.button} color="primary" variant="contained">Enroll</Button>
       </CareManagementPaneContentStyles>

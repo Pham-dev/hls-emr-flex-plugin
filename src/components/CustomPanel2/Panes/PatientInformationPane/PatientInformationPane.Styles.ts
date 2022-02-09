@@ -5,7 +5,7 @@ export const PatientInformationPaneBodyStyles = styled('div')
     background-color: white;
     color: black;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-    font-size: 24px;
+    font-size: 14px;
     
     .information {
       padding: 8px;
@@ -67,24 +67,31 @@ export const PatientInformationPaneBodyStyles = styled('div')
     .scheduler-patient {
       display: flex;
       flex-direction: row;
-      gap: 20px;
+      gap: 4px;
     }
 
     .column1 {
+      padding-top: 8px;
+      width: 50%;
+    }
 
+    .nurse-patient-info {
+      display: flex;
+      flex-direction: column;
     }
 
     .column2 {
       height: auto;
       border-left: 2px solid gray;
       border-left: 2px solid gray;
-      margin-left: 25px;
+      margin-left: 20px;
     }
     
     .column3 {
       display: flex;
       flex-direction: column;
-      padding-left: 10px;
+      padding-left: 5px;
+      width: 45%;
     }
 
     .insurance-info {
@@ -95,7 +102,7 @@ export const PatientInformationPaneBodyStyles = styled('div')
     }
 
     .insurance-content {
-      margin-left: 14px;
+      margin-left: 6px;
       margin-bottom: 8px;
       font-size: 14px;
     }
