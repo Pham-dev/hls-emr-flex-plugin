@@ -9,7 +9,7 @@ export const CareManagementPaneStyles = styled('div')
       text-align: center;
       color: black;
       padding-top: 8px;
-      font-size: 14px;
+      font-size: 16px;
     }
   `;
 
@@ -17,14 +17,14 @@ export const CareManagementPaneContentStyles = styled('div')
   `
     padding: 10px;
     color: black;
-    width: 50%;
+    width: 80%;
     margin: 0 auto;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     .checkboxes {
-      
+      font-size: 14px;
     }
     .check-item {
       margin-top: 7px;

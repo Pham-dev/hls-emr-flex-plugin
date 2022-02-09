@@ -8,7 +8,11 @@ export const PatientInformationPaneBodyStyles = styled('div')
     font-size: 14px;
     
     .information {
-      padding: 8px;
+      padding: 8px 8px 0px 8px;
+    }
+
+    .content {
+      color: #666666;
     }
     
     .divider {
@@ -25,12 +29,30 @@ export const PatientInformationPaneBodyStyles = styled('div')
     }
     
     .patient-info {
-      margin-bottom: 8px;
+      margin-bottom: 4px;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    .patient-info2 {
+      margin-bottom: 4px;
+      margin-left: 8px;
+      gap: 50px;
+      display: flex;
+    }
+
+    .patient-info3 {
+      margin-bottom: 4px;
+      margin-left: 8px;
+      display: flex;
+      margin-top: 14px;
     }
 
     .info {
       display: flex;
       flex-direction: column;
+      padding-left: 8px;
+      padding-right: 8px;
     }
 
     .patient-list-item {
