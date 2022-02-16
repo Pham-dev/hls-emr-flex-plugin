@@ -1,6 +1,36 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
+import { getBackendUri } from '../../constants/backendUri';
 
 const AccountForm = () => {
+  // Call useEffect to call function to get account Name
+  const [accountName, setAccountName] = useState<string>("");
+  const [accountSid, setAccountSid] = useState<string>("");
+  const [accountAuthToken, setAccountAuthToken] = useState<string>("");
+
+  useEffect(() => {
+    const getAccount = async () => {
+      await fetch(getBackendUri() + "/account/get-account-name")
+      .then(resp => resp.json())
+      .then(jsonResp => setAccountName(jsonResp.data.accountName));
+
+      await fetch(getBackendUri() + "/account/get-account-info")
+        .then(resp => resp.json())
+        .then(jsonResp => {
+          setAccountSid(jsonResp.data.accountSid)
+          console.log(jsonResp)
+      });
+      await fetch(getBackendUri() + "/account/get-account-info")
+        .then(resp => resp.json())
+        .then(jsonResp => {
+          setAccountAuthToken(jsonResp.data.authToken)
+          console.log(jsonResp)
+      });
+    }
+    getAccount();
+  }, []);
+
+  const hello = 6;
   return (
     <div className='col-start-5 col-span-4'>
       <form className='text-deploy-blue'>
@@ -14,7 +44,7 @@ const AccountForm = () => {
               <div className='pl-4'>
                 <div className='p-0'>
                   <div className='mb-2'>Account Name</div>
-                  <input className='bg-light-gray px-2 py-2 rounded-md border'></input>
+                  <input value={accountName} disabled className='bg-light-gray px-2 py-2 rounded-md border'></input>
                 </div>
               </div>
           </div>
@@ -32,16 +62,16 @@ const AccountForm = () => {
                 </label>
               </div>
               <div className='mb-2'>
-                <input  className='w-100 px-2 py-2 rounded-md border' type={'text'} required name={'ACCOUNT_SID'}></input>
+                <input  className='w-100 px-2 py-2 rounded-md border' type={'text'} value={accountSid} required name={'ACCOUNT_SID'}></input>
               </div>
               <div className="verify-account-sid">
                 <label htmlFor={'ACCOUNT_SID'}>
                   <span className='text-red mr-2'>*</span>
-                  <span>Verify Account SID</span>
+                  <span>Verify Account Auth Token</span>
                 </label>
               </div>
               <div className='mb-2'>
-                <input  className='w-100 px-2 py-2 rounded-md border' type={'text'} required name={'ACCOUNT_SID'}></input>
+                <input  className='w-100 px-2 py-2 rounded-md border' type={'text'} value={accountAuthToken} required name={'ACCOUNT_AUTH_TOKEN'}></input>
               </div>
             </div>
           </div>

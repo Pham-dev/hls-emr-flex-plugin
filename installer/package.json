@@ -5,9 +5,10 @@
   "scripts": {
     "backend": "twilio-run start --functions-folder ./build/functions -p 3001",
     "frontend": "BROWSER='google chrome' react-scripts start",
-    "dev": "concurrently \"npm run frontend\" \"npx tsc --watch\" \"npm run backend\"",
-    "deploy": "twilio-run deploy",
+    "build-css": "npx tailwindcss -i ./src/index.css -o ./assets/style.css --watch",
     "build-assets": "webpack --config webpack.config.js",
+    "dev": "concurrently \"npm run frontend\" \"npx tsc --watch\" \"npm run backend\" \"npm run build-css\" \"npm run build-assets\"",
+    "deploy": "twilio-run deploy",
     "test": "npm run build-assets && npm run start"
   },
   "dependencies": {
@@ -30,6 +31,8 @@
     "postcss": "8.4.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "sass": "1.49.7",
+    "sass-loader": "12.6.0",
     "tailwindcss": "3.0.17",
     "twilio-run": "^3.4.0",
     "typescript": "4.5.5",
