@@ -486,8 +486,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.5rem;
 }
 
-.mb-1 {
-  margin-bottom: 0.25rem;
+.mt-4 {
+  margin-top: 1rem;
 }
 
 .mr-2 {
@@ -518,12 +518,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 3rem;
 }
 
-.w-screen {
-  width: 100vw;
-}
-
-.w-1\/2 {
-  width: 50%;
+.w-auto {
+  width: auto;
 }
 
 .flex-shrink-0 {

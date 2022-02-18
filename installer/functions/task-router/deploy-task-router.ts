@@ -26,6 +26,7 @@ export const handler: ServerlessFunctionSignature = async function(
   
   const client = context.getTwilioClient();
   const response = new Twilio.Response();
+  response.appendHeader('Access-Control-Allow-Origin', '*');
 
   try {
     // Get the Flex Workspace
@@ -59,13 +60,6 @@ export const handler: ServerlessFunctionSignature = async function(
     const educatorConfiguration = getWorkflowConfiguration(educatorsQueueSid, EDUCATORS);
     if (!schedulerWorkflow) await createWorkflow(client, workspaceSid, INTAKE_BY_SCHEDULERS, queueToQueueSidMap, schedulerConfiguration, schedulerQueueSid);
     if (!educatorWorkflow) await createWorkflow(client, workspaceSid, TRANSFER_TO_NURSE_EDUCATOR, queueToQueueSidMap, educatorConfiguration, educatorsQueueSid);
-
-    // Give all current workers the scheduler and education skills, will be able to 
-    // const workerSids: string[] = (await getAllWorkers(client, workspaceSid)).map(worker => worker.sid);
-    // console.log(workerSids);
-
-    // const workers: WorkerInstance[] = await getAllWorkers(client, workspaceSid);
-    // console.log(workers);
     
     response.setBody({Message: 'HLS Flex Plugin Account Setup completed'});
     response.setStatusCode(200);

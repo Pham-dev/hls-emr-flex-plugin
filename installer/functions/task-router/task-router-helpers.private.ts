@@ -17,23 +17,6 @@ export interface QueueToQueueSid {
   educatorSid: string;
 }
 
-function isLocalhost(context: Context) {
-  return context.DOMAIN_NAME.startsWith('localhost:');
-}
-
-export function getParam(context: Context, key: string) {
-  const client = context.getTwilioClient();
-  try {
-    switch (key) {
-      case 'IS_LOCALHOST': {
-        return isLocalhost(context);
-      }
-    }
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 // Function which creates Flex Workspace
 export function createWorkspace(client: TwilioClient, friendlyName: string): Promise<WorkspaceInstance> {
   const workspace = client.taskrouter.workspaces

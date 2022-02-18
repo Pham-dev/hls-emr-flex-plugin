@@ -14,8 +14,8 @@ export const handler: ServerlessFunctionSignature = async function(
   response.appendHeader('Access-Control-Allow-Origin', '*');
   try {
     const accounts = await client.api.accounts
-    .list({status: 'active', limit: 20})
-    .then(accounts => accounts);
+      .list({status: 'active', limit: 20})
+      .then(accounts => accounts);
   
     if (accounts.length) {
       const accountName = accounts[0].friendlyName;
