@@ -1,6 +1,10 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { getBackendUri } from '../../constants/backendUri';
+import { hlsPluginName } from '../../constants/constants';
+import { Plugin } from '../../constants/interface';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import NoPluginMessage from '../NoPluginMessage/NoPluginMessage';
 
 const AccountForm = () => {
   // Call useEffect to call function to get account Name
@@ -9,16 +13,15 @@ const AccountForm = () => {
   const [accountAuthToken, setAccountAuthToken] = useState<string>("");
   const [pluginFriendlyName, setPluginFriendlyName] = useState<string>("");
   const [pluginSid, setPluginSid] = useState<string>("");
-
+  const [hlsPluginExists, setHlsPluginExists] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleDeployment = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     if (accountSid && accountAuthToken) {
-      const base64Account = btoa(accountSid + ":" + accountAuthToken);
-      console.log(base64Account);
-
       // This call creates the workspace and routers via APIs
-      fetch(getBackendUri() + "/task-router/deploy-task-router")
+      await fetch(getBackendUri() + "/task-router/deploy-task-router")
         .then(resp => resp.json())
         .then(data => {
           console.log(data);
@@ -26,19 +29,27 @@ const AccountForm = () => {
         .catch(err => console.error(err));
 
       // This call gets all the plugins
-      await fetch(getBackendUri() + "/plugin/get-plugins")
+      const plugin = await fetch(getBackendUri() + "/plugin/get-plugins")
         .then(plugin => plugin.json())
-        .then(resp => {
-          console.log(resp);
-          setPluginFriendlyName(resp.data.plugins.friendly_name)
-          setPluginSid(resp.data.plugins.sid);
-          console.log(resp.data.plugins);
+        .then(async resp => {
+          const plugins: Plugin[] = resp.data.plugins;
+          const hlsPlugin = Object.values(plugins).find(plugin => plugin.friendly_name === hlsPluginName);
+          if (hlsPlugin) {
+            setPluginFriendlyName(hlsPlugin.friendly_name);
+            setPluginSid(hlsPlugin.sid);
+          }
+          return hlsPlugin;
         })
         .catch(err => console.error(err));
-
-      // Releast the plugin
+      if (!plugin) setHlsPluginExists(false);
       
-
+      // Release the plugin config to Flex Account
+      const configRelease = await fetch(getBackendUri() + "/plugin/release-plugin")
+        .then(res => res.json())
+        .then(release => release.data)
+        .catch(err => console.error(err));
+      if (configRelease) setIsLoading(false);
+      console.log(configRelease);
     }
   }
 
@@ -60,9 +71,9 @@ const AccountForm = () => {
 
   return (
     <div className='col-start-5 col-span-4 flex flex-col'>
-      <form className='text-deploy-blue'>
+      <form className=''>
         <div className='flex flex-col'>
-          <div className='row mb-5'>
+          <div className='row mb-5 text-deploy-blue'>
               <div className='mb-3'>
                 <span className='font-bold pr-2'>Step 1:</span>
                 <span>Account Information</span>
@@ -75,7 +86,7 @@ const AccountForm = () => {
               </div>
           </div>
           
-          <div className='row mb-5'>
+          <div className='row mb-5 text-deploy-blue'>
             <div className='mb-3 items-center'>
               <span className='pr-2 font-bold'>Step 2:</span>
               <span className='pr-2'>Set up your application</span>
@@ -103,17 +114,30 @@ const AccountForm = () => {
           </div>
 
           <div className='row mb-5'>
-              <div className='mb-3'>
+              <div className='mb-3 text-deploy-blue'>
                 <span className='font-bold pr-2'>Step 3:</span>
                 <span>Deploy your application and try it out!</span>
               </div>
               <div className='pl-4'>
-                <button className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleDeployment}>
-                  Deploy this application
-                </button>
+                {!isLoading ?
+                  <button className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleDeployment}>
+                    {"Deploy this application"}
+                  </button>
+                  :
+                  <LoadingSpinner/>
+                }
               </div>
+              {
+                <div className='mt-8 border-2 rounded white p-3'>
+                  <h1 className='font-xxl font-bold border-1 bg-red mb-2 text-white text-center'>{"HLS Flex Plugin is deployed"}</h1>
+                  <div><span className='font-bold text-deploy-blue'>{"Flex Plugin Name: "}</span><span>{pluginFriendlyName}</span></div>
+                  <div><span className='font-bold text-deploy-blue'>{"Flex Plugin SID: "}</span><span>{pluginSid}</span></div>
+                </div>
+              }
           </div>
-
+          {hlsPluginExists ??
+            <NoPluginMessage/>
+          }
         </div>
       </form>
     </div>

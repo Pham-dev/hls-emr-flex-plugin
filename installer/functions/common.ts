@@ -1,15 +1,11 @@
 import { Context, TwilioClient } from "@twilio-labs/serverless-runtime-types/types";
+import { ApplicationContext } from "../src/constants/interface";
 
 // constants
 export const IS_LOCALHOST = "IS_LOCALHOST";
 export const ACCOUNT_SID = "ACCOUNT_SID";
 export const AUTH_TOKEN = "AUTH_TOKEN";
 export const LOCAL_HOST = "localhost:";
-
-export interface ApplicationContext extends Context {
-  ACCOUNT_SID: string;
-  AUTH_TOKEN: string;
-}
 
 export function getParam(context: Context, key: string) {
   const client = context.getTwilioClient();

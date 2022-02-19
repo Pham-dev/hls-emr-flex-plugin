@@ -1,10 +1,10 @@
 
 import axios from 'axios';
+import { ApplicationContext, Configuration } from '../../src/constants/interface';
 import { 
-  ACCOUNT_SID, 
-  ApplicationContext, 
-  AUTH_TOKEN, 
-  getParam 
+  ACCOUNT_SID,
+  AUTH_TOKEN,
+  getParam
 } 
 from '../common';
 
@@ -38,6 +38,22 @@ export const getBase64Credentials = (accountSid: string, authToken: string): str
  * Releases = FKxxxxxxxxx;
  */
 
+
+export const getAllPlugins = async (context: ApplicationContext) => {
+  const accountSid = await getParam(context, ACCOUNT_SID);
+  const authToken = await getParam(context, AUTH_TOKEN);
+  const base64Credentials = convertToBase64(accountSid + ":" + authToken);
+  const plugins = await axios.get("https://flex-api.twilio.com/v1/PluginService/Plugins?PageSize=20", {
+    headers: {
+      Authorization: `Basic ${base64Credentials}`
+    }
+  })
+  .then(res => res.data)
+  .catch(error => console.error(error));
+  console.log()
+  return plugins;
+}
+
 /**
  * 
  * @param context 
@@ -46,7 +62,7 @@ export const getBase64Credentials = (accountSid: string, authToken: string): str
  * @param pluginUrl 
  * @returns version
  */
-export const getPluginVersion = async (context: ApplicationContext, pluginSid: string, versionSid: string, pluginUrl: string) => {
+export const getPluginVersion = async (context: ApplicationContext, pluginSid: string, versionSid: string) => {
   const accountSid = getParam(context, ACCOUNT_SID);
   const authToken = getParam(context, AUTH_TOKEN);
   const base64Credentials = convertToBase64(accountSid + ":" + authToken);
@@ -69,8 +85,8 @@ export const getPluginVersion = async (context: ApplicationContext, pluginSid: s
  * @returns versions
  */
 export const getAllPluginVersions = async (context: ApplicationContext, pluginSid: string) => {
-  const accountSid = getParam(context, ACCOUNT_SID);
-  const authToken = getParam(context, AUTH_TOKEN);
+  const accountSid = await getParam(context, ACCOUNT_SID);
+  const authToken = await getParam(context, AUTH_TOKEN);
   const base64Credentials = convertToBase64(accountSid + ":" + authToken);
   const versions = await axios.get(`https://flex-api.twilio.com/v1/PluginService/Plugins/${pluginSid}/Versions?PageSize=20`, {
     headers: {
@@ -88,21 +104,23 @@ export const getAllPluginVersions = async (context: ApplicationContext, pluginSi
  * @param pluginVersionSid 
  * @returns configuration
  */
-export const createPluginConfiguration = async (context: ApplicationContext, configurationName: string, ...pluginVersionSid: string[]) => {
-  const accountSid = getParam(context, ACCOUNT_SID);
-  const authToken = getParam(context, AUTH_TOKEN);
+export const createPluginConfiguration = async (context: ApplicationContext, configurationName: string, pluginVersionSid: string): Promise<Configuration> => {
+  const accountSid = await getParam(context, ACCOUNT_SID);
+  const authToken = await getParam(context, AUTH_TOKEN);
   const base64Credentials = convertToBase64(accountSid + ":" + authToken);
-  const configuration = await axios.post(
-    `https://flex-api.twilio.com/v1/PluginService/Configurations?Plugins={\"plugin_version\\\": \\\"${pluginVersionSid}\\\"}&Name=${configurationName}`, 
-    {
-      headers: {
-        Authorization: `Basic ${base64Credentials}`
-      }
-    }
-  )
+
+  const response = await axios({
+    url: "https://flex-api.twilio.com/v1/PluginService/Configurations",
+    headers: {
+      Authorization: `Basic ${base64Credentials}`,
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    method: 'post',
+    data: `Plugins={\"plugin_version\": \"${pluginVersionSid}\"}&Name=${configurationName}`
+  })
   .then(res => res.data)
-  .catch(error => console.error(error));
-  return configuration;
+  .catch(err => console.log(err));
+  return response;
 }
 
 /**
@@ -110,32 +128,36 @@ export const createPluginConfiguration = async (context: ApplicationContext, con
  * @param context 
  * @returns - array of configurations
  */
-export const getAllPluginConfigurations = (context: ApplicationContext) => {
-  const accountSid = getParam(context, ACCOUNT_SID);
-  const authToken = getParam(context, AUTH_TOKEN);
+export const getAllPluginConfigurations = async (context: ApplicationContext): Promise<Configuration> => {
+  const accountSid = await getParam(context, ACCOUNT_SID);
+  const authToken = await getParam(context, AUTH_TOKEN);
   const base64Credentials = convertToBase64(accountSid + ":" + authToken);
-  const configurations = axios.get("https://flex-api.twilio.com/v1/PluginService/Configurations?PageSize=20", {
+  const configurations = await axios.get("https://flex-api.twilio.com/v1/PluginService/Configurations?PageSize=20", {
     headers: {
       Authorization: `Basic ${base64Credentials}`
     }
   })
   .then(res => res.data)
-  .catch(error => console.error(error));
+  .catch(error => console.log("Error: ", error));
   return configurations;
 }
 
 export const createPluginRelease = async (context: ApplicationContext, configurationSid: string) => {
   // axios post
   // returns a release with SID of FKXXXXXXXXXXXXXXXXX
-  const accountSid = getParam(context, ACCOUNT_SID);
-  const authToken = getParam(context, AUTH_TOKEN);
+  const accountSid = await getParam(context, ACCOUNT_SID);
+  const authToken = await getParam(context, AUTH_TOKEN);
   const base64Credentials = convertToBase64(accountSid + ":" + authToken);
-  const release = await axios.post(`https://flex-api.twilio.com/v1/PluginService/Releases?ConfigurationId=${configurationSid}`, {
-      headers: {
-        Authorization: `Basic ${base64Credentials}`
-      }
+  const release = await axios({
+    method: 'post',
+    url: "https://flex-api.twilio.com/v1/PluginService/Releases",
+    headers: {
+      Authorization: `Basic ${base64Credentials}`,
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    data: `ConfigurationId=${configurationSid}`
   })
   .then(res => res.data)
-  .catch(error => console.error(error));
+  .catch(error => error);
   return release;
 }

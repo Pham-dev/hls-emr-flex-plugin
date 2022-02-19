@@ -7,6 +7,8 @@ import { execSync } from 'child_process';
 import { LOCAL_HOST } from '../common';
 
 /** 
+ * // TODO: Complete this and deploy using APIs
+ * 
  * This Function is private and only accessible through localhost on Dockerfile  
  * It deploys the plugin with a specified version and this is done on the docker environment.
 */
