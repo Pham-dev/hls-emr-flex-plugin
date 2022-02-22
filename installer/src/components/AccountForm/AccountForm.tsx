@@ -15,6 +15,7 @@ const AccountForm = () => {
   const [pluginSid, setPluginSid] = useState<string>("");
   const [hlsPluginExists, setHlsPluginExists] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isDeployed, setIsDeployed] = useState<boolean>(false);
 
   const handleDeployment = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -48,7 +49,10 @@ const AccountForm = () => {
         .then(res => res.json())
         .then(release => release.data)
         .catch(err => console.error(err));
-      if (configRelease) setIsLoading(false);
+      if (configRelease) {
+        setIsLoading(false);
+        setIsDeployed(true);
+      }
       console.log(configRelease);
     }
   }
@@ -127,12 +131,13 @@ const AccountForm = () => {
                   <LoadingSpinner/>
                 }
               </div>
-              {
+              {isDeployed ?
                 <div className='mt-8 border-2 rounded white p-3'>
-                  <h1 className='font-xxl font-bold border-1 bg-red mb-2 text-white text-center'>{"HLS Flex Plugin is deployed"}</h1>
+                  <h1 className='font-xxl font-bold border-1 bg-red mb-2 text-white text-center'>{"HLS Flex Plugin Information"}</h1>
                   <div><span className='font-bold text-deploy-blue'>{"Flex Plugin Name: "}</span><span>{pluginFriendlyName}</span></div>
                   <div><span className='font-bold text-deploy-blue'>{"Flex Plugin SID: "}</span><span>{pluginSid}</span></div>
-                </div>
+                </div> :
+                <></>
               }
           </div>
           {hlsPluginExists ??

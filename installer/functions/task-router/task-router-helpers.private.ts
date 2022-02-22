@@ -1,4 +1,4 @@
-import { Context, TwilioClient } from '@twilio-labs/serverless-runtime-types/types';
+import { TwilioClient } from '@twilio-labs/serverless-runtime-types/types';
 import { WorkspaceInstance } from 'twilio/lib/rest/taskrouter/v1/workspace';
 import { TaskQueueInstance } from 'twilio/lib/rest/taskrouter/v1/workspace/taskQueue';
 import { WorkerInstance } from 'twilio/lib/rest/taskrouter/v1/workspace/worker';
@@ -12,12 +12,14 @@ export const EDUCATION = "Education";
 export const INTAKE_BY_SCHEDULERS = "Intake by Schedulers";
 export const TRANSFER_TO_NURSE_EDUCATOR = "Transfer to Nurse Educator";
 
-export interface QueueToQueueSid {
-  schedulerSid: string;
-  educatorSid: string;
-}
-
-// Function which creates Flex Workspace
+/**
+ * This function creates a workspace within the account's TaskRouter 
+ * Only 1 Workspace can exist in a Twilio account
+ * 
+ * @param client 
+ * @param friendlyName 
+ * @returns Promise<WorkspaceInstance>
+ */
 export function createWorkspace(client: TwilioClient, friendlyName: string): Promise<WorkspaceInstance> {
   const workspace = client.taskrouter.workspaces
         .create({
@@ -28,7 +30,16 @@ export function createWorkspace(client: TwilioClient, friendlyName: string): Pro
   return workspace;
 }
 
-// Creates task queue given a workspace SID
+/**
+ * Creates task queue given a workspace SID.
+ * Creates task queues for workers to receive tasks.
+ * 
+ * @param client
+ * @param friendlyName
+ * @param workspaceSid
+ * @param skill
+ * @returns Promise<TaskQueueInstance>
+ */
 export function createTaskQueue(client: TwilioClient, friendlyName: string, workspaceSid: string, skill?: string): Promise<TaskQueueInstance> {
   const taskQueue = client.taskrouter.workspaces(workspaceSid)
     .taskQueues
@@ -40,6 +51,14 @@ export function createTaskQueue(client: TwilioClient, friendlyName: string, work
   return taskQueue;
 }
 
+/**
+ * Gets all TaskQueues in the current account.
+ * returns a list of all TaskQueues
+ * 
+ * @param client 
+ * @param workspaceSid 
+ * @returns Promise<TaskQueueInstance[]>
+ */
 export function getAllTaskQueues(client: TwilioClient, workspaceSid: string): Promise<TaskQueueInstance[]> {
   const taskQueues = client.taskrouter.workspaces(workspaceSid)
     .taskQueues
@@ -48,6 +67,13 @@ export function getAllTaskQueues(client: TwilioClient, workspaceSid: string): Pr
   return taskQueues;
 }
 
+/**
+ * Returns all Workflow instances
+ * 
+ * @param client 
+ * @param workspaceSid 
+ * @returns Promise<WorkflowInstance[]>
+ */
 export function getAllWorkflows(client: TwilioClient, workspaceSid: string): Promise<WorkflowInstance[]> {
   const workflows = client.taskrouter.workspaces(workspaceSid)
     .workflows
@@ -56,7 +82,16 @@ export function getAllWorkflows(client: TwilioClient, workspaceSid: string): Pro
   return workflows;
 }
 
-export function createWorkflow(client: TwilioClient, workspaceSid: string, friendlyName: string, queueToQueueSid: QueueToQueueSid, configuration: string, defaultQueueSid?: string): Promise<WorkflowInstance> {
+/**
+ * Creates a workflow within the TaskRouter.
+ * 
+ * @param client 
+ * @param workspaceSid 
+ * @param friendlyName 
+ * @param configuration 
+ * @returns Promise<WorkflowInstance>
+ */
+export function createWorkflow(client: TwilioClient, workspaceSid: string, friendlyName: string, configuration: string): Promise<WorkflowInstance> {
   const workspace = client.taskrouter.workspaces(workspaceSid)
     .workflows
     .create({
@@ -67,6 +102,13 @@ export function createWorkflow(client: TwilioClient, workspaceSid: string, frien
   return workspace;
 }
 
+/**
+ * Returns a list of all workers
+ * 
+ * @param client 
+ * @param workspaceSid 
+ * @returns Promise<WorkerInstance[]>
+ */
 export function getAllWorkers(client: TwilioClient, workspaceSid: string): Promise<WorkerInstance[]> {
   const workers = client.taskrouter.workspaces(workspaceSid)
     .workers
@@ -75,16 +117,27 @@ export function getAllWorkers(client: TwilioClient, workspaceSid: string): Promi
   return workers;
 }
 
-export function giveAllSkillsToWorker(client: TwilioClient, workspaceSid: string, workerSid: string): Promise<WorkerInstance> {
+
+/**
+ * Gives a user all skills ["Scheduling", "Education"]
+ * Intended to modify only the attributes of the admin user
+ * 
+ * @param client 
+ * @param workspaceSid 
+ * @param workerSid 
+ * @param attributes 
+ * @returns Promise<WorkerInstance>
+ */
+export function giveAllSkillsToWorker(client: TwilioClient, workspaceSid: string, workerSid: string, attributes: string): Promise<WorkerInstance> {
+  const jsonAttributes = JSON.parse(attributes);
+  jsonAttributes.routing = {
+    skills: [SCHEDULING, EDUCATION],
+    levels: {},
+  }
   const worker = client.taskrouter.workspaces(workspaceSid)
     .workers(workerSid)
     .update({
-      attributes: JSON.stringify({
-        routing: {
-          skills: [SCHEDULING, EDUCATION],
-          levels: {}
-        }
-      })
+      attributes: JSON.stringify(jsonAttributes)
     })
     .then(worker => worker);
   return worker;

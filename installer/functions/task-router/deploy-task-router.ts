@@ -1,6 +1,6 @@
 // Imports global types
 import '@twilio-labs/serverless-runtime-types';
-import { createTaskQueue, createWorkspace, getAllWorkflows, getAllTaskQueues, createWorkflow, QueueToQueueSid, getAllWorkers } from './task-router-helpers.private';
+import { createTaskQueue, createWorkspace, getAllWorkflows, getAllTaskQueues, createWorkflow, getAllWorkers, giveAllSkillsToWorker } from './task-router-helpers.private';
 import { 
   WORKSPACE_FRIENDLY_NAME,
   SCHEDULERS,
@@ -49,17 +49,24 @@ export const handler: ServerlessFunctionSignature = async function(
     // Create workflows if they do not exist
     const schedulerQueueSid = schedulersQueue?.sid!;
     const educatorsQueueSid = educatorsQueue?.sid!;
-    const queueToQueueSidMap: QueueToQueueSid = {
-      schedulerSid: schedulerQueueSid,
-      educatorSid: educatorsQueueSid
-    }
     const allWorkflows = await getAllWorkflows(client, workspaceSid);
     const schedulerWorkflow: WorkflowInstance | undefined = allWorkflows.find(workflow => workflow.friendlyName === INTAKE_BY_SCHEDULERS);
     const educatorWorkflow: WorkflowInstance | undefined = allWorkflows.find(workflow => workflow.friendlyName === TRANSFER_TO_NURSE_EDUCATOR);
     const schedulerConfiguration = getWorkflowConfiguration(schedulerQueueSid, SCHEDULERS);
     const educatorConfiguration = getWorkflowConfiguration(educatorsQueueSid, EDUCATORS);
-    if (!schedulerWorkflow) await createWorkflow(client, workspaceSid, INTAKE_BY_SCHEDULERS, queueToQueueSidMap, schedulerConfiguration, schedulerQueueSid);
-    if (!educatorWorkflow) await createWorkflow(client, workspaceSid, TRANSFER_TO_NURSE_EDUCATOR, queueToQueueSidMap, educatorConfiguration, educatorsQueueSid);
+    if (!schedulerWorkflow) await createWorkflow(client, workspaceSid, INTAKE_BY_SCHEDULERS, schedulerConfiguration);
+    if (!educatorWorkflow) await createWorkflow(client, workspaceSid, TRANSFER_TO_NURSE_EDUCATOR, educatorConfiguration);
+
+    // Give admin user (current user, hopefully) both skills (Scheduler and Nurse Educator).
+    const workers = await getAllWorkers(client, workspaceSid);
+    if (!workers) {
+      response.setStatusCode(400);
+      response.setBody({error: "No workers in your Flex Account.  Please create a worker in your TaskRouter console."})
+      callback(null, response);
+    }
+    const adminWorker = workers[0];
+    const w = await giveAllSkillsToWorker(client, workspaceSid, adminWorker.sid, adminWorker.attributes);
+    console.log("Admin Worker given 'Education' and 'Scheduling' skills.  Admin's new attributes: ", w.attributes);
     
     response.setBody({Message: 'HLS Flex Plugin Account Setup completed'});
     response.setStatusCode(200);
