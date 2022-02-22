@@ -21,10 +21,10 @@ RUN twilio plugins:install @twilio-labs/plugin-flex
 # Copy directory over to /hls-deploy folder
 WORKDIR /hls-deploy
 COPY . /hls-deploy
+RUN npm install
 
 # Run deploy command to get a working version
 RUN twilio flex:plugins:deploy --major --changelog 'Deploy Major HLS Flex Plugin' --description 'Deployment' -l debug
-RUN npm install
 
 # Installer folder is now working directory
 WORKDIR /hls-deploy/installer
