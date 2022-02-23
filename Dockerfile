@@ -29,6 +29,7 @@ RUN twilio flex:plugins:deploy --major --changelog 'Deploy Major HLS Flex Plugin
 # Installer folder is now working directory
 WORKDIR /hls-deploy/installer
 RUN npm install
+RUN npm run build-ts
 
 EXPOSE 3000 3001
 
