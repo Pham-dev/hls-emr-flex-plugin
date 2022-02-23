@@ -7,6 +7,7 @@
     "frontend": "BROWSER='google chrome' react-scripts start",
     "build-css": "npx tailwindcss -i ./src/index.css -o ./assets/style.css --watch",
     "build-assets": "webpack --config webpack.config.js",
+    "build-ts": "npx tsc",
     "dev": "concurrently \"npm run frontend\" \"npx tsc --watch\" \"npm run backend\" \"npm run build-css\"",
     "deploy": "twilio-run deploy",
     "test": "npm run build-assets && npm run start"
