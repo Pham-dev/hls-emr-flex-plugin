@@ -22,11 +22,11 @@ This Package will allow you to seemlessly setup the HLS Flex Plugin to your own 
 
 1. Build the docker image of this installer by running this command in your terminal.  You'll need to get your Account Sid and Auth Token from your Twilio Console:
 ```
-docker build --build-arg TWILIO_ACCOUNT_SID={ACCOUNT_SID} --build-arg TWILIO_AUTH_TOKEN={AUTH_TOKEN} --tag hls-flex-plugin https://github.com/Pham-dev/hls-emr-flex-plugin.git#main
+docker build --build-arg TWILIO_ACCOUNT_SID={ACCOUNT_SID} --build-arg TWILIO_AUTH_TOKEN={AUTH_TOKEN} --no-cache --tag hls-flex-plugin https://github.com/Pham-dev/hls-emr-flex-plugin.git#main
 ```
 2. Now run the built docker image by executing this command:
 ```
-docker run --name hls-flex-plugin --rm -p 3000:3000 -p 3001:3001 -e TWILIO_ACCOUNT_SID={ACCOUNT_SID} -e TWILIO_AUTH_TOKEN={AUTH_TOKEN} -it hls-flex-plugin 
+docker run --name hls-flex-plugin --rm -p 3000:3000 -p 3001:3001 -e ACCOUNT_SID={ACCOUNT_SID} -e AUTH_TOKEN={AUTH_TOKEN} -it hls-flex-plugin 
 ```
 3. Go ahead and open [http://localhost:3000/](http://localhost:3000/) on your favorite browser.
 
