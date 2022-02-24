@@ -62,7 +62,7 @@ export const handler: ServerlessFunctionSignature = async function(
     if (!workers) {
       response.setStatusCode(400);
       response.setBody({error: "No workers in your Flex Account.  Please create a worker in your TaskRouter console."})
-      callback(null, response);
+      return callback(null, response);
     }
     const adminWorker = workers[0];
     const w = await giveAllSkillsToWorker(client, workspaceSid, adminWorker.sid, adminWorker.attributes);
@@ -70,7 +70,7 @@ export const handler: ServerlessFunctionSignature = async function(
     
     response.setBody({Message: 'HLS Flex Plugin Account Setup completed'});
     response.setStatusCode(200);
-    callback(null, response);
+    return callback(null, response);
 
   } catch (err) {
     console.log(err);
@@ -81,7 +81,7 @@ export const handler: ServerlessFunctionSignature = async function(
       }
     );
     response.setStatusCode(400);
-    callback(null, response);
+    return callback(null, response);
   }
   
 };

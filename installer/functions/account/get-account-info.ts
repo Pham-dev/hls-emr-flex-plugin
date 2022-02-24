@@ -27,13 +27,13 @@ export const handler: ServerlessFunctionSignature = async function(
         } 
       });
       response.setStatusCode(200);
-      callback(null, response);
+      return callback(null, response);
     } else {
       throw new Error("No Accounts found!");
     }
   } catch (err: any) {
     response.setBody({error: err});
     response.setStatusCode(400);
-    callback(err, response)
+    return callback(err, response)
   }
 }

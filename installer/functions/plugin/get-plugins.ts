@@ -43,10 +43,10 @@ export const handler: ServerlessFunctionSignature = async function(
     } else {
       response.setBody({data: pluginsResp});
     }
-    callback(null, response);
+    return callback(null, response);
   } catch (err: any) {
     response.setBody({error: err});
     response.setStatusCode(400);
-    callback(err, response)
+    return callback(err, response)
   }
 }
