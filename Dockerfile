@@ -11,8 +11,6 @@
 FROM twilio/twilio-cli:latest
 ARG TWILIO_ACCOUNT_SID=sid
 ARG TWILIO_AUTH_TOKEN=token
-ENV TWILIO_ACCOUNT_SID ${TWILIO_ACCOUNT_SID}
-ENV TWILIO_AUTH_TOKEN ${TWILIO_AUTH_TOKEN}
 
 # Download serverless and flex plugin CLIs
 RUN twilio plugins:install @twilio-labs/plugin-serverless
@@ -30,7 +28,8 @@ RUN twilio flex:plugins:deploy --major --changelog 'Deploy Major HLS Flex Plugin
 WORKDIR /hls-deploy/installer
 RUN npm install
 RUN npm run build-ts
+RUN npx tailwindcss -i ./src/index.css -o ./assets/style.css
 
 EXPOSE 3000 3001
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]

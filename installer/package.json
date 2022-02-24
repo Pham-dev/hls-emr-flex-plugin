@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "backend": "twilio-run start --functions-folder ./build/functions -p 3001",
+    "backend": "twilio serverless:start --functions-folder ./build/functions --load-local-env -p 3001",
     "frontend": "BROWSER='google chrome' react-scripts start",
     "build-css": "npx tailwindcss -i ./src/index.css -o ./assets/style.css --watch",
     "build-assets": "webpack --config webpack.config.js",
     "build-ts": "npx tsc",
-    "dev": "concurrently \"npm run frontend\" \"npx tsc --watch\" \"npm run backend\" \"npm run build-css\"",
+    "dev": "npm run backend && concurrently \"npm run frontend\" \"npx tsc --watch\" \"npm run build-css\"",
+    "start": "concurrently \"npm run frontend\" \"npm run backend\"",
     "deploy": "twilio-run deploy",
     "test": "npm run build-assets && npm run start"
   },
