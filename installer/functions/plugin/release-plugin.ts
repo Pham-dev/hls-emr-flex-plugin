@@ -3,8 +3,8 @@ import {
   ServerlessCallback,
   ServerlessFunctionSignature,
 } from '@twilio-labs/serverless-runtime-types/types';
-import { hlsPluginName } from '../../src/constants/constants';
-import { ApplicationContext, Configuration, Plugin, Version } from '../../src/constants/interface';
+import { hlsPluginName } from '../constants';
+import { ApplicationContext, Configuration, Plugin, Version } from '../interface';
 import { createPluginConfiguration, createPluginRelease, getAllPlugins, getAllPluginVersions } from './helper-plugins.private';
 
 export const handler: ServerlessFunctionSignature = async function(

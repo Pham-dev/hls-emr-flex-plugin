@@ -4,7 +4,7 @@ import {
   ServerlessFunctionSignature,
 } from '@twilio-labs/serverless-runtime-types/types';
 import { execSync } from 'child_process';
-import { LOCAL_HOST } from '../common';
+import { LOCAL_HOST } from '../constants';
 
 /** 
  * // TODO: Complete this and deploy using APIs

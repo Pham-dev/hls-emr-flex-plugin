@@ -1,25 +1,26 @@
 import { Context, TwilioClient } from "@twilio-labs/serverless-runtime-types/types";
-import { ApplicationContext } from "../src/constants/interface";
+import { ApplicationContext } from "./interface";
+import { ACCOUNT_NAME, ACCOUNT_SID, AUTH_TOKEN, IS_LOCALHOST } from "./constants";
 
-// constants
-export const IS_LOCALHOST = "IS_LOCALHOST";
-export const ACCOUNT_SID = "ACCOUNT_SID";
-export const AUTH_TOKEN = "AUTH_TOKEN";
-export const LOCAL_HOST = "localhost:";
-
-export function getParam(context: Context, key: string) {
+export async function getParam(context: Context, key: string) {
+  
   const client = context.getTwilioClient();
   const appContext = context as ApplicationContext;
+  const activeAccount = await getActiveAccount(client);
+
   try {
     switch (key) {
       case IS_LOCALHOST: {
         return isLocalhost(appContext);
       }
       case ACCOUNT_SID: {
-        return getAccountSid(appContext, client);
+        return appContext.ACCOUNT_SID ? appContext.ACCOUNT_SID : activeAccount?.sid;
       }
       case AUTH_TOKEN: {
-        return getAuthToken(appContext, client);
+        return appContext.AUTH_TOKEN ? appContext.AUTH_TOKEN : activeAccount?.authToken;
+      }
+      case ACCOUNT_NAME: {
+        return activeAccount?.friendlyName;
       }
     }
   } catch (err) {
@@ -31,28 +32,21 @@ function isLocalhost(context: ApplicationContext): string {
   return context.DOMAIN_NAME.startsWith('localhost:') ? 'yes' : 'no';
 }
 
-async function getAccountSid(context: ApplicationContext, client: TwilioClient): Promise<string> {
+export async function getActiveAccount(client: TwilioClient) {
   try {
-    if (context.ACCOUNT_SID) return context.ACCOUNT_SID;
-    const account = await client.api.accounts
-      .list({status: 'active', limit: 20})
+    return await client.api.accounts
+      .list()
       .then(accounts => accounts[0]);
-    return account.sid;
-  } catch (err) {
+  } catch(err) {
     console.error(err);
-    throw(err);
   }
 }
 
-async function getAuthToken(context: ApplicationContext, client: TwilioClient): Promise<string> {
-  try {
-    if (context.AUTH_TOKEN) return context.AUTH_TOKEN;
-    const account = await client.api.accounts
-      .list({status: 'active', limit: 20})
-      .then(accounts => accounts[0]);
-    return account.authToken;
-  } catch (err) {
-    console.error(err);
-    throw(err);
-  }
+/**
+ * Needed to make API calls
+ * @param stringToConvert 
+ * @returns - base64 string
+ */
+ export const convertToBase64 = (stringToConvert: string) => {
+  return Buffer.from(stringToConvert).toString('base64');
 }

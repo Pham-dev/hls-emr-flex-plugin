@@ -8,12 +8,13 @@
     "build-css": "npx tailwindcss -i ./src/index.css -o ./assets/style.css --watch",
     "build-assets": "webpack --config webpack.config.js",
     "build-ts": "npx tsc",
-    "dev": "npm run backend && concurrently \"npm run frontend\" \"npx tsc --watch\" \"npm run build-css\"",
+    "dev": "concurrently \"npm run frontend\" \"npx tsc --watch\" \"npm run backend\" \"npm run build-css\"",
     "start": "concurrently \"npm run frontend\" \"npm run backend\"",
     "deploy": "twilio-run deploy",
     "test": "npm run build-assets && npm run start"
   },
   "dependencies": {
+    "@twilio-labs/serverless-api": "5.4.1",
     "@twilio-labs/serverless-runtime-types": "2.2.2",
     "@twilio/runtime-handler": "1.2.1",
     "@types/jest": "27.4.0",
@@ -22,8 +23,6 @@
     "@types/react-dom": "17.0.11",
     "axios": "0.26.0",
     "concurrently": "7.0.0",
-    "node-fetch": "2.6.7",
-    "react-scripts": "5.0.0",
     "twilio": "^3.56"
   },
   "devDependencies": {
@@ -35,6 +34,7 @@
     "postcss": "8.4.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-scripts": "5.0.0",
     "sass": "1.49.7",
     "sass-loader": "12.6.0",
     "tailwindcss": "3.0.17",

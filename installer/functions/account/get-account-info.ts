@@ -3,6 +3,7 @@ import {
   ServerlessCallback,
   ServerlessFunctionSignature,
 } from '@twilio-labs/serverless-runtime-types/types';
+import { getActiveAccount } from '../common';
 
 export const handler: ServerlessFunctionSignature = async function(
   context: Context,
@@ -13,17 +14,12 @@ export const handler: ServerlessFunctionSignature = async function(
   const response = new Twilio.Response();
   response.appendHeader('Access-Control-Allow-Origin', '*');
   try {
-    const accounts = await client.api.accounts
-      .list({status: 'active', limit: 20})
-      .then(accounts => accounts);
-  
-    if (accounts.length) {
-      const accountSid = accounts[0].sid;
-      const accountAuthToken = accounts[0].authToken;
+    const account = await getActiveAccount(client);
+    if (account) {
       response.setBody({data: 
         { 
-          accountSid: accountSid, 
-          authToken: accountAuthToken
+          accountSid: account.sid,
+          authToken: account.authToken
         } 
       });
       response.setStatusCode(200);
