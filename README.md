@@ -18,12 +18,18 @@ This Package will allow you to seemlessly setup the HLS Flex Plugin to your own 
 3. Click on the "Create my Flex account" button on the page.
 4. Follow the steps to verify your email and phone and then after a couple minutes you should have a working-bare-bones Flex instance on your account.
 
+### Ensure that Telehealth is deployed to your Flex Account
+Once you get your flex account up and running, you'll need to deploy Telehealth to your newly created Flex account in order to access Telehealth capabilities through flex. Instructions to deploy Telehealth in this repo's [README.md](https://github.com/Pham-dev/telehealth-v2).
+1. After installing Telehealth inside your Flex account created in the intructions above, go to the Functions console.
+2. Inside the Functions console, click on services and click into the service named ```flex-telehealth``` (Assuming you deployed Telehealth to the account).
+3. At the bottom-left of the page, just above the "Deploy All" Button, you'll want to save that URL as that is your ```REACT_APP_BACKEND_URL``` which will be needed for the Docker build step in the next section.
+
 ### Deploy the Plugin to your Flex Instance
 
 1. First, launch your Flex instance and click "Edit" under development setup.  Here you'll want to change the React Version to the latest; which is ```16.13.1```
 2. Build the docker image of this installer by running this command in your terminal.  You'll need to get your Account Sid and Auth Token from your Twilio Console:
 ```
-docker build --build-arg TWILIO_ACCOUNT_SID={ACCOUNT_SID} --build-arg TWILIO_AUTH_TOKEN={AUTH_TOKEN} --no-cache --tag hls-flex-plugin https://github.com/Pham-dev/hls-emr-flex-plugin.git#main
+docker build --build-arg TWILIO_ACCOUNT_SID={ACCOUNT_SID} --build-arg TWILIO_AUTH_TOKEN={AUTH_TOKEN} --build-arg REACT_APP_BACKEND_URL={REACT_APP_BACKEND_URL} --no-cache --tag hls-flex-plugin https://github.com/Pham-dev/hls-emr-flex-plugin.git#main
 ```
 3. Now run the built docker image by executing this command:
 ```
