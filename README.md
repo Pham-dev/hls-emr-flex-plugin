@@ -10,19 +10,20 @@ This Package will allow you to seemlessly setup the HLS Flex Plugin to your own 
 **Twilio Account**
 - Create a [Twilio account](https://www.twilio.com/try-twilio) if you have not done so already
 - After creating your account you will have access to an **Account Sid** and an **Auth Token** which will be needed to run through the installation.
-## **Deploying this plugin to your Twilio Flex instance**
-### Create a Flex account
+
+**Create a Flex account**
 
 1. Ensure you sign up or login to your Twilio account in the step above.
 2. While in your Twilio console, go to the Overview of the Flex section under the Develop tab on the left-hand panel.
 3. Click on the "Create my Flex account" button on the page.
 4. Follow the steps to verify your email and phone and then after a couple minutes you should have a working-bare-bones Flex instance on your account.
 
-### Ensure that Telehealth is deployed to your Flex Account
+**Ensure that Telehealth is deployed to your Flex Account**
 Once you get your flex account up and running, you'll need to deploy Telehealth to your newly created Flex account in order to access Telehealth capabilities through flex. Instructions to deploy Telehealth in this repo's [README.md](https://github.com/Pham-dev/telehealth-v2).
 1. After installing Telehealth inside your Flex account created in the intructions above, go to the Functions console.
 2. Inside the Functions console, click on services and click into the service named ```flex-telehealth``` (Assuming you deployed Telehealth to the account).
 3. At the bottom-left of the page, just above the "Deploy All" Button, you'll want to save that URL as that is your ```REACT_APP_BACKEND_URL``` which will be needed for the Docker build step in the next section.
+## **Deploying this plugin to your Twilio Flex instance**
 
 ### Deploy the Plugin to your Flex Instance
 
