@@ -2,9 +2,9 @@ import React from 'react';
 import { VERSION } from '@twilio/flex-ui';
 import { FlexPlugin } from 'flex-plugin';
 import reducers, { namespace } from './states';
-import PatientInteractionPane from './components/CustomPanel2/Panes/PatientInteractionPane/PatientInteractionPane';
 import CustomPanel2Container from './components/CustomPanel2/CustomPanel2.Container';
 import { CustomTheme } from './CustomTheme';
+import { setUpActions, setUpComponents, setUpNotifications } from './helpers';
 
 const PLUGIN_NAME = 'HlsEmrPlugin';
 
@@ -55,6 +55,15 @@ export default class HlsEmrPlugin extends FlexPlugin {
       minimumFirstPanelSize: "360px",
       initialFirstPanelSize: "440px"
     }
+
+    // This is supposed to be the button
+    flex.TaskCanvasHeader.Content.add(<div key="button">Hello</div>, {
+      sortOrder: 1,
+    });
+
+    setUpComponents();
+    setUpNotifications();
+    setUpActions();
   }
 
   /**

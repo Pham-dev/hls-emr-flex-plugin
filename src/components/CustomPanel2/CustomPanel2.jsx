@@ -24,6 +24,7 @@ const hasAssignedTask = (tasks) => {
 const CustomPanel2 = (props) => {
   const workerSkills = props.flexInfo.skills;
   // console.log("props", props);
+  const shouldShowTelehealth = process.env.REACT_APP_BACKEND_URL ? true : false;
 
   if (props && props.tasks.size && hasAssignedTask(props.tasks) && props.task && props.task.attributes) {
     const timeStamps = { date: props.task.dateCreated.toDateString(), time: props.task.dateCreated.toTimeString() };
@@ -31,12 +32,20 @@ const CustomPanel2 = (props) => {
     if (workerSkills[0] === EDUCATION) {
       return (
           <CustomPanel2Styles>
-            <Grid container spacing={16} grid-auto-rows={"1fr"}>
-              <Grid item xs={12} sm={4}><CareManagementPane/></Grid>
-              <Grid item xs={12} sm={8}><PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/></Grid>
-              <Grid item xs={12} sm={4}><TelehealthPane nurseName={props.flexInfo.full_name}/></Grid>
-              <Grid item xs={12} sm={8}><AppointmentSchedulingPane skill={EDUCATION}/></Grid>
-            </Grid>
+            {shouldShowTelehealth ? 
+              <Grid container spacing={16} grid-auto-rows={"1fr"}>
+                <Grid item xs={12} sm={4}><CareManagementPane/></Grid>
+                <Grid item xs={12} sm={8}><PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/></Grid>
+                <Grid item xs={12} sm={4}><TelehealthPane nurseName={props.flexInfo.full_name}/></Grid>
+                <Grid item xs={12} sm={8}><AppointmentSchedulingPane skill={EDUCATION}/></Grid>
+              </Grid> :
+              <Grid container spacing={16} grid-auto-rows={"1fr"}>
+                <Grid item xs={12} sm={4}><CareManagementPane/></Grid>
+                <Grid item xs={12} sm={8}><PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/></Grid>
+                <Grid item xs={12} sm={12}><AppointmentSchedulingPane skill={EDUCATION}/></Grid>
+              </Grid> 
+            }
+            
           </CustomPanel2Styles>
       );
     } else if (workerSkills[0] === SCHEDULING) {
