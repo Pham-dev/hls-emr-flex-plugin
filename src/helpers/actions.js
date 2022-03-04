@@ -44,30 +44,7 @@ export const transferOverride = async (payload, original) => {
   };
 
   // initiate the transfer
-  console.log("url", window.location.href);
-  console.log("bodysssss", body);
-  return fetch('http://' + `${process.env.REACT_APP_BACKEND_URL}/transfer-chat`,{
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    method: 'POST',
-    body: JSON.stringify(body),
-  }).catch(async (e) => {
-    /*
-     * see src/helpers/notifications.js for how this custom notification is registered.
-     * if for some reason the request to transfer fails, show it to the agent
-     */
-    Notifications.showNotification('chatTransferFetchError', { message: e.message });
-
-    /*
-     * If we encounter an error with the transfer-chat function we do not want to leave
-     * the customer with no one in the chat channel.
-     */
-    if (channel) {
-      await channel.source.join();
-    }
-  });
-  return fetch('http://' + `localhost:3001/transfer-chat`, {
+  return fetch(`https://${process.env.REACT_APP_BACKEND_URL}/transfer-chat`,{
     headers: {
       'Content-Type': 'application/json',
     },

@@ -4,7 +4,7 @@ import { CustomPanel2Styles } from './CustomPanel2.Styles';
 import PatientInformationPane from './Panes/PatientInformationPane/PatientInformationPane';
 import CareManagementPane from './Panes/CareManagementPane/CareManagementPane';
 import TelehealthPane from './Panes/TelehealthPane/TelehealthPane';
-import { EDUCATION, SCHEDULING } from '../constants';
+import { EDUCATION, INTAKE_BY_SCHEDULERS, SCHEDULING, TRANSFER_TO_NURSE_EDUCATOR } from '../constants';
 import { Grid } from '@material-ui/core';
 import AppointmentSchedulingPane from './Panes/AppointmentSchedulingPane/AppointmentSchedulingPane';
 import { withTaskContext } from '@twilio/flex-ui';
@@ -23,13 +23,12 @@ const hasAssignedTask = (tasks) => {
 // It is recommended to keep components stateless and use redux for managing states
 const CustomPanel2 = (props) => {
   const workerSkills = props.flexInfo.skills;
-  // console.log("props", props);
   const shouldShowTelehealth = process.env.REACT_APP_BACKEND_URL ? true : false;
-
-  if (props && props.tasks.size && hasAssignedTask(props.tasks) && props.task && props.task.attributes) {
+  if (props && props.tasks.size && hasAssignedTask(props.tasks) && props.task && props.task.attributes && props.task.workflowName) {
+    console.log("Workflow: ", props.task.workflowName);
     const timeStamps = { date: props.task.dateCreated.toDateString(), time: props.task.dateCreated.toTimeString() };
     props.flex.TaskInfoPanel.Content.replace(<PatientInteractionPane key="PatientInteractionPane-component" timeStamps={timeStamps} workerSkill={workerSkills[0]}/>, { sortOrder: -1 });
-    if (workerSkills[0] === EDUCATION) {
+    if (props.task.workflowName === TRANSFER_TO_NURSE_EDUCATOR && workerSkills.includes(EDUCATION)) {
       return (
           <CustomPanel2Styles>
             {shouldShowTelehealth ? 
@@ -48,7 +47,7 @@ const CustomPanel2 = (props) => {
             
           </CustomPanel2Styles>
       );
-    } else if (workerSkills[0] === SCHEDULING) {
+    } else if (props.task.workflowName === INTAKE_BY_SCHEDULERS && workerSkills.includes(SCHEDULING)) {
       return (
         <CustomPanel2Styles>
           <div className="flex-col">
