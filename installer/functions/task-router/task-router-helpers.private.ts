@@ -9,6 +9,7 @@ export const SCHEDULERS = "Schedulers";
 export const EDUCATORS = "Educators";
 export const SCHEDULING = "Scheduling";
 export const EDUCATION = "Education";
+export const ASSIGN_TO_ANYONE = "Assign to Anyone";
 export const INTAKE_BY_SCHEDULERS = "Intake by Schedulers";
 export const TRANSFER_TO_NURSE_EDUCATOR = "Transfer to Nurse Educator";
 
@@ -92,14 +93,23 @@ export function getAllWorkflows(client: TwilioClient, workspaceSid: string): Pro
  * @returns Promise<WorkflowInstance>
  */
 export function createWorkflow(client: TwilioClient, workspaceSid: string, friendlyName: string, configuration: string): Promise<WorkflowInstance> {
-  const workspace = client.taskrouter.workspaces(workspaceSid)
+  return client.taskrouter.workspaces(workspaceSid)
     .workflows
     .create({
       friendlyName,
       configuration,
     })
     .then(workspace => workspace);
-  return workspace;
+}
+
+export function updateDefaultWorkflow(client: TwilioClient, workspaceSid: string, friendlyName: string, defaultWorkflowSid: string, configuration: string) {
+  return client.taskrouter.workspaces(workspaceSid)
+    .workflows(defaultWorkflowSid)
+    .update({
+      friendlyName,
+      configuration,
+    })
+    .then(workspace => workspace);
 }
 
 /**
@@ -141,4 +151,58 @@ export function giveAllSkillsToWorker(client: TwilioClient, workspaceSid: string
     })
     .then(worker => worker);
   return worker;
+}
+
+export const getDefaultConfig = (queueSid: string): string => {
+  return JSON.stringify({
+    task_routing: {
+      default_filter: {
+        queue: queueSid
+      }
+    }
+  });
+}
+
+export const getWorkflowConfiguration = (queueSid: string, role: string): string => {
+  if (role === SCHEDULERS) {
+    return JSON.stringify({
+      task_routing: {
+        filters: [
+          {
+            filter_friendly_name: "Schedulers Filter",
+            expression: 'routing.skills HAS "Scheduling"',
+            targets: [
+              {
+                queue: queueSid
+              }
+            ]
+          },
+        ],
+      },
+      default_filter: {
+        queue: queueSid
+      }
+    });
+  } else if (role === EDUCATORS) {
+    return JSON.stringify({
+      task_routing: {
+        filters: [
+          {
+            filter_friendly_name: "Schedulers Filter",
+            expression: 'routing.skills HAS "Education"',
+            targets: [
+              {
+                queue: queueSid
+              }
+            ]
+          },
+        ],
+      },
+      default_filter: {
+        queue: queueSid
+      }
+    });
+  } else {
+    return "";
+  }
 }
