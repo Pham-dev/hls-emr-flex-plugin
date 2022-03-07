@@ -5,7 +5,8 @@ import CustomPanel2 from './CustomPanel2';
 
 // Use Redux to attach these states to the component
 const mapStateToProps = (state) => ({
-  shouldShowPanel: state['hls-emr'].customPanel2.shouldShowPanel
+  shouldShowPanel: state['hls-emr'].customPanel2.shouldShowPanel,
+  shouldShowTelehealth: state['hls-emr'].videoButton.shouldShowTelehealth
 });
 
 // Just matches the Dispatch which is the action to perform on the component

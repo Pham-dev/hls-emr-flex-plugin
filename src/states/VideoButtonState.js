@@ -1,23 +1,22 @@
-const ACTION_TOGGLE_PANEL2 = 'TOGGLE_PANEL';
+const ACTION_TOGGLE_TELEHEALTH = 'TOGGLE_TELEHEALTH';
 
 const initialState = {
-  shouldShowPanel: false,
   shouldShowTelehealth: false,
 };
 
 export class Actions {
-  static togglePanel = () => ({ type: ACTION_TOGGLE_PANEL2 });
+  static toggleTelehealth = () => ({ type: ACTION_TOGGLE_TELEHEALTH });
 }
 
 export function reduce(state = initialState, action) {
   // eslint-disable-next-line sonarjs/no-small-switch
   switch (action.type) {
-    case ACTION_TOGGLE_PANEL2: {
+    case ACTION_TOGGLE_TELEHEALTH: {
       return {
         ...state,
-        shouldShowPanel: !state.shouldShowPanel,
-      };
-    }
+        shouldShowTelehealth: !state.shouldShowTelehealth,
+      }
+    } 
     default:
       return state;
   }
