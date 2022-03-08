@@ -26,6 +26,7 @@ export const setUpComponents = (flex, manager, flexInfo) => {
     sortOrder: 1,
     if: (props) => 
       props.task &&
+      props.task.taskStatus === 'assigned' &&
       props.task.queueName === EDUCATORS_QUEUE_NAME &&
       manager.workerClient.attributes.routing && 
       manager.workerClient.attributes.routing.skills &&
