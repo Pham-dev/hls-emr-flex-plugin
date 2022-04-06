@@ -57,3 +57,17 @@ docker run --name hls-flex-plugin --rm -p 3000:3000 -p 3001:3001 -e ACCOUNT_SID=
 ```
 twilio flex:plugins:start
 ```
+
+### Using the Makefile:
+The makefile in this repo comes with a few targets or branches for which you can execute some useful things when developing such as deploying and releasing the plugin on your account for testing.
+- You can run ```make``` at the top level to list all targets to run
+Executing a target will look something like this:
+```
+make <TARGET>
+```
+# Note:
+The transfer functionality will not work unless you populate the ```REACT_APP_BACKEND_URL=``` field in the ```.env``` file.
+You can run ```npx configure-env``` at the top level of the repo and that will create a ```.env``` file and prompt you for the value(s) to populate it with.  Once you have the ```.env``` file, you can start your development normally as well as deploy and release which will have the context of your ```REACT_APP_BACKEND_URL=``` field.
+
+### Other Blueprints:
+Follow this README.md to install all of our HLS Blue Prints: https://github.com/Pham-dev/hls-blueprint-release
