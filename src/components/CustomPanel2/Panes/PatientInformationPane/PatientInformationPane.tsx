@@ -1,8 +1,5 @@
-import { Typography, Divider, Icon as MIcon } from "@material-ui/core";
-import { Icon } from "@twilio/flex-ui";
-import { EDUCATION, SCHEDULING } from "../../../../components/constants";
-import PaneHeader from "../PaneHeader/PaneHeader";
 import { PatientInformationPaneBodyStyles } from "./PatientInformationPane.Styles";
+import React from "react";
 
 interface PatientInformationPaneProps {
   patientName: string;
@@ -12,59 +9,45 @@ interface PatientInformationPaneProps {
 const PatientInformationPane = ({ patientName = '', skill }: PatientInformationPaneProps ) => {
   return (
     <PatientInformationPaneBodyStyles>
-      <PaneHeader text="Patient Information"/>
-      <div className="information">
-        {/* SCHEDULER */}
-        {skill === SCHEDULING ?
-          <div className="scheduler-patient">
-            <div className="column1">
-              <div className="flex-row-container">
-                <Icon icon="AgentsViewBold" />
-                <Typography className="patient-info" component={"h1"}><strong>{"Name: "}{"Mary Ann Doe"}</strong></Typography>
+          <p className="title">Patient Information:</p>
+          <div className='info-block'>
+              <div className="info-column">
+                  <div className="column-value">
+                      <span className="label">Mrn</span>
+                      <span className="value">12 34 56</span>
+                  </div>
+                  <div className="column-value">
+                      <span className="label">phone number</span>
+                      <span className="value">256 123 4567</span>
+                  </div>
+                  <div className="column-value">
+                      <span className="label">email</span>
+                      <span className="value">mdoe@gmail.com</span>
+                  </div>
+                  <div className="column-value">
+                      <span className="label">address</span>
+                      <span className="value">324 Panorama Drive Broomfield CO 80020</span>
+                  </div>
               </div>
-              <div className="flex-row-container">
-                <MIcon>key</MIcon>
-                <Typography className="patient-info" component={"h1"}>{"MRN: "}12-34-56 </Typography>
+              <div className="info-column right-column">
+                  <div className="column-value">
+                      <span className="label">primary insurance</span>
+                      <span className="value">Aetna</span>
+                  </div>
+                  <div className="column-value">
+                      <span className="label">ID #</span>
+                      <span className="value">A3489 32892</span>
+                  </div>
+                  <div className="column-value">
+                      <span className="label">group #</span>
+                      <span className="value">348912 328 780541</span>
+                  </div>
+                  <div className="column-value">
+                      <span className="label">payer #</span>
+                      <span className="value">348912 5452</span>
+                  </div>
               </div>
-              <Divider className="divider"/>
-              <div className="flex-row-container">
-                <Icon icon="CallBold" />
-                <Typography className="patient-info">{"Phone: "}+12561234567</Typography>
-              </div>
-              <div className="flex-row-container">
-                  <Icon icon="Email" />
-                <Typography className="patient-info">{"Email: "}<a>mdoe@example.com</a></Typography>
-              </div>
-              <div className="flex-row-container">
-                <MIcon>home</MIcon>
-                <Typography className="patient-info">{"Address: "}123 Panorama Drive Broomfield CO 80020 </Typography>
-              </div>
-            </div>
-
-            <div className="column2 vertical-divider"></div>
-
-            <div className="column3">
-              <div className="flex-insurance-container">
-                <Icon icon="GenericTaskBold"/>
-                <Typography className="insurance-info">Insurance Info:</Typography>
-              </div>
-              <Typography className="insurance-content">{"Primary: "}Aetna</Typography>
-              <Typography className="insurance-content">{"ID #: "}<a>A1234 12345</a></Typography>
-              <Typography className="insurance-content">{"Group #: "}12-34-56 </Typography>
-              <Typography className="insurance-content">{"Payer #: "}12345 1234</Typography>
-            </div>
-          </div> :
-          <div>
-          <ul className="nurse-patient-info">
-            <li className="patient-list-item"><strong>{"PCP: "}</strong>Dr. Andrew Smith</li>
-            <li className="patient-list-item"><strong>{"Chief Complaint: "}</strong>Diabetes, Type 2 </li>
-            <li className="patient-list-item"><strong>{"Current Medications: "}</strong>Metformin 800mg daily; Lipitor 10mg daily; Lisinopril 10mg daily</li>
-            <li className="patient-list-item"><strong>{"Allergies: "}</strong>Latex, bee stings</li>
-            <li className="patient-list-item"><strong>{"Problems List: "}</strong>Diabetes, Type 2; Hypertension; Peripheral neuropathy</li>
-          </ul>
-        </div>
-        }
-      </div>
+          </div>
     </PatientInformationPaneBodyStyles>
   )
 }

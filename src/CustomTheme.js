@@ -7,6 +7,7 @@ export const black = "#000";
 export const blue = "#0066b2";
 export const teal = "#057d9e";
 export const tealHover = "#02627c";
+export const colorTextWeak = '#606B85';
 
 export const CustomTheme = {
   baseName: "FlexLight",

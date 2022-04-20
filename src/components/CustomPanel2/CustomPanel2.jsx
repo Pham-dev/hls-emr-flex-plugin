@@ -5,7 +5,7 @@ import PatientInformationPane from './Panes/PatientInformationPane/PatientInform
 import CareManagementPane from './Panes/CareManagementPane/CareManagementPane';
 import TelehealthPane from './Panes/TelehealthPane/TelehealthPane';
 import { EDUCATION, SCHEDULING } from '../constants';
-import { Grid } from '@material-ui/core';
+import {Grid, Typography} from '@material-ui/core';
 import AppointmentSchedulingPane from './Panes/AppointmentSchedulingPane/AppointmentSchedulingPane';
 import { withTaskContext } from '@twilio/flex-ui';
 import NoTasksPanel2 from '../NoTasksPanel2/NoTasksPanel2';
@@ -43,9 +43,10 @@ const CustomPanel2 = (props) => {
       return (
         <CustomPanel2Styles>
           <div className="flex-col">
+            <Typography className="patient-info" component={"h1"}><strong>{"Mary Ann Doe"}</strong></Typography>
             <div className="flex-row">
-              <PatientInformationPane className="flex-item item1" patientName={props.task.attributes.name} skill={SCHEDULING}/>
-              <PreventativeCarePane className="flex-item item2" />
+                <PatientInformationPane patientName={props.task.attributes.name} skill={SCHEDULING}/>
+                <PreventativeCarePane/>
             </div>
             <AppointmentSchedulingPane/>
           </div>

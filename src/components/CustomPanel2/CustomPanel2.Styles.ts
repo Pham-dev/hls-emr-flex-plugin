@@ -7,8 +7,7 @@ export const CustomPanel2Styles = styled('div')
     padding: 8px;
     font-size: 12px;
 
-    .scheduler-panes {
-    }
+    .scheduler-panes {}
     
     .container {
       display: flex;
@@ -76,4 +75,12 @@ export const CustomPanel2Styles = styled('div')
       width: 100%;
       height: 100%;
        flex: none;
-    }`;
+    }
+    .patient-info {
+      color: #606B85;
+      margin-top: 17px;
+      font-weight: 600;
+      font-size: 28px;
+      line-height: 34px;
+    }
+  `;
