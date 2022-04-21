@@ -3,11 +3,13 @@ import styled from 'react-emotion';
 export const PatientInformationPaneBodyStyles = styled('div')
   `
     padding: 20px;
-    width: 519px;
+    max-width: 519px;
+    width: 50%;
     height: 201px;
     border: 1px solid #E1E3E9;
     box-sizing: border-box;
     border-radius: 8px;
+    margin-right: 12px;
     
     .title {
       font-size: 14px;

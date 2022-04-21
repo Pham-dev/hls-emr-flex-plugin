@@ -4,7 +4,7 @@ export const CustomPanel2Styles = styled('div')
   `
     color: #fff;
     border-left: 0.5px solid #E5E4E2;
-    padding: 8px;
+    padding: 12px;
     font-size: 12px;
 
     .scheduler-panes {}
@@ -27,18 +27,19 @@ export const CustomPanel2Styles = styled('div')
     .flex-col {
       display: flex;
       flex-direction: column;
-      gap: 22px;
+      // gap: 22px;
     }
 
     .flex-row {
       display: flex;
       flex-direction: row;
-      gap: 22px;
+      // gap: 22px;
+      padding: 12px 0;
     }
 
     .first-row {
       display: flex;
-      gap: 22px;
+      //gap: 22px;
       height: 80%;
     }
 

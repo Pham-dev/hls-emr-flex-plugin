@@ -2,7 +2,8 @@ import styled from 'react-emotion';
 
 export const PreventativeCarePaneStyles = styled('div')
   `
-    width: 519px;
+    max-width: 519px;
+    width: 50%;
     height: 201px;
     border: 1px solid #E1E3E9;
     box-sizing: border-box;
@@ -12,6 +13,7 @@ export const PreventativeCarePaneStyles = styled('div')
       font-size: 14px;
       color: #606B85;
       font-weight: 700;
+      margin-bottom: 8px;
     }
     table {
       color: #121C2D;
@@ -27,7 +29,7 @@ export const PreventativeCarePaneStyles = styled('div')
       text-align: start;
     }
     td {
-      height: 35px;
+      height: 33px;
       border-bottom: 1px solid #E1E3E9;
       vertical-align: middle;
       font-weight: 500;
