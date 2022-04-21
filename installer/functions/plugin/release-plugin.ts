@@ -3,8 +3,8 @@ import {
   ServerlessCallback,
   ServerlessFunctionSignature,
 } from '@twilio-labs/serverless-runtime-types/types';
-import { hlsPluginName } from '../../src/constants/constants';
-import { ApplicationContext, Configuration, Plugin, Version } from '../../src/constants/interface';
+import { hlsPluginName } from '../constants';
+import { ApplicationContext, Configuration, Plugin, Version } from '../interface';
 import { createPluginConfiguration, createPluginRelease, getAllPlugins, getAllPluginVersions } from './helper-plugins.private';
 
 export const handler: ServerlessFunctionSignature = async function(
@@ -25,7 +25,7 @@ export const handler: ServerlessFunctionSignature = async function(
     if (!flexPlugin) {
       response.setStatusCode(400);
       response.setBody({ error: "Could not find HLS Flex Plugin on account!" });
-      callback(null, response);
+      return callback(null, response);
     }
 
     // get the plugin SID
@@ -36,7 +36,7 @@ export const handler: ServerlessFunctionSignature = async function(
     if (!pluginVersions) {
       response.setStatusCode(400);
       response.setBody({ error: "Could not find HLS Flex Plugin Versions!" });
-      callback(null, response);
+      return callback(null, response);
     }
 
     // Latest Version will always be first in the array
@@ -56,11 +56,11 @@ export const handler: ServerlessFunctionSignature = async function(
           release: pluginRelease
         }
       });
-    callback(null, response);
+    return callback(null, response);
 
   } catch (err: any) {
     response.setBody({error: err});
     response.setStatusCode(400);
-    callback(err, response)
+    return callback(err, response)
   }
 }

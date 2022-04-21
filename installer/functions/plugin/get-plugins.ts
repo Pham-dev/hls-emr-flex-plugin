@@ -3,9 +3,10 @@ import {
   ServerlessCallback,
   ServerlessFunctionSignature,
 } from '@twilio-labs/serverless-runtime-types/types';
-import { convertToBase64, listPluginsEndpoint } from './helper-plugins.private';
+import { listPluginsEndpoint } from './helper-plugins.private';
 import axios from 'axios';
-import { getParam, ACCOUNT_SID, AUTH_TOKEN } from '../common';
+import { convertToBase64, getParam } from '../common';
+import { ACCOUNT_SID, AUTH_TOKEN } from '../constants';
 
 /**
  * This function is used to get all current plugins.
@@ -43,10 +44,10 @@ export const handler: ServerlessFunctionSignature = async function(
     } else {
       response.setBody({data: pluginsResp});
     }
-    callback(null, response);
+    return callback(null, response);
   } catch (err: any) {
     response.setBody({error: err});
     response.setStatusCode(400);
-    callback(err, response)
+    return callback(err, response)
   }
 }

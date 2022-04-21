@@ -4,7 +4,7 @@ import {
   ServerlessFunctionSignature,
 } from '@twilio-labs/serverless-runtime-types/types';
 import { execSync } from 'child_process';
-import { LOCAL_HOST } from '../common';
+import { LOCAL_HOST } from '../constants';
 
 /** 
  * // TODO: Complete this and deploy using APIs
@@ -26,7 +26,7 @@ export const handler: ServerlessFunctionSignature = async function(
   if (!context.DOMAIN_NAME.startsWith(LOCAL_HOST)) {
     response.setStatusCode(400);
     response.setBody({ error: "You cannot call this endpoint outside of localhost" });
-    callback(null, response);
+    return callback(null, response);
   }
 
   try {
@@ -44,10 +44,10 @@ export const handler: ServerlessFunctionSignature = async function(
     );
 
     response.setBody({data: {message: "Successfully deployed plugin!", output: output.toString()}});
-    callback(null, response);
+    return callback(null, response);
   } catch (err: any) {
     response.setBody({ error: err });
     response.setStatusCode(400);
-    callback(err, response)
+    return callback(err, response)
   }
 }

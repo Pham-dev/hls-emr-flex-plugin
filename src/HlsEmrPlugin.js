@@ -1,10 +1,8 @@
-import React from 'react';
 import { VERSION } from '@twilio/flex-ui';
 import { FlexPlugin } from 'flex-plugin';
 import reducers, { namespace } from './states';
-import PatientInteractionPane from './components/CustomPanel2/Panes/PatientInteractionPane/PatientInteractionPane';
-import CustomPanel2Container from './components/CustomPanel2/CustomPanel2.Container';
 import { CustomTheme } from './CustomTheme';
+import { setUpActions, setUpComponents, setUpNotifications } from './helpers';
 
 const PLUGIN_NAME = 'HlsEmrPlugin';
 
@@ -37,24 +35,18 @@ export default class HlsEmrPlugin extends FlexPlugin {
     // console.log(manager.store.getState());
     this.registerReducers(manager);
     const flexInfo = getFlexObject(manager.workerClient);
-    const options = { sortOrder: -1 };
     const configuration = {
       colorTheme: CustomTheme
     };
-
     flex.MainHeader.defaultProps.logoUrl = "https://hls-site-4115-dev.twil.io/owlhealth/images/logoOwlHealth.png"
-
     manager.updateConfig(configuration);
     manager.strings.NoTasksTitle = "Task Status";
     manager.strings.NoTasks = "No Patient Tasks";
-    //console.log(manager.store.getState());
-    flex.CRMContainer.Content.replace(<div key="empty-div-component"/>, options);
-    flex.AgentDesktopView.Panel2.Content.add(<CustomPanel2Container key={"CustomPanel2-component"} flexInfo={flexInfo} flex={flex}/> , options);
-    flex.AgentDesktopView.defaultProps.splitterOptions = {
-      minimumSecondPanelSize: "840px",
-      minimumFirstPanelSize: "360px",
-      initialFirstPanelSize: "440px"
-    }
+
+    //console.log("overall state", manager.store.getState());
+    setUpComponents(flex, manager, flexInfo);
+    setUpNotifications();
+    setUpActions();
   }
 
   /**

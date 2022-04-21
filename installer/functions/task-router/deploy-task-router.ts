@@ -1,6 +1,6 @@
 // Imports global types
 import '@twilio-labs/serverless-runtime-types';
-import { createTaskQueue, createWorkspace, getAllWorkflows, getAllTaskQueues, createWorkflow, getAllWorkers, giveAllSkillsToWorker } from './task-router-helpers.private';
+import { createTaskQueue, createWorkspace, getAllWorkflows, getAllTaskQueues, createWorkflow, getAllWorkers, giveAllSkillsToWorker, updateDefaultWorkflow, ASSIGN_TO_ANYONE, getDefaultConfig } from './task-router-helpers.private';
 import { 
   WORKSPACE_FRIENDLY_NAME,
   SCHEDULERS,
@@ -40,29 +40,43 @@ export const handler: ServerlessFunctionSignature = async function(
 
     // Find the Queues and create them if they don't exist yet
     const taskQueues = await getAllTaskQueues(client, workspaceSid);
-    const schedulersQueue = taskQueues.find(q => q.friendlyName === SCHEDULERS);
-    const educatorsQueue = taskQueues.find(q => q.friendlyName === EDUCATORS);
-    if (!schedulersQueue) await createTaskQueue(client, SCHEDULERS, workspaceSid, SCHEDULING);
-    if (!educatorsQueue) await createTaskQueue(client, EDUCATORS, workspaceSid, EDUCATION);
+    let schedulersQueue = taskQueues.find(q => q.friendlyName === SCHEDULERS);
+    let educatorsQueue = taskQueues.find(q => q.friendlyName === EDUCATORS);
+    if (!schedulersQueue) {
+      schedulersQueue = await createTaskQueue(client, SCHEDULERS, workspaceSid, SCHEDULING);
+    }
+    if (!educatorsQueue) {
+      educatorsQueue = await createTaskQueue(client, EDUCATORS, workspaceSid, EDUCATION);
+    }
 
-    
     // Create workflows if they do not exist
-    const schedulerQueueSid = schedulersQueue?.sid!;
-    const educatorsQueueSid = educatorsQueue?.sid!;
+    const schedulersQueueSid = schedulersQueue.sid;
+    const educatorsQueueSid = educatorsQueue.sid;
     const allWorkflows = await getAllWorkflows(client, workspaceSid);
+    const defaultWorkflow: WorkflowInstance | undefined = allWorkflows.find(workflow => workflow.friendlyName === ASSIGN_TO_ANYONE);
     const schedulerWorkflow: WorkflowInstance | undefined = allWorkflows.find(workflow => workflow.friendlyName === INTAKE_BY_SCHEDULERS);
     const educatorWorkflow: WorkflowInstance | undefined = allWorkflows.find(workflow => workflow.friendlyName === TRANSFER_TO_NURSE_EDUCATOR);
-    const schedulerConfiguration = getWorkflowConfiguration(schedulerQueueSid, SCHEDULERS);
-    const educatorConfiguration = getWorkflowConfiguration(educatorsQueueSid, EDUCATORS);
-    if (!schedulerWorkflow) await createWorkflow(client, workspaceSid, INTAKE_BY_SCHEDULERS, schedulerConfiguration);
-    if (!educatorWorkflow) await createWorkflow(client, workspaceSid, TRANSFER_TO_NURSE_EDUCATOR, educatorConfiguration);
+    const schedulerConfiguration = getDefaultConfig(schedulersQueueSid);
+    const educatorConfiguration = getDefaultConfig(educatorsQueueSid);
+    if (!schedulerWorkflow) {
+      if (!defaultWorkflow) {
+        const wf = await createWorkflow(client, workspaceSid, INTAKE_BY_SCHEDULERS, schedulerConfiguration);
+        console.log(wf);
+      } else {
+        const wf = await updateDefaultWorkflow(client, workspaceSid, INTAKE_BY_SCHEDULERS, defaultWorkflow.sid, schedulerConfiguration);
+        console.log(wf);
+      } 
+    }
+    if (!educatorWorkflow) {
+      await createWorkflow(client, workspaceSid, TRANSFER_TO_NURSE_EDUCATOR, educatorConfiguration);
+    }
 
     // Give admin user (current user, hopefully) both skills (Scheduler and Nurse Educator).
     const workers = await getAllWorkers(client, workspaceSid);
     if (!workers) {
       response.setStatusCode(400);
       response.setBody({error: "No workers in your Flex Account.  Please create a worker in your TaskRouter console."})
-      callback(null, response);
+      return callback(null, response);
     }
     const adminWorker = workers[0];
     const w = await giveAllSkillsToWorker(client, workspaceSid, adminWorker.sid, adminWorker.attributes);
@@ -70,7 +84,7 @@ export const handler: ServerlessFunctionSignature = async function(
     
     response.setBody({Message: 'HLS Flex Plugin Account Setup completed'});
     response.setStatusCode(200);
-    callback(null, response);
+    return callback(null, response);
 
   } catch (err) {
     console.log(err);
@@ -81,51 +95,7 @@ export const handler: ServerlessFunctionSignature = async function(
       }
     );
     response.setStatusCode(400);
-    callback(null, response);
+    return callback(null, response);
   }
   
 };
-
-const getWorkflowConfiguration = (queueSid: string, role: string): string => {
-  if (role === SCHEDULERS) {
-    return JSON.stringify({
-      task_routing: {
-        filters: [
-          {
-            filter_friendly_name: "Schedulers Filter",
-            expression: 'routing.skills HAS "Scheduling"',
-            targets: [
-              {
-                queue: queueSid
-              }
-            ]
-          },
-        ],
-      },
-      default_filter: {
-        queue: queueSid
-      }
-    });
-  } else if (role === EDUCATORS) {
-    return JSON.stringify({
-      task_routing: {
-        filters: [
-          {
-            filter_friendly_name: "Schedulers Filter",
-            expression: 'routing.skills HAS "Education"',
-            targets: [
-              {
-                queue: queueSid
-              }
-            ]
-          },
-        ],
-      },
-      default_filter: {
-        queue: queueSid
-      }
-    });
-  } else {
-    return "";
-  }
-}

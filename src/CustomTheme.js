@@ -13,7 +13,7 @@ export const CustomTheme = {
   baseName: "FlexLight",
   colors: {
       base1: twilioWhite,
-      base2: twilioWhite,
+      base3: lightGray,
       base0: twilioRed,
       tabSelectedColor: teal,
   },
@@ -47,8 +47,20 @@ export const CustomTheme = {
       }
     },
     TaskList: {
+      Filter: {
+        Menu: {
+          background: twilioRed
+        },
+        Container: {
+          background: twilioWhite
+        },
+        EntryButton: {
+          background: twilioWhite
+        }
+      },
       Item: {
         Container: {
+          background: twilioWhite
         },
         Icon: {
           background: teal

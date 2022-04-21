@@ -1,23 +1,10 @@
 
 import axios from 'axios';
-import { ApplicationContext, Configuration } from '../../src/constants/interface';
-import { 
-  ACCOUNT_SID,
-  AUTH_TOKEN,
-  getParam
-} 
-from '../common';
+import { ApplicationContext, Configuration } from '../interface';
+import { convertToBase64, getParam } from '../common';
+import { ACCOUNT_SID, AUTH_TOKEN } from '../constants';
 
 export const listPluginsEndpoint = "https://flex-api.twilio.com/v1/PluginService/Plugins";
-
-/**
- * Needed to make API calls
- * @param stringToConvert 
- * @returns - base64 string
- */
-export const convertToBase64 = (stringToConvert: string) => {
-  return Buffer.from(stringToConvert).toString('base64');
-}
 
 /**
  * 
