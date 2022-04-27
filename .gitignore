@@ -65,6 +65,7 @@ typings/
 appConfig.js
 pluginsService.js
 build/
+.idea
 
 # VSCode
 .vscode

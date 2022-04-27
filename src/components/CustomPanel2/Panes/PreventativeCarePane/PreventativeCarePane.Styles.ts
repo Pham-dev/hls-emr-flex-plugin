@@ -2,60 +2,54 @@ import styled from 'react-emotion';
 
 export const PreventativeCarePaneStyles = styled('div')
   `
-    background-color: white;
-    color: black;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-    width: 70%;
-    font-size: 14px;
-
-    .check-list {
-      font-size: 15px;
-      padding: 12px;
-      white-space: nowrap;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .header {
-      font-weight: bold;
-    }
-
-    .content {
-      margin-bottom: 13px;
-      font-weight: bold;
-    }
+    max-width: 519px;
+    width: 50%;
+    height: 201px;
+    border: 1px solid #E1E3E9;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 20px;
     .title {
-      color: #F22F46;
-      font-size: 18px;
-      margin-bottom: 15px;
+      font-size: 14px;
+      color: #606B85;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
-
-    .table-headers {
-      display: flex;
-      flex-direction: row;
-    }
-
-    .table-content {
-      display: flex;
-      flex-direction: row;
-    }
-    
-    .input-item {
-      
-    }
-
     table {
-      font-family: arial, sans-serif;
-      border-collapse: collapse;
+      color: #121C2D;
       width: 100%;
     }
-    
-    td, th {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
+    th{
+      font-weight: 700;
+      font-size: 8px;
+      line-height: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #AFB2C0;
+      text-align: start;
     }
-    
-    tr:nth-child(even) {
+    td {
+      height: 33px;
+      border-bottom: 1px solid #E1E3E9;
+      vertical-align: middle;
+      font-weight: 500;
+      font-size: 10px;
+    }
+    .outdated {
+      font-weight: 600;
+      font-size: 10px;
+      line-height: 12px;
+      color: #E36A19;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .date-warning {
+      font-weight: 700;
+      font-size: 9px;
+      line-height: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #AEB2C1;
     }
   `; 

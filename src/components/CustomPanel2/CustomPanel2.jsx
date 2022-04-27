@@ -5,7 +5,7 @@ import PatientInformationPane from './Panes/PatientInformationPane/PatientInform
 import CareManagementPane from './Panes/CareManagementPane/CareManagementPane';
 import TelehealthPane from './Panes/TelehealthPane/TelehealthPane';
 import { EDUCATION, EDUCATORS_QUEUE_NAME, INTAKE_BY_SCHEDULERS, SCHEDULERS_QUEUE_NAME, SCHEDULING, TRANSFER_TO_NURSE_EDUCATOR } from '../constants';
-import { Grid } from '@material-ui/core';
+import {Grid, Typography} from '@material-ui/core';
 import AppointmentSchedulingPane from './Panes/AppointmentSchedulingPane/AppointmentSchedulingPane';
 import { withTaskContext } from '@twilio/flex-ui';
 import NoTasksPanel2 from '../NoTasksPanel2/NoTasksPanel2';
@@ -31,7 +31,7 @@ const CustomPanel2 = (props) => {
     if (props.task.workflowName === TRANSFER_TO_NURSE_EDUCATOR && workerSkills.includes(EDUCATION)) {
       return (
           <CustomPanel2Styles>
-            {shouldShowTelehealth ? 
+            {shouldShowTelehealth ?
               <Grid container spacing={16} grid-auto-rows={"1fr"}>
                 <Grid item xs={12} sm={4}><CareManagementPane/></Grid>
                 <Grid item xs={12} sm={8}><PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/></Grid>
@@ -42,7 +42,7 @@ const CustomPanel2 = (props) => {
                 <Grid item xs={12} sm={4}><CareManagementPane/></Grid>
                 <Grid item xs={12} sm={8}><PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/></Grid>
                 <Grid item xs={12} sm={12}><AppointmentSchedulingPane skill={EDUCATION}/></Grid>
-              </Grid> 
+              </Grid>
             }
           </CustomPanel2Styles>
       );
@@ -50,9 +50,10 @@ const CustomPanel2 = (props) => {
       return (
         <CustomPanel2Styles>
           <div className="flex-col">
+            <Typography className="patient-info" component={"h1"}><strong>{"Mary Ann Doe"}</strong></Typography>
             <div className="flex-row">
-              <PatientInformationPane className="flex-item item1" patientName={props.task.attributes.name} skill={SCHEDULING}/>
-              <PreventativeCarePane className="flex-item item2" />
+                <PatientInformationPane patientName={props.task.attributes.name} skill={SCHEDULING}/>
+                <PreventativeCarePane/>
             </div>
             <AppointmentSchedulingPane/>
           </div>

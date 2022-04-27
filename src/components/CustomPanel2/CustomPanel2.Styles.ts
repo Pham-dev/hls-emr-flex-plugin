@@ -4,11 +4,10 @@ export const CustomPanel2Styles = styled('div')
   `
     color: #fff;
     border-left: 0.5px solid #E5E4E2;
-    padding: 8px;
+    padding: 12px;
     font-size: 12px;
 
-    .scheduler-panes {
-    }
+    .scheduler-panes {}
     
     .container {
       display: flex;
@@ -28,18 +27,19 @@ export const CustomPanel2Styles = styled('div')
     .flex-col {
       display: flex;
       flex-direction: column;
-      gap: 22px;
+      // gap: 22px;
     }
 
     .flex-row {
       display: flex;
       flex-direction: row;
-      gap: 22px;
+      // gap: 22px;
+      padding: 12px 0;
     }
 
     .first-row {
       display: flex;
-      gap: 22px;
+      //gap: 22px;
       height: 80%;
     }
 
@@ -76,4 +76,12 @@ export const CustomPanel2Styles = styled('div')
       width: 100%;
       height: 100%;
        flex: none;
-    }`;
+    }
+    .patient-info {
+      color: #606B85;
+      margin-top: 17px;
+      font-weight: 600;
+      font-size: 28px;
+      line-height: 34px;
+    }
+  `;

@@ -1,107 +1,57 @@
-import { Divider, Typography } from '@material-ui/core';
 import React from 'react';
-import PaneHeader from '../PaneHeader/PaneHeader';
 import { PreventativeCarePaneStyles } from './PreventativeCarePane.Styles';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-
-const styles = () => ({
-});
-
-let id = 0;
-function createData(name: any, calories: any, fat: any, carbs: any, protein: any) {
-  id += 1;
-  return { id, name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 const PreventativeCarePane = (props: any) => {
-  const { classes } = props;
+  // const { classes } = props;
   return (
     <PreventativeCarePaneStyles>
-      <PaneHeader text="Preventative Care" />
+      <p className="title">Preventative Care:</p>
+
       <table>
-        <tr className="header">
-          <th>Item</th>
-          <th>Last Date</th>
-          <th></th>
-        </tr>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Last Date</th>
+          </tr>
+        </thead>
         <tr>
           <td>Flu shot</td>
           <td>10-08-21</td>
-          <td>DUE</td>
         </tr>
         <tr>
           <td>Covid-19 Vaccine</td>
-          <td>01-05-22</td>
-          <td></td>
+          <td>
+            <span className="outdated">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 2.5C4.86739 2.5 4.74022 2.55268 4.64645 2.64645C4.55268 2.74021 4.5 2.86739 4.5 3V5C4.5 5.13261 4.55268 5.25979 4.64645 5.35355C4.74022 5.44732 4.86739 5.5 5 5.5C5.13261 5.5 5.25979 5.44732 5.35356 5.35355C5.44732 5.25979 5.5 5.13261 5.5 5V3C5.5 2.86739 5.44732 2.74021 5.35356 2.64645C5.25979 2.55268 5.13261 2.5 5 2.5ZM5.46 6.81C5.44906 6.77814 5.43392 6.74787 5.415 6.72L5.355 6.645C5.28469 6.57562 5.1954 6.52862 5.09841 6.50994C5.00141 6.49125 4.90106 6.50171 4.81 6.54C4.74941 6.56532 4.6936 6.60083 4.645 6.645C4.59866 6.69172 4.562 6.74713 4.53712 6.80805C4.51223 6.86897 4.49962 6.9342 4.5 7C4.50079 7.06534 4.51438 7.12989 4.54 7.19C4.56246 7.25205 4.59829 7.3084 4.64494 7.35506C4.6916 7.40172 4.74795 7.43754 4.81 7.46C4.86985 7.48645 4.93457 7.50012 5 7.50012C5.06544 7.50012 5.13015 7.48645 5.19 7.46C5.25205 7.43754 5.3084 7.40172 5.35506 7.35506C5.40172 7.3084 5.43755 7.25205 5.46 7.19C5.48562 7.12989 5.49921 7.06534 5.5 7C5.50246 6.96671 5.50246 6.93329 5.5 6.9C5.49139 6.86812 5.4779 6.83776 5.46 6.81ZM5 0C4.0111 0 3.0444 0.293245 2.22215 0.842652C1.39991 1.39206 0.759043 2.17295 0.380605 3.08658C0.00216642 4.00021 -0.0968502 5.00555 0.0960758 5.97545C0.289002 6.94536 0.765206 7.83627 1.46447 8.53553C2.16373 9.2348 3.05465 9.711 4.02455 9.90393C4.99446 10.0969 5.99979 9.99784 6.91342 9.6194C7.82705 9.24096 8.60794 8.6001 9.15735 7.77785C9.70676 6.95561 10 5.98891 10 5C10 4.34339 9.87067 3.69321 9.6194 3.08658C9.36812 2.47995 8.99983 1.92876 8.53553 1.46447C8.07124 1.00017 7.52005 0.631876 6.91342 0.380602C6.30679 0.129329 5.65661 0 5 0ZM5 9C4.20888 9 3.43552 8.7654 2.77772 8.32588C2.11992 7.88635 1.60723 7.26164 1.30448 6.53073C1.00173 5.79983 0.92252 4.99556 1.07686 4.21964C1.2312 3.44371 1.61216 2.73098 2.17157 2.17157C2.73098 1.61216 3.44372 1.2312 4.21964 1.07686C4.99556 0.922518 5.79983 1.00173 6.53074 1.30448C7.26164 1.60723 7.88635 2.11992 8.32588 2.77772C8.7654 3.43552 9 4.20887 9 5C9 6.06087 8.57857 7.07828 7.82843 7.82843C7.07828 8.57857 6.06087 9 5 9Z" fill="#E36A19"/>
+              </svg>
+              &nbsp;01-05-22&nbsp;
+              <span className="date-warning">(outdated)</span>
+            </span>
+          </td>
         </tr>
         <tr>
           <td>Mammogram</td>
           <td>01-20-21</td>
-          <td>DUE</td>
         </tr>
         <tr>
           <td>Colonoscopy</td>
-          <td>12-04-15</td>
-          <td></td>
+          <td>
+            <span className="outdated">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 2.5C4.86739 2.5 4.74022 2.55268 4.64645 2.64645C4.55268 2.74021 4.5 2.86739 4.5 3V5C4.5 5.13261 4.55268 5.25979 4.64645 5.35355C4.74022 5.44732 4.86739 5.5 5 5.5C5.13261 5.5 5.25979 5.44732 5.35356 5.35355C5.44732 5.25979 5.5 5.13261 5.5 5V3C5.5 2.86739 5.44732 2.74021 5.35356 2.64645C5.25979 2.55268 5.13261 2.5 5 2.5ZM5.46 6.81C5.44906 6.77814 5.43392 6.74787 5.415 6.72L5.355 6.645C5.28469 6.57562 5.1954 6.52862 5.09841 6.50994C5.00141 6.49125 4.90106 6.50171 4.81 6.54C4.74941 6.56532 4.6936 6.60083 4.645 6.645C4.59866 6.69172 4.562 6.74713 4.53712 6.80805C4.51223 6.86897 4.49962 6.9342 4.5 7C4.50079 7.06534 4.51438 7.12989 4.54 7.19C4.56246 7.25205 4.59829 7.3084 4.64494 7.35506C4.6916 7.40172 4.74795 7.43754 4.81 7.46C4.86985 7.48645 4.93457 7.50012 5 7.50012C5.06544 7.50012 5.13015 7.48645 5.19 7.46C5.25205 7.43754 5.3084 7.40172 5.35506 7.35506C5.40172 7.3084 5.43755 7.25205 5.46 7.19C5.48562 7.12989 5.49921 7.06534 5.5 7C5.50246 6.96671 5.50246 6.93329 5.5 6.9C5.49139 6.86812 5.4779 6.83776 5.46 6.81ZM5 0C4.0111 0 3.0444 0.293245 2.22215 0.842652C1.39991 1.39206 0.759043 2.17295 0.380605 3.08658C0.00216642 4.00021 -0.0968502 5.00555 0.0960758 5.97545C0.289002 6.94536 0.765206 7.83627 1.46447 8.53553C2.16373 9.2348 3.05465 9.711 4.02455 9.90393C4.99446 10.0969 5.99979 9.99784 6.91342 9.6194C7.82705 9.24096 8.60794 8.6001 9.15735 7.77785C9.70676 6.95561 10 5.98891 10 5C10 4.34339 9.87067 3.69321 9.6194 3.08658C9.36812 2.47995 8.99983 1.92876 8.53553 1.46447C8.07124 1.00017 7.52005 0.631876 6.91342 0.380602C6.30679 0.129329 5.65661 0 5 0ZM5 9C4.20888 9 3.43552 8.7654 2.77772 8.32588C2.11992 7.88635 1.60723 7.26164 1.30448 6.53073C1.00173 5.79983 0.92252 4.99556 1.07686 4.21964C1.2312 3.44371 1.61216 2.73098 2.17157 2.17157C2.73098 1.61216 3.44372 1.2312 4.21964 1.07686C4.99556 0.922518 5.79983 1.00173 6.53074 1.30448C7.26164 1.60723 7.88635 2.11992 8.32588 2.77772C8.7654 3.43552 9 4.20887 9 5C9 6.06087 8.57857 7.07828 7.82843 7.82843C7.07828 8.57857 6.06087 9 5 9Z" fill="#E36A19"/>
+              </svg>
+              &nbsp;12-04-15&nbsp;
+              <span className="date-warning">(outdated)</span>
+            </span>
+          </td>
         </tr>
       </table>
-      
+      <div>
 
-      {/* <div className="check-list">
-        <div className="content">
-          <input type="checkbox" id="Diabetes Management" name="fav_language" value="HTML"/>
-          <label className="input-item">ID Verification</label><br/>
-        </div>
-        <div className="content">
-          <input type="checkbox" id="css" name="fav_language" value="CSS"/>
-          <label className="input-item">Updated contact info (phone number, address, email)</label><br/>
-        </div>
-        <div className="content">
-          <input type="checkbox" id="javascript" name="fav_language" value="JavaScript"/>
-          <label className="input-item">Insurance Eligibility Check </label>
-        </div>
-        <div className="content">
-          <input type="checkbox" id="hello" name="fav_food" value="Foo"/>
-          <label className="input-item">Flu Shot check</label>
-        </div>
-      </div> */}
-      {/* <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell align="center">Item</TableCell>
-            <TableCell align="center">Latest Value</TableCell>
-            <TableCell align="center"></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.id}>
-              <TableCell align="center" component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="center">{row.calories}</TableCell>
-              <TableCell align="center">{row.fat}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Paper> */}
+      </div>
+
     </PreventativeCarePaneStyles>
   );
 };
@@ -111,4 +61,4 @@ PreventativeCarePane.propTypes = {
 };
 
 
-export default withStyles(styles)(PreventativeCarePane);
+export default PreventativeCarePane;
