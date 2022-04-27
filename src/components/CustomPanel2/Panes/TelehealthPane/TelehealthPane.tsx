@@ -11,7 +11,7 @@ const TelehealthPane = ({ nurseName }: TelehealthPaneProps) => {
 
   useEffect(() => {
     const fetchToken = async () => {
-      await fetch("https://" + process.env.REACT_APP_BACKEND_URL! + "/visit/token", {
+      await fetch("https://" + process.env.REACT_APP_TELEHEALTH_URL! + "/visit/token", {
         method: "post",
         headers: {
           "Accept": "application/json",
@@ -34,7 +34,7 @@ const TelehealthPane = ({ nurseName }: TelehealthPaneProps) => {
       {passcode ?
         <TelehealthPaneStyles>
           <PaneHeader text="Telehealth"/>
-          <iframe className="telehealth"  allow="camera; microphone" src={"https://" + process.env.REACT_APP_BACKEND_URL + "/provider/index.html?" + `token=${passcode}&name=${nurseName}`}/>
+          <iframe className="telehealth"  allow="camera; microphone" src={"https://" + process.env.REACT_APP_TELEHEALTH_URL + "/provider/index.html?" + `token=${passcode}&name=${nurseName}&flex_enabled=1`}/>
         </TelehealthPaneStyles> :
         <></>
       }
