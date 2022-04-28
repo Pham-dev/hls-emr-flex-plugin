@@ -70,7 +70,6 @@ make <TARGET>
 The transfer functionality will not work unless you populate the ```REACT_APP_TELEHEALTH_URL=``` field in the ```.env``` file.
 You can run ```npx configure-env``` at the top level of the repo and that will create a ```.env``` file and prompt you for the value(s) to populate it with.  Once you have the ```.env``` file, you can start your development normally as well as deploy and release which will have the context of your ```REACT_APP_TELEHEALTH_URL=``` field.
 
-Same for ```REACT_APP_TELEHEALTH_URL```.  You will need to perform the prerequisite to install/deploy telehealth first.  Instructions are above on this page.
 
 ### Other Blueprints:
 Follow this README.md to install all of our HLS Blue Prints: https://github.com/Pham-dev/hls-blueprint-release
