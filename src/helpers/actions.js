@@ -44,6 +44,7 @@ export const transferOverride = async (payload, original) => {
   };
 
   // initiate the transfer
+  console.log("ENV", process.env);
   return fetch(`https://${process.env.REACT_APP_BACKEND_URL}/transfer-chat`,{
     headers: {
       'Content-Type': 'application/json',
