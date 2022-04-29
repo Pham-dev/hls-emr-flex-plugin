@@ -2,32 +2,46 @@ import styled from 'react-emotion';
 
 export const CareManagementPaneStyles = styled('div')
   `
-    background-color: white;
-    height: 100%;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-    .intro-text {
-      text-align: center;
-      color: black;
-      padding-top: 8px;
-      font-size: 16px;
+    max-width: 519px;
+    width: 50%;
+    height: 201px;
+    border: 1px solid #E1E3E9;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .title-block {
+      position: relative;
+      height: 40px;
+    }
+    .title {
+      font-size: 14px;
+      color: #606B85;
+      font-weight: 700;
+    }
+    .sub-title {
+      font-size: 10px;
+      color: #606B85;
+      line-height: 12px;
+    }
+    select {
+      display: block;
+      padding: 8px 10px;
+      width: 200px;
+      height: 35px;
+    }
+    .enroll-btn {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 15px;
+      color: #AEB2C1;
+      padding: 7.5px 19px 7.5px 13.58px;
+      background: #F4F4F6;
+      width: 85px;
+      height: 30px;
+      text-transform: capitalize;
     }
   `;
 
-export const CareManagementPaneContentStyles = styled('div')
-  `
-    padding: 10px;
-    color: black;
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    .checkboxes {
-      font-size: 14px;
-    }
-    .check-item {
-      margin-top: 7px;
-      margin-bottom: 7px;
-    }
-  `;
