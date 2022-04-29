@@ -20,8 +20,11 @@ RUN twilio plugins:install @twilio-labs/plugin-flex
 # Copy directory over to /hls-deploy folder
 WORKDIR /hls-deploy
 COPY . /hls-deploy
+WORKDIR /plugin-backend
 RUN echo "REACT_APP_TELEHEALTH_URL=${REACT_APP_TELEHEALTH_URL}" > .env
-RUN echo "REACT_APP_BACKEND_URL=$(eval twilio serverless:deploy -o=json | jq -r .domain)" >> .env
+RUN echo "REACT_APP_BACKEND_URL=$(eval twilio serverless:deploy -o=json | grep -o '"domain": "[^"]*' | grep -o '[^"]*$')" >> .env
+COPY .env /hls-deploy
+WORKDIR /hls-deploy
 RUN npm install
 
 # Run deploy command to get a working version

@@ -22,6 +22,48 @@ const hasAssignedTask = (tasks) => {
 
 // It is recommended to keep components stateless and use redux for managing states
 const CustomPanel2 = (props) => {
+
+  console.log(props)
+
+  /*const [patientInfo, setPatientInfo] = useState({});
+
+  const getConversationHistory = async (chatId) => {
+
+  }
+
+  const parsePatientNamesFromChat = () => {
+
+  }
+
+  const findPatientInfo = (firstname, lastname, dob) =>
+    new Promise((resolve, reject) => {
+      fetch(`https://${process.env.OPENEMR_URL}/apis/default/fhir/Patient`)
+        .then((resp) => {
+          const { entry } = resp.json();
+          const filteredPatient = entry.find(
+            (e) =>
+              e.resource.birthDate == dob &&
+              e.resource.name.find(
+                (name) =>
+                  name.family == lastname && name.given.includes(firstname)
+              )
+          );
+          if (!filteredPatient) throw new Error();
+          resolve(filteredPatient);
+        })
+        .catch((_err) => {
+          reject(
+            `No patient found with first name: ${firstname}, last name=${lastname} and DOB=${dob}`
+          );
+        });
+    });
+
+  useEffect(async () => {
+    const patient = await findPatientInfo(); //TODO: add firstname, lastname, dob here
+    setPatientInfo(patient);
+  }); */
+
+
   const workerSkills = props.flexInfo.skills;
   const showTelehealth = props.manager.store.getState()['hls-emr'].videoButton.shouldShowTelehealth;
   const shouldShowTelehealth = (process.env.REACT_APP_TELEHEALTH_URL && showTelehealth) ? true : false;
@@ -52,7 +94,7 @@ const CustomPanel2 = (props) => {
           <div className="flex-col">
             <Typography className="patient-info" component={"h1"}><strong>{"Mary Ann Doe"}</strong></Typography>
             <div className="flex-row">
-                <PatientInformationPane patientName={props.task.attributes.name} skill={SCHEDULING}/>
+                <PatientInformationPane manager={props.manager} patientName={props.task.attributes.name} skill={SCHEDULING}/>
                 <PreventativeCarePane/>
             </div>
             <AppointmentSchedulingPane/>

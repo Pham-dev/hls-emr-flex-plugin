@@ -1,12 +1,32 @@
 import { PatientInformationPaneBodyStyles } from "./PatientInformationPane.Styles";
-import React from "react";
+import React, { useEffect } from "react";
+import { ManagerForOutside } from "@twilio/flex-ui/src/core/Manager";
+import {Channel} from "@twilio/flex-ui-core/node_modules/twilio-chat/lib/channel"
 
 interface PatientInformationPaneProps {
   patientName: string;
   skill: string;
+  manager: ManagerForOutside;
 }
 
-const PatientInformationPane = ({ patientName = '', skill }: PatientInformationPaneProps ) => {
+const PatientInformationPane = ({ patientName = '', skill, manager }: PatientInformationPaneProps ) => {
+
+
+    useEffect(()=>{
+        const getChannels = async () => manager.chatClient.getLocalChannels()
+        const getConversation = async (channel:Channel) => {
+            channel.getMessages().then(paginator => {
+                paginator.items.forEach(msg=>console.log(msg.body))
+            })
+        }
+        getChannels().then(resp => {
+            resp.forEach((channel, index)=> {
+                console.log(channel.friendlyName)
+                console.log(channel.uniqueName)
+            })
+        })
+    })
+
   return (
     <PatientInformationPaneBodyStyles>
           <p className="title">Patient Information:</p>
