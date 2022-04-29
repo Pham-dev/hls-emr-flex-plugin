@@ -25,7 +25,7 @@ const CustomPanel2 = (props) => {
 
   console.log(props)
 
-  /*const [patientInfo, setPatientInfo] = useState({});
+  const [patientInfo, setPatientInfo] = useState({});
 
   const getConversationHistory = async (chatId) => {
 
@@ -61,7 +61,7 @@ const CustomPanel2 = (props) => {
   useEffect(async () => {
     const patient = await findPatientInfo(); //TODO: add firstname, lastname, dob here
     setPatientInfo(patient);
-  }); */
+  });
 
 
   const workerSkills = props.flexInfo.skills;
