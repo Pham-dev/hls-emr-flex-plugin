@@ -24,6 +24,7 @@ WORKDIR /plugin-backend
 RUN npm install
 RUN echo "REACT_APP_TELEHEALTH_URL=${REACT_APP_TELEHEALTH_URL}" > .env
 RUN echo "REACT_APP_BACKEND_URL=$(eval twilio serverless:deploy -o=json | grep -o '"domain": "[^"]*' | grep -o '[^"]*$')" >> .env
+RUN echo "Hello-World" >> .env
 RUN cp .env /hls-deploy
 WORKDIR /hls-deploy
 RUN npm install
