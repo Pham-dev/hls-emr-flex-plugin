@@ -22,6 +22,8 @@ WORKDIR /hls-deploy
 COPY . /hls-deploy
 WORKDIR /plugin-backend
 RUN npm install
+RUN export TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+RUN export TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
 RUN echo "REACT_APP_BACKEND_URL=$(eval twilio serverless:deploy -o=json | grep -o '"domain": "[^"]*' | grep -o '[^"]*$')" > .env
 RUN echo "REACT_APP_TELEHEALTH_URL=${REACT_APP_TELEHEALTH_URL}" >> .env
 RUN echo "Hello-World" >> .env
