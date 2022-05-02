@@ -1,4 +1,4 @@
-const ACTION_TOGGLE_PANEL2 = 'TOGGLE_PANEL';
+const ACTION_TOGGLE_PANEL2 = "TOGGLE_PANEL";
 
 const initialState = {
   shouldShowPanel: false,

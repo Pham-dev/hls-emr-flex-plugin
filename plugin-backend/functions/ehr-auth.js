@@ -3,7 +3,7 @@ const JWEValidator = require("twilio-flex-token-validator").functionValidator;
 const fetch = require("node-fetch");
 const Headers = require("node-fetch").Headers;
 
-exports.handler = JWEValidator(async function (_context, _event, callback) {
+exports.handler = JWEValidator(async function (context, event, callback) {
   const response = new Twilio.Response();
   response.appendHeader("Access-Control-Allow-Origin", "*");
   response.appendHeader("Access-Control-Allow-Methods", "OPTIONS, POST");
@@ -61,7 +61,7 @@ exports.handler = JWEValidator(async function (_context, _event, callback) {
 
     return callback(null, response);
   } catch (err) {
-    response.setStatusCode(500)
+    response.setStatusCode(500);
     return callback(null, response);
   }
 });

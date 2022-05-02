@@ -1,31 +1,28 @@
 import { PatientInformationPaneBodyStyles } from "./PatientInformationPane.Styles";
-import React, { useEffect } from "react";
-import { ManagerForOutside } from "@twilio/flex-ui/src/core/Manager";
-import {Channel} from "@twilio/flex-ui-core/node_modules/twilio-chat/lib/channel"
+import React, {useEffect, useMemo } from "react";
 
 interface PatientInformationPaneProps {
-  patientName: string;
+  name:string
+  patientInfo: any;
+  pendingRequest:boolean
   skill: string;
-  manager: ManagerForOutside;
 }
 
-const PatientInformationPane = ({ patientName = '', skill, manager }: PatientInformationPaneProps ) => {
+const PatientInformationPane = ({patientInfo, pendingRequest, name, skill}:PatientInformationPaneProps ) => {
 
-
-    useEffect(()=>{
-        const getChannels = async () => manager.chatClient.getLocalChannels()
-        const getConversation = async (channel:Channel) => {
-            channel.getMessages().then(paginator => {
-                paginator.items.forEach(msg=>console.log(msg.body))
-            })
+    const phone = useMemo(()=>{
+        if(patientInfo && patientInfo.telecom){
+            console.log(patientInfo.telecom)
+            const result = patientInfo.telecom.find((item:any)=>item.use === "mobile")
+            return result?.value || "N/A"
         }
-        getChannels().then(resp => {
-            resp.forEach((channel, index)=> {
-                console.log(channel.friendlyName)
-                console.log(channel.uniqueName)
-            })
-        })
-    })
+        return "N/A"
+    }, [patientInfo])
+
+    const email = useMemo(()=>{
+        const names = name.split(" ")
+        return names.join("").concat("@gmail.com")
+    }, [name])
 
   return (
     <PatientInformationPaneBodyStyles>
@@ -33,16 +30,16 @@ const PatientInformationPane = ({ patientName = '', skill, manager }: PatientInf
           <div className='info-block'>
               <div className="info-column">
                   <div className="column-value">
-                      <span className="label">Mrn</span>
-                      <span className="value">12 34 56</span>
+                      <span className="label">Id</span>
+                      <span className="value">{pendingRequest ? "..." : patientInfo?.id || "N/A"}</span>
                   </div>
                   <div className="column-value">
                       <span className="label">phone number</span>
-                      <span className="value">256 123 4567</span>
+                      <span className="value">{pendingRequest ? "..." : phone}</span>
                   </div>
                   <div className="column-value">
                       <span className="label">email</span>
-                      <span className="value">mdoe@gmail.com</span>
+                      <span className="value">{pendingRequest ? "..." : email}</span>
                   </div>
                   <div className="column-value">
                       <span className="label">address</span>

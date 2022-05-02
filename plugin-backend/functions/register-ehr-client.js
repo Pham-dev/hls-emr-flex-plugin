@@ -3,7 +3,7 @@ const JWEValidator = require("twilio-flex-token-validator").functionValidator;
 const fetch = require("node-fetch");
 const Headers = require("node-fetch").Headers;
 
-exports.handler = JWEValidator(async function (context, _event, callback) {
+exports.handler = JWEValidator(async function (context, event, callback) {
   const response = new Twilio.Response();
   response.appendHeader("Access-Control-Allow-Origin", "*");
   response.appendHeader("Access-Control-Allow-Methods", "OPTIONS, POST");
@@ -15,14 +15,13 @@ exports.handler = JWEValidator(async function (context, _event, callback) {
   response.setStatusCode(200);
 
   try {
-
     const body = {
       application_type: "private",
+      client_name: "hls-api-client",
+      token_endpoint_auth_method: "client_secret_post",
       redirect_uris: ["http://localhost:3000"],
       post_logout_redirect_uris: ["http://localhost:3000"],
       initiate_login_uri: "http://localhost:3000",
-      client_name: "hls-api-client",
-      token_endpoint_auth_method: "client_secret_post",
       username: "admin",
       password: "pass",
       scope:
@@ -41,6 +40,6 @@ exports.handler = JWEValidator(async function (context, _event, callback) {
 
     return callback(null, response);
   } catch (err) {
-    return callback(err)
+    return callback(err);
   }
 });

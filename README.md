@@ -7,6 +7,9 @@ This Package will allow you to seemlessly setup the HLS Flex Plugin to your own 
 **Docker CLI and/or Docker Desktop**
 - Docker desktop will be used to run the application installer locally on your machine. Go to [Docker](https://www.docker.com/products/docker-desktop) website and download Docker with default options. After installation make sure to start Docker desktop.
 
+**ngrok**
+- Per the [open-emr repo](https://github.com/bochoi-twlo/hls-ehr), ensure you have OpenEMR installed and are running ngrok on a local terminal. This is done by calling `ngrok http 80` from your terminal. Write down your ngrok http url for later use.
+
 **Twilio Account**
 - Create a [Twilio account](https://www.twilio.com/try-twilio) if you have not done so already
 - After creating your account you will have access to an **Account Sid** and an **Auth Token** which will be needed to run through the installation.
@@ -29,6 +32,7 @@ Once you get your flex account up and running, you'll need to deploy Telehealth 
 ### Deploy the Plugin to your Flex Instance
 
 1. First, launch your Flex instance and click "Edit" under development setup.  Here you'll want to change the React Version to the latest; which is ```16.13.1```
+
 2. Build the docker image of this installer by running this command in your terminal.  You'll need to get your Account Sid and Auth Token from your Twilio Console:
 ```
 docker build --build-arg TWILIO_ACCOUNT_SID={ACCOUNT_SID} --build-arg TWILIO_AUTH_TOKEN={AUTH_TOKEN} --build-arg REACT_APP_TELEHEALTH_URL={REACT_APP_TELEHEALTH_URL} --build-arg NGROK_URL={NGROK_URL} --no-cache --tag hls-flex-plugin https://github.com/Pham-dev/hls-emr-flex-plugin.git#main

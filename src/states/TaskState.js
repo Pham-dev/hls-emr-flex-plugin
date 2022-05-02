@@ -1,89 +1,66 @@
-import { string } from "prop-types";
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
-import { resolve } from "path";
+import { fetchingState } from "../states";
 
-const ACTION_SELECT_TASK = "SELET_TASK";
+export const ACTION_FETCHING_FIHR = "FETCHING_FIHR_DATA";
+export const ACTION_FETCHING_FIHR_SUCCESS = "FETCHING_FIHR_DATA_SUCCSS";
+export const ACTION_FETCHING_FIHR_FAILURE = "FETCHING_FIHR_DATA_FAILURE";
 
-const initialState = {
-  name: "Mary Ann Doe",
-  dob: "1990-01-01",
-  isFetching: false,
-  fetchingFailed: false,
-  fetchingSuccess: false
-};
-
-export class Actions {
-  static selectTask = () => ({ type: ACTION_SELECT_TASK });
+export class TaskActions {
+  static fetchingFihrData = () => ({ type: ACTION_FETCHING_FIHR });
+  static fetchingFihrDataSuccess = (payload) => ({
+    payload,
+    type: ACTION_FETCHING_FIHR_SUCCESS,
+  });
+  static fetchingFihrDataFailure = () => ({
+    type: ACTION_FETCHING_FIHR_FAILURE,
+  });
 }
 
-/**
- * params contains name
- */
-const getFihrData = createAsyncThunk(
-  "Fetch Fihr Data",
-  async (params, { dispatch, getState }) => {
-    try {
-      //1. Register the client, and get the client ID
-      //2. Is get an access token
-      //3. Get fihr data
-      //4. Return the fihr data, or an error
+export const initialState = {
+  ...fetchingState,
+  accessTokenInfo: null,
+  clientId: null,
+  patientInfo: null,
+};
 
-      const { name } = params;
-
-      const result = fetch("registerClientEndpoint")
-      .then(resp=>resp.json())
-      .then(async resp=>{
-          const {clientId} = resp;
-          const res = await fetch(`getAccessTokenEndpoint?clientId=${clientId}}`)
-          return res
-      })
-      .then(resp=>resp.json())
-      .then(resp=>{
-          const {accessToken} = resp
-          const res = await fetch("getFihrDataEndpoint", {method: 'POST', body: JSON.stringify({accessToken})})
-          return res
-      })
-      .then(resp=>resp.json())
-
-      //pseudocode
-      const patient = result.entry.find(e=>e.name === name)
-
-      return patient;
-    } catch (err) {
-      return err;
+export function reduce(state = initialState, { type, payload }) {
+  // eslint-disable-next-line sonarjs/no-small-switch
+  switch (type) {
+    case ACTION_FETCHING_FIHR: {
+      console.log("FETCHING");
+      return {
+        ...state,
+        accessTokenInfo: null,
+        clientId: null,
+        patientInfo: null,
+        fetching: true,
+        fetchingFailed: false,
+        fetchingSuccess: false,
+      };
     }
+    case ACTION_FETCHING_FIHR_SUCCESS: {
+      const s = {
+        ...state,
+        ...payload,
+        fetching: false,
+        fetchingFailed: false,
+        fetchingSuccess: true,
+      };
+      return s;
+    }
+    case ACTION_FETCHING_FIHR_FAILURE: {
+      console.log("FAILURE");
+      return {
+        ...state,
+        accessTokenInfo: null,
+        clientId: null,
+        patientInfo: null,
+        fetching: false,
+        fetchingFailed: true,
+        fetchingSuccess: false,
+      };
+    }
+    default:
+      return state;
   }
-);
-
-export function reduce(state = initialState, action) {
-    createReducer(initialState, builder => {
-        builder
-        .addCase(getFihrData.pending, state => {
-            return {
-                ...state,
-                isFetching: true,
-                fetchingFailed: false,
-                fetchingSuccess: false
-            }
-
-        })
-        .addCase(getFihrData.fulfilled, (state, payload) => {
-            return {
-                ...state,
-                isFetching: false,
-                fetchingFailed: false,
-                fetchingSuccess: true,
-                dob: payload.dob,
-                name: payload.name
-            }
-        })
-        .addCase(getFihrData.rejected, (state, payload)=> {
-            return {
-                ...state,
-                isFetching: false,
-                fetchingFailed: true,
-                fetchingSuccess: false
-            }
-        })
-    })
 }
