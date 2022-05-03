@@ -1,4 +1,3 @@
-import { ServerlessResourceConfigWithFilePath } from "@twilio-labs/serverless-api";
 import { Context } from "@twilio-labs/serverless-runtime-types/types";
 
 export interface ApplicationContext extends Context {
@@ -11,7 +10,7 @@ export interface Plugin extends ResourceInformation {
   date_updated: string;
   links: {
     plugin_versions: string;
-  }
+  };
 }
 
 export interface Version extends ResourceInformation {
@@ -24,13 +23,13 @@ export interface Version extends ResourceInformation {
 export interface Configuration extends ResourceInformation {
   links: {
     plugins: string;
-  }
+  };
 }
 
 export interface DeployProjectParams {
-  context: ApplicationContext,
-  serviceSid?: string,
-  functionSid?: string,
+  context: ApplicationContext;
+  serviceSid?: string;
+  functionSid?: string;
 }
 
 export interface Release extends ResourceInformation {
