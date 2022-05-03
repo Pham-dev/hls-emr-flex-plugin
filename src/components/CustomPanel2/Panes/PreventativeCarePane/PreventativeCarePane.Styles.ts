@@ -38,11 +38,15 @@ export const PreventativeCarePaneStyles = styled('div')
     .outdated {
       font-weight: 600;
       font-size: 10px;
-      line-height: 12px;
+      // line-height: 12px;
       color: #E36A19;
       display: inline-flex;
       justify-content: center;
-      align-items: center;
+      // align-items: center;
+      align-items: end;
+    }
+    .outdated-date {
+      line-height: 10px;
     }
     .date-warning {
       font-weight: 700;

@@ -31,7 +31,7 @@ const CustomPanel2 = (props) => {
     if (props.task.workflowName === TRANSFER_TO_NURSE_EDUCATOR && workerSkills.includes(EDUCATION)) {
       return (
           <CustomPanel2Styles>
-            {shouldShowTelehealth ?
+            {/*{shouldShowTelehealth ?
               <Grid container spacing={16} grid-auto-rows={"1fr"}>
                 <Grid item xs={12} sm={4}><CareManagementPane manager={props.manager}/></Grid>
                 <Grid item xs={12} sm={8}><PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/></Grid>
@@ -43,7 +43,14 @@ const CustomPanel2 = (props) => {
                 <Grid item xs={12} sm={8}><PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/></Grid>
                 <Grid item xs={12} sm={12}><AppointmentSchedulingPane skill={EDUCATION}/></Grid>
               </Grid>
-            }
+            }*/}
+            <div className="flex-row">
+              <CareManagementPane manager={props.manager}/>
+              <PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/>
+              {shouldShowTelehealth && <TelehealthPane nurseName={props.flexInfo.full_name}/>}
+            </div>
+            <AppointmentSchedulingPane skill={EDUCATION}/>
+          
           </CustomPanel2Styles>
       );
     } else if (props.task.workflowName === INTAKE_BY_SCHEDULERS && workerSkills.includes(SCHEDULING)) {
@@ -57,7 +64,7 @@ const CustomPanel2 = (props) => {
             </div>
             <AppointmentSchedulingPane/>
           </div>
-        </CustomPanel2Styles>      
+        </CustomPanel2Styles>
       );
     } else {
       throw new Error("Unknown Worker Skill!");
