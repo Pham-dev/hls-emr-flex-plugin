@@ -24,20 +24,33 @@ const hasAssignedTask = (tasks) => {
 const CustomPanel2 = (props) => {
   const workerSkills = props.flexInfo.skills;
   const showTelehealth = props.manager.store.getState()['hls-emr'].videoButton.shouldShowTelehealth;
-  const shouldShowTelehealth = (process.env.REACT_APP_BACKEND_URL && showTelehealth) ? true : false;
+  const shouldShowTelehealth = (process.env.REACT_APP_TELEHEALTH_URL && showTelehealth) ? true : false;
   if (props && props.tasks.size && hasAssignedTask(props.tasks) && props.task && props.task.attributes && props.task.workflowName) {
     const timeStamps = { date: props.task.dateCreated.toDateString(), time: props.task.dateCreated.toTimeString() };
     props.flex.TaskInfoPanel.Content.replace(<PatientInteractionPane key="PatientInteractionPane-component" timeStamps={timeStamps} workerSkill={workerSkills[0]}/>, { sortOrder: -1 });
     if (props.task.workflowName === TRANSFER_TO_NURSE_EDUCATOR && workerSkills.includes(EDUCATION)) {
       return (
           <CustomPanel2Styles>
+            {/*{shouldShowTelehealth ?
+              <Grid container spacing={16} grid-auto-rows={"1fr"}>
+                <Grid item xs={12} sm={4}><CareManagementPane manager={props.manager}/></Grid>
+                <Grid item xs={12} sm={8}><PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/></Grid>
+                <Grid item xs={12} sm={4}><TelehealthPane nurseName={props.flexInfo.full_name}/></Grid>
+                <Grid item xs={12} sm={8}><AppointmentSchedulingPane skill={EDUCATION}/></Grid>
+              </Grid> :
+              <Grid container spacing={16} grid-auto-rows={"1fr"}>
+                <Grid item xs={12} sm={4}><CareManagementPane manager={props.manager}/></Grid>
+                <Grid item xs={12} sm={8}><PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/></Grid>
+                <Grid item xs={12} sm={12}><AppointmentSchedulingPane skill={EDUCATION}/></Grid>
+              </Grid>
+            }*/}
             <div className="flex-row">
-              <CareManagementPane/>
+              <CareManagementPane manager={props.manager}/>
               <PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/>
-              <TelehealthPane nurseName={props.flexInfo.full_name}/>
+              {shouldShowTelehealth && <TelehealthPane nurseName={props.flexInfo.full_name}/>}
             </div>
             <AppointmentSchedulingPane skill={EDUCATION}/>
-
+          
           </CustomPanel2Styles>
       );
     } else if (props.task.workflowName === INTAKE_BY_SCHEDULERS && workerSkills.includes(SCHEDULING)) {

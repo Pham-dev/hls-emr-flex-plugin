@@ -26,11 +26,19 @@ export const CareManagementPaneStyles = styled('div')
       color: #606B85;
       line-height: 12px;
     }
-    select {
-      display: block;
-      padding: 8px 10px;
-      width: 200px;
-      height: 35px;
+    .checkboxes {
+      display: flex;
+      flex-direction: column;
+    }
+    .checkbox-wrapper {
+      height: 16px;
+      margin-bottom: 12px;
+      display: inline-flex;
+      align-items: center;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 15px;
+      color: #121C2D;
     }
     .enroll-btn {
       font-weight: 600;

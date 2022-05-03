@@ -11,7 +11,7 @@
 FROM twilio/twilio-cli:latest
 ARG TWILIO_ACCOUNT_SID=sid
 ARG TWILIO_AUTH_TOKEN=token
-ARG REACT_APP_BACKEND_URL=url
+ARG REACT_APP_TELEHEALTH_URL=url
 
 # Download serverless and flex plugin CLIs
 RUN twilio plugins:install @twilio-labs/plugin-serverless
@@ -20,7 +20,12 @@ RUN twilio plugins:install @twilio-labs/plugin-flex
 # Copy directory over to /hls-deploy folder
 WORKDIR /hls-deploy
 COPY . /hls-deploy
-RUN echo "REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}" > .env
+WORKDIR /hls-deploy/plugin-backend
+RUN npm install
+RUN echo "REACT_APP_BACKEND_URL=$(eval twilio serverless:deploy --override-existing-project --runtime node14 -o=json | grep -o '"domain": "[^"]*' | grep -o '[^"]*$')" > .env
+RUN echo "REACT_APP_TELEHEALTH_URL=${REACT_APP_TELEHEALTH_URL}" >> .env
+RUN cp .env /hls-deploy
+WORKDIR /hls-deploy
 RUN npm install
 
 # Run deploy command to get a working version
