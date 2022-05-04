@@ -7,10 +7,12 @@ import { execSync } from 'child_process';
 import { LOCAL_HOST } from '../constants';
 
 /** 
- * // TODO: Complete this and deploy using APIs
+ * TODO: Complete this and deploy using APIs
+ * UNDER CONSTRUCTION LEFT HERE FOR FUTURE DEVELOPMENT
  * 
  * This Function is private and only accessible through localhost on Dockerfile  
  * It deploys the plugin with a specified version and this is done on the docker environment.
+ * This Function should use Node's child process to 
 */
 export const handler: ServerlessFunctionSignature = async function(
   context: Context,

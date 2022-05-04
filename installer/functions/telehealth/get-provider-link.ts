@@ -3,8 +3,6 @@ import {
   ServerlessCallback,
   ServerlessFunctionSignature,
 } from '@twilio-labs/serverless-runtime-types/types';
-// import { getParam } from '../common';
-// import { ACCOUNT_NAME } from '../constants';
 
 export const handler: ServerlessFunctionSignature = async function(
   context: Context,
