@@ -40,16 +40,34 @@ export const CareManagementPaneStyles = styled('div')
       line-height: 15px;
       color: #121C2D;
     }
+    .btn-row {
+      display: flex;
+      align-items: center;
+    }
     .enroll-btn {
       font-weight: 600;
       font-size: 12px;
       line-height: 15px;
-      color: #AEB2C1;
       padding: 7.5px 19px 7.5px 13.58px;
-      background: #F4F4F6;
-      width: 85px;
-      height: 30px;
       text-transform: capitalize;
+      color: #0263E0;      
+      background: #EBF4FF; 
+      
     }
+    .enroll-btn:disabled {
+      color: #AEB2C1;
+      background: #F4F4F6;
+    }
+ 
+    .enroll-btn-text {
+      margin-left: 6.58px;
+    }
+    
+    /*.enrolled-message {
+      font-weight: 600;   
+      font-size: 10px;        
+      line-height: 12px; 
+      color: #AEB2C1;
+      margin-left: 11px
+    }*/
   `;
-
