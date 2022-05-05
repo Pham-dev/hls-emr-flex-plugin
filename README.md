@@ -10,6 +10,9 @@ _Twilio Flex Plugins allow you to customize the appearance and behavior of [Twil
 
 - Docker desktop will be used to run the application installer locally on your machine. Go to [Docker](https://www.docker.com/products/docker-desktop) website and download Docker with default options. After installation make sure to start Docker desktop.
 
+**ngrok**
+- Per the [open-emr repo](https://github.com/bochoi-twlo/hls-ehr), ensure you have OpenEMR installed and are running ngrok on a local terminal. This is done by calling `ngrok http 80` from your terminal. Write down your ngrok http url for later use.
+
 **Twilio Account**
 
 - Create a [Twilio account](https://www.twilio.com/try-twilio) if you have not done so already
@@ -36,7 +39,7 @@ Once you get your flex account up and running, you'll need to deploy Telehealth 
 1. Build the docker image of this installer by running this command in your terminal. You'll need to get your Account Sid and Auth Token from your Twilio Console:
 
 ```
-docker build --build-arg TWILIO_ACCOUNT_SID={ACCOUNT_SID} --build-arg TWILIO_AUTH_TOKEN={AUTH_TOKEN} --build-arg REACT_APP_TELEHEALTH_URL={REACT_APP_TELEHEALTH_URL} --no-cache --tag hls-flex-plugin https://github.com/Pham-dev/hls-emr-flex-plugin.git#main
+docker build --build-arg TWILIO_ACCOUNT_SID={ACCOUNT_SID} --build-arg TWILIO_AUTH_TOKEN={AUTH_TOKEN} --build-arg REACT_APP_TELEHEALTH_URL={REACT_APP_TELEHEALTH_URL} --build-arg NGROK_URL={NGROK_URL} --no-cache --tag hls-flex-plugin https://github.com/Pham-dev/hls-emr-flex-plugin.git#main
 ```
 
 2. Now run the built docker image by executing this command:

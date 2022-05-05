@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@twilio/runtime-handler": "1.2.2",
+    "node-fetch": "2.6.7",
     "twilio": "^3.56",
     "twilio-flex-token-validator": "1.5.6"
   },
