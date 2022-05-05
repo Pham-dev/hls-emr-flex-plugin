@@ -6,6 +6,7 @@ export const CustomPanel2Styles = styled('div')
     border-left: 0.5px solid #E5E4E2;
     padding: 12px;
     font-size: 12px;
+    width: 1049px;
 
     .scheduler-panes {}
     

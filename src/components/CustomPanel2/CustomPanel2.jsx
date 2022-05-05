@@ -28,7 +28,8 @@ const CustomPanel2 = (props) => {
   if (props && props.tasks.size && hasAssignedTask(props.tasks) && props.task && props.task.attributes && props.task.workflowName) {
     const timeStamps = { date: props.task.dateCreated.toDateString(), time: props.task.dateCreated.toTimeString() };
     props.flex.TaskInfoPanel.Content.replace(<PatientInteractionPane key="PatientInteractionPane-component" timeStamps={timeStamps} workerSkill={workerSkills[0]}/>, { sortOrder: -1 });
-    if (props.task.workflowName === TRANSFER_TO_NURSE_EDUCATOR && workerSkills.includes(EDUCATION)) {
+    // if (props.task.workflowName === TRANSFER_TO_NURSE_EDUCATOR && workerSkills.includes(EDUCATION)) {
+    if (true) {
       return (
           <CustomPanel2Styles>
             {/*{shouldShowTelehealth ?
@@ -44,12 +45,15 @@ const CustomPanel2 = (props) => {
                 <Grid item xs={12} sm={12}><AppointmentSchedulingPane skill={EDUCATION}/></Grid>
               </Grid>
             }*/}
-            <div className="flex-row">
-              <CareManagementPane manager={props.manager}/>
-              <PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/>
-              {shouldShowTelehealth && <TelehealthPane nurseName={props.flexInfo.full_name}/>}
+            <div className="flex-col">
+              <Typography className="patient-info" component={"h1"}><strong>{"Mary Ann Doe"}</strong></Typography>
+              <div className="flex-row">
+                <CareManagementPane manager={props.manager}/>
+                <PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/>
+                {shouldShowTelehealth && <TelehealthPane nurseName={props.flexInfo.full_name}/>}
+              </div>
+              <AppointmentSchedulingPane skill={EDUCATION}/>
             </div>
-            <AppointmentSchedulingPane skill={EDUCATION}/>
           
           </CustomPanel2Styles>
       );
