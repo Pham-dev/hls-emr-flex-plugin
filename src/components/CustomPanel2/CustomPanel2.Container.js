@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { ACTION_FETCHING_FIHR, TaskActions } from "../../states/TaskState";
+import { ACTION_FETCHING_FHIR, TaskActions } from "../../states/TaskState";
 import { Actions } from "../../states/CustomPanel2State";
 import CustomPanel2 from "./CustomPanel2";
 
@@ -9,20 +9,20 @@ const mapStateToProps = (state) => ({
   accessTokenInfo: state["hls-emr"].taskState.accessTokenInfo,
   clientId: state["hls-emr"].taskState.clientId,
   patientInfo: state["hls-emr"].taskState.patientInfo,
-  isFihrRequestPending: state["hls-emr"].taskState.fetching,
+  isFhirRequestPending: state["hls-emr"].taskState.fetching,
   shouldShowPanel: state["hls-emr"].customPanel2.shouldShowPanel,
   shouldShowTelehealth: state["hls-emr"].videoButton.shouldShowTelehealth,
 });
 
 // Just matches the Dispatch which is the action to perform on the component
 const mapDispatchToProps = (dispatch) => ({
-  fetchingFihrData: bindActionCreators(TaskActions.fetchingFihrData, dispatch),
-  fetchingFihrDataSuccess: bindActionCreators(
-    TaskActions.fetchingFihrDataSuccess,
+  fetchingFhirData: bindActionCreators(TaskActions.fetchingFhirData, dispatch),
+  fetchingFhirDataSuccess: bindActionCreators(
+    TaskActions.fetchingFhirDataSuccess,
     dispatch
   ),
-  fetchingFihrDataFailure: bindActionCreators(
-    TaskActions.fetchingFihrDataFailure,
+  fetchingFhirDataFailure: bindActionCreators(
+    TaskActions.fetchingFhirDataFailure,
     dispatch
   ),
   togglePanel: bindActionCreators(Actions.togglePanel, dispatch),

@@ -26,7 +26,7 @@ const PatientInformationPane = ({patientInfo, pendingRequest, name, skill}:Patie
 
   return (
     <PatientInformationPaneBodyStyles>
-          <p className="title">Patient Information:</p>
+          <p className="title">Patient Information</p>
           <div className='info-block'>
               <div className="info-column">
                   <div className="column-value">

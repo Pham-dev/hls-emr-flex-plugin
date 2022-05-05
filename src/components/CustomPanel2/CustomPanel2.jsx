@@ -48,7 +48,7 @@ const CustomPanel2 = (props) => {
         const first_name = names[0];
         const last_name = names[names.length - 1];
 
-        props.fetchingFihrData();
+        props.fetchingFhirData();
 
         const Token = props.manager.user.token;
         const body = {
@@ -97,21 +97,14 @@ const CustomPanel2 = (props) => {
               patientInfo: patientResult,
             };
 
-            props.fetchingFihrDataSuccess(info);
+            props.fetchingFhirDataSuccess(info);
           })();
         }
       } catch (err) {
-        props.fetchingFihrDataFailure();
+        props.fetchingFhirDataFailure();
       }
     }
   }, [props.task]);
-
-  //TODO: remove this
-  useEffect(() => {
-    if (props.patientInfo) {
-      console.log(props.patientInfo);
-    }
-  }, [props.patientInfo]);
 
   const workerSkills = props.flexInfo.skills;
   const showTelehealth =
@@ -138,50 +131,41 @@ const CustomPanel2 = (props) => {
       />,
       { sortOrder: -1 }
     );
-    if (
-      props.task.workflowName === TRANSFER_TO_NURSE_EDUCATOR &&
-      workerSkills.includes(EDUCATION)
-    ) {
+    // if (props.task.workflowName === TRANSFER_TO_NURSE_EDUCATOR && workerSkills.includes(EDUCATION)) {
+    if (true) {
       return (
         <CustomPanel2Styles>
-          {shouldShowTelehealth ? (
-            <Grid container spacing={16} grid-auto-rows={"1fr"}>
-              <Grid item xs={12} sm={4}>
-                <CareManagementPane manager={props.manager} />
+          {/*{shouldShowTelehealth ?
+              <Grid container spacing={16} grid-auto-rows={"1fr"}>
+                <Grid item xs={12} sm={4}><CareManagementPane manager={props.manager}/></Grid>
+                <Grid item xs={12} sm={8}><PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/></Grid>
+                <Grid item xs={12} sm={4}><TelehealthPane nurseName={props.flexInfo.full_name}/></Grid>
+                <Grid item xs={12} sm={8}><AppointmentSchedulingPane skill={EDUCATION}/></Grid>
+              </Grid> :
+              <Grid container spacing={16} grid-auto-rows={"1fr"}>
+                <Grid item xs={12} sm={4}><CareManagementPane manager={props.manager}/></Grid>
+                <Grid item xs={12} sm={8}><PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/></Grid>
+                <Grid item xs={12} sm={12}><AppointmentSchedulingPane skill={EDUCATION}/></Grid>
               </Grid>
-              <Grid item xs={12} sm={8}>
-                <PatientInformationPane
-                  name={props.task.attributes.name}
-                  patientInfo={props.patientInfo}
-                  pendingRequest={props.isFihrRequestPending}
-                  skill={SCHEDULING}
-                />
-              </Grid>
-              <Grid item xs={12} sm={4}>
+            }*/}
+          <div className="flex-col">
+            <Typography className="patient-info" component={"h1"}>
+              <strong>{props.task.attributes.name}</strong>
+            </Typography>
+            <div className="flex-row">
+              <CareManagementPane manager={props.manager} />
+              <PatientInformationPane
+                name={props.task.attributes.name}
+                patientInfo={props.patientInfo}
+                pendingRequest={props.isFhirRequestPending}
+                skill={SCHEDULING}
+              />
+              {shouldShowTelehealth && (
                 <TelehealthPane nurseName={props.flexInfo.full_name} />
-              </Grid>
-              <Grid item xs={12} sm={8}>
-                <AppointmentSchedulingPane skill={EDUCATION} />
-              </Grid>
-            </Grid>
-          ) : (
-            <Grid container spacing={16} grid-auto-rows={"1fr"}>
-              <Grid item xs={12} sm={4}>
-                <CareManagementPane manager={props.manager} />
-              </Grid>
-              <Grid item xs={12} sm={8}>
-                <PatientInformationPane
-                  name={props.task.attributes.name}
-                  patientInfo={props.patientInfo}
-                  pendingRequest={props.isFihrRequestPending}
-                  skill={SCHEDULING}
-                />
-              </Grid>
-              <Grid item xs={12} sm={12}>
-                <AppointmentSchedulingPane skill={EDUCATION} />
-              </Grid>
-            </Grid>
-          )}
+              )}
+            </div>
+            <AppointmentSchedulingPane skill={EDUCATION} />
+          </div>
         </CustomPanel2Styles>
       );
     } else if (
@@ -198,7 +182,7 @@ const CustomPanel2 = (props) => {
               <PatientInformationPane
                 name={props.task.attributes.name}
                 patientInfo={props.patientInfo}
-                pendingRequest={props.isFihrRequestPending}
+                pendingRequest={props.isFhirRequestPending}
                 skill={SCHEDULING}
               />
               <PreventativeCarePane />

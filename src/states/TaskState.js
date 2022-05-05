@@ -1,18 +1,18 @@
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import { fetchingState } from "../states";
 
-export const ACTION_FETCHING_FIHR = "FETCHING_FIHR_DATA";
-export const ACTION_FETCHING_FIHR_SUCCESS = "FETCHING_FIHR_DATA_SUCCSS";
-export const ACTION_FETCHING_FIHR_FAILURE = "FETCHING_FIHR_DATA_FAILURE";
+export const ACTION_FETCHING_FHIR = "FETCHING_FHIR_DATA";
+export const ACTION_FETCHING_FHIR_SUCCESS = "FETCHING_FHIR_DATA_SUCCSS";
+export const ACTION_FETCHING_FHIR_FAILURE = "FETCHING_FHIR_DATA_FAILURE";
 
 export class TaskActions {
-  static fetchingFihrData = () => ({ type: ACTION_FETCHING_FIHR });
-  static fetchingFihrDataSuccess = (payload) => ({
+  static fetchingFhirData = () => ({ type: ACTION_FETCHING_FHIR });
+  static fetchingFhirDataSuccess = (payload) => ({
     payload,
-    type: ACTION_FETCHING_FIHR_SUCCESS,
+    type: ACTION_FETCHING_FHIR_SUCCESS,
   });
-  static fetchingFihrDataFailure = () => ({
-    type: ACTION_FETCHING_FIHR_FAILURE,
+  static fetchingFhirDataFailure = () => ({
+    type: ACTION_FETCHING_FHIR_FAILURE,
   });
 }
 
@@ -26,7 +26,7 @@ export const initialState = {
 export function reduce(state = initialState, { type, payload }) {
   // eslint-disable-next-line sonarjs/no-small-switch
   switch (type) {
-    case ACTION_FETCHING_FIHR: {
+    case ACTION_FETCHING_FHIR: {
       console.log("FETCHING");
       return {
         ...state,
@@ -38,7 +38,7 @@ export function reduce(state = initialState, { type, payload }) {
         fetchingSuccess: false,
       };
     }
-    case ACTION_FETCHING_FIHR_SUCCESS: {
+    case ACTION_FETCHING_FHIR_SUCCESS: {
       const s = {
         ...state,
         ...payload,
@@ -48,7 +48,7 @@ export function reduce(state = initialState, { type, payload }) {
       };
       return s;
     }
-    case ACTION_FETCHING_FIHR_FAILURE: {
+    case ACTION_FETCHING_FHIR_FAILURE: {
       console.log("FAILURE");
       return {
         ...state,

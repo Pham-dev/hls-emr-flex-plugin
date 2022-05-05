@@ -2,10 +2,11 @@ import styled from 'react-emotion';
 
 export const CustomPanel2Styles = styled('div')
   `
-    color: #fff;
+    background: #fff;
     border-left: 0.5px solid #E5E4E2;
     padding: 12px;
     font-size: 12px;
+    width: 1049px;
 
     .scheduler-panes {}
     
@@ -33,6 +34,8 @@ export const CustomPanel2Styles = styled('div')
     .flex-row {
       display: flex;
       flex-direction: row;
+      justify-content: space-between;
+
       // gap: 22px;
       padding: 12px 0;
     }
