@@ -25,7 +25,7 @@ When you accept a task in Flex, the name of the customer in the chat is queried 
 
 1. Follow the instructions here to install and run the [open-emr](https://github.com/bochoi-twlo/hls-ehr#deploy-hls-ehr) repo. 
 2. Follow the instructions here to setup ngrok.
-3. Once ngrok is installed and you have an ngrok account, you will need to add a domain to ngrok. Go to Cloud Edge > Domains > New Domain. Add a domain name of your choosing. Then, from your local machine, run `ngrok http --region=us --hostname=ssepac.ngrok.io 80`, then record the forwarding address listed in your terminal for the next step. (i.e. bjohnson.ngrok.io (ignore the http://))
+3. Once ngrok is installed and you have an ngrok account, you will need to add a domain to ngrok. Go to Cloud Edge > Domains > New Domain. Add a domain name of your choosing. Add your authtoken by executing `ngrok authtoken <authtoken>` (the instructions on ngrok's docs are currently incorrect!) Then, from your local machine, run `ngrok http --region=us --hostname=ssepac.ngrok.io 80`, then record the forwarding address listed in your terminal for the next step. (i.e. bjohnson.ngrok.io (ignore the http://))
 
 ## **2. Deploy the Plugin to your Flex Instance**
 
