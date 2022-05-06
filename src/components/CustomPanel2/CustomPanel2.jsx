@@ -131,8 +131,7 @@ const CustomPanel2 = (props) => {
       />,
       { sortOrder: -1 }
     );
-    // if (props.task.workflowName === TRANSFER_TO_NURSE_EDUCATOR && workerSkills.includes(EDUCATION)) {
-    if (true) {
+    if (props.task.workflowName === TRANSFER_TO_NURSE_EDUCATOR && workerSkills.includes(EDUCATION)) {
       return (
         <CustomPanel2Styles>
           {/*{shouldShowTelehealth ?
