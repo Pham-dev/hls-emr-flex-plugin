@@ -63,11 +63,11 @@ export const CareManagementPaneStyles = styled('div')
       margin-left: 6.58px;
     }
     
-    /*.enrolled-message {
+    .enrolled-message {
       font-weight: 600;   
       font-size: 10px;        
       line-height: 12px; 
       color: #AEB2C1;
       margin-left: 11px
-    }*/
+    }
   `;

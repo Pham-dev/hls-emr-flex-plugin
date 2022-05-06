@@ -82,7 +82,6 @@ export const CustomPanel2Styles = styled('div')
     }
     .patient-info {
       color: #606B85;
-      margin-top: 17px;
       font-weight: 600;
       font-size: 28px;
       line-height: 34px;
