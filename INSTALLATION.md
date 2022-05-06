@@ -25,7 +25,7 @@ When you accept a task in Flex, the name of the customer in the chat is queried 
 
 1. Follow the instructions here to install and run the [open-emr](https://github.com/bochoi-twlo/hls-ehr#deploy-hls-ehr) repo. 
 2. Follow the instructions here to setup ngrok.
-3. Once ngrok is installed and you have an ngrok account, run `ngrok http 80`, then record the forwarding address listed in your terminal for the next step. (i.e. http://d2e2-22-190-191-234.ngrok.io)
+3. Once ngrok is installed and you have an ngrok account, run `ngrok http 80`, then record the forwarding address listed in your terminal for the next step. (i.e. d2e2-22-190-191-234.ngrok.io (ignore the http://))
 
 ## **2. Deploy the Plugin to your Flex Instance**
 
