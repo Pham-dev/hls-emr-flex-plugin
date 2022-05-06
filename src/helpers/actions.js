@@ -1,5 +1,11 @@
-import { Actions, TaskHelper, Manager, Notifications, StateHelper } from '@twilio/flex-ui';
-import fetch from 'node-fetch';
+import {
+  Actions,
+  TaskHelper,
+  Manager,
+  Notifications,
+  StateHelper,
+} from "@twilio/flex-ui";
+import fetch from "node-fetch";
 
 // Once you publish the chat transfer function, place the returned domain in your version of the plugin.
 
@@ -17,8 +23,6 @@ export const transferOverride = async (payload, original) => {
     return original(payload);
   }
 
-  
-
   /*
    * The Twilio Chat SDK only allows an agent to join 250 chat channels. The transfer-chat serverless function
    * will bypass normal Flex controls for automatically removing agents from Twilio Chat channels in order
@@ -26,7 +30,7 @@ export const transferOverride = async (payload, original) => {
    * 250 channel limit.
    */
   const channel = StateHelper.getChatChannelStateForTask(payload.task);
-  console.log("channel" ,channel);
+  console.log("channel", channel);
   if (channel) {
     await channel.source.leave();
   }
@@ -44,18 +48,20 @@ export const transferOverride = async (payload, original) => {
   };
 
   // initiate the transfer
-  return fetch(`https://${process.env.REACT_APP_BACKEND_URL}/transfer-chat`,{
+  return fetch(`https://${process.env.REACT_APP_BACKEND_URL}/transfer-chat`, {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify(body),
   }).catch(async (e) => {
     /*
      * see src/helpers/notifications.js for how this custom notification is registered.
      * if for some reason the request to transfer fails, show it to the agent
      */
-    Notifications.showNotification('chatTransferFetchError', { message: e.message });
+    Notifications.showNotification("chatTransferFetchError", {
+      message: e.message,
+    });
 
     /*
      * If we encounter an error with the transfer-chat function we do not want to leave
@@ -76,5 +82,7 @@ export const transferOverride = async (payload, original) => {
  * If its a voice task, we want to run the original function. (see transferOverride for details)
  */
 export const setUpActions = () => {
-  Actions.replaceAction('TransferTask', (payload, original) => transferOverride(payload, original));
+  Actions.replaceAction("TransferTask", (payload, original) =>
+    transferOverride(payload, original)
+  );
 };

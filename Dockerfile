@@ -12,12 +12,13 @@ FROM twilio/twilio-cli:latest
 ARG TWILIO_ACCOUNT_SID=sid
 ARG TWILIO_AUTH_TOKEN=token
 ARG REACT_APP_TELEHEALTH_URL=url
+ARG NGROK_URL=url
 
 # Update React Version to 16.13.1.  By default this plugin is not compatible with the default version (16.5.2)
 RUN curl -X POST 'https://flex-api.twilio.com/v1/Configuration' \
-  -u ${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN} \
-  -H 'Content-Type: application/json' \
-  -d "{\"account_sid\":\"${TWILIO_ACCOUNT_SID}\",\"ui_dependencies\":{\"react\":\"~16.13.1\",\"react-dom\":\"~16.13.1\"}}"
+    -u ${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN} \
+    -H 'Content-Type: application/json' \
+    -d "{\"account_sid\":\"${TWILIO_ACCOUNT_SID}\",\"ui_dependencies\":{\"react\":\"~16.13.1\",\"react-dom\":\"~16.13.1\"}}"
 
 # Download serverless and flex plugin CLIs
 RUN twilio plugins:install @twilio-labs/plugin-serverless

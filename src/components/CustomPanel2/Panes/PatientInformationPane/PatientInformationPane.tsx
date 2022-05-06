@@ -1,28 +1,45 @@
 import { PatientInformationPaneBodyStyles } from "./PatientInformationPane.Styles";
-import React from "react";
+import React, {useEffect, useMemo } from "react";
 
 interface PatientInformationPaneProps {
-  patientName: string;
+  name:string
+  patientInfo: any;
+  pendingRequest:boolean
   skill: string;
 }
 
-const PatientInformationPane = ({ patientName = '', skill }: PatientInformationPaneProps ) => {
+const PatientInformationPane = ({patientInfo, pendingRequest, name, skill}:PatientInformationPaneProps ) => {
+
+    const phone = useMemo(()=>{
+        if(patientInfo && patientInfo.telecom){
+            console.log(patientInfo.telecom)
+            const result = patientInfo.telecom.find((item:any)=>item.use === "mobile")
+            return result?.value || "N/A"
+        }
+        return "N/A"
+    }, [patientInfo])
+
+    const email = useMemo(()=>{
+        const names = name.split(" ")
+        return names.join("").concat("@gmail.com")
+    }, [name])
+
   return (
     <PatientInformationPaneBodyStyles>
           <p className="title">Patient Information</p>
           <div className='info-block'>
               <div className="info-column">
                   <div className="column-value">
-                      <span className="label">Mrn</span>
-                      <span className="value">12 34 56</span>
+                      <span className="label">Id</span>
+                      <span className="value">{pendingRequest ? "..." : patientInfo?.id || "N/A"}</span>
                   </div>
                   <div className="column-value">
                       <span className="label">phone number</span>
-                      <span className="value">256 123 4567</span>
+                      <span className="value">{pendingRequest ? "..." : phone}</span>
                   </div>
                   <div className="column-value">
                       <span className="label">email</span>
-                      <span className="value">mdoe@gmail.com</span>
+                      <span className="value">{pendingRequest ? "..." : email}</span>
                   </div>
                   <div className="column-value">
                       <span className="label">address</span>
