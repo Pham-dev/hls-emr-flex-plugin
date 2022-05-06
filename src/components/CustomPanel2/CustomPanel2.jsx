@@ -28,8 +28,7 @@ const CustomPanel2 = (props) => {
   if (props && props.tasks.size && hasAssignedTask(props.tasks) && props.task && props.task.attributes && props.task.workflowName) {
     const timeStamps = { date: props.task.dateCreated.toDateString(), time: props.task.dateCreated.toTimeString() };
     props.flex.TaskInfoPanel.Content.replace(<PatientInteractionPane key="PatientInteractionPane-component" timeStamps={timeStamps} workerSkill={workerSkills[0]}/>, { sortOrder: -1 });
-    // if (props.task.workflowName === TRANSFER_TO_NURSE_EDUCATOR && workerSkills.includes(EDUCATION)) {
-    if (true) {
+    if (props.task.workflowName === TRANSFER_TO_NURSE_EDUCATOR && workerSkills.includes(EDUCATION)) {
       return (
           <CustomPanel2Styles>
             {/*{shouldShowTelehealth ?
