@@ -44,21 +44,52 @@ targets:
 	@grep '^[A-Za-z0-9\-]*:' Makefile | cut -d ':' -f 1 | sort
 
 
-installer-build-github:
-	docker build --build-arg TWILIO_ACCOUNT_SID={ACCOUNT_SID} --build-arg TWILIO_AUTH_TOKEN={AUTH_TOKEN} \
-	--build-arg REACT_APP_BACKEND_URL={REACT_APP_BACKEND_URL} --no-cache $(DOCKER_EMULATION) \
-	--tag $(INSTALLER_NAME) $(GIT_REPO_URL)#main
+get-telehealth-service-sid:
+	$(eval TELEHEALTH_SERVICE_SID := $(shell twilio api:serverless:v1:services:list -o=json \
+	| jq --raw-output '.[] | select(.friendlyName == "telehealth") | .sid'))
+	@if [[ ! -z "$(TELEHEALTH_SERVICE_SID)" ]]; then \
+      echo "TELEHEALTH_SERVICE_SID=$(TELEHEALTH_SERVICE_SID)"; \
+    else \
+	  echo "$@: Service named 'telehealth' is not deployed!!! aborting..."; \
+	fi
+	@[[ ! -z "$(TELEHEALTH_SERVICE_SID)" ]]
 
 
-installer-build-local:
-	docker build --build-arg TWILIO_ACCOUNT_SID={ACCOUNT_SID} --build-arg TWILIO_AUTH_TOKEN={AUTH_TOKEN} \
-	--build-arg REACT_APP_BACKEND_URL={REACT_APP_BACKEND_URL} --no-cache $(DOCKER_EMULATION) \
-	--tag $(INSTALLER_NAME) --no-cache .
+get-telehealth-hostname: get-telehealth-service-sid
+	$(eval TELEHEALTH_HOSTNAME := $(shell twilio api:serverless:v1:services:environments:list --service-sid $(TELEHEALTH_SERVICE_SID) -o=json \
+	| jq --raw-output '.[0].domainName'))
+	@if [[ ! -z "$(TELEHEALTH_HOSTNAME)" ]]; then \
+	  echo "TELEHEALTH_HOSTNAME=$(TELEHEALTH_HOSTNAME)"; \
+	else \
+	  echo "$@: Domain name for service named 'telehealth' is not found!!! aborting..."; \
+	fi
+	@[[ ! -z "$(TELEHEALTH_HOSTNAME)" ]]
+
+
+installer-build-github: get-telehealth-domain-name
+	@if [[ -z "$(NGROK_HOSTNAME)" ]]; then \
+  	  echo 'Usage: make installer-build-github NGROK_HOSTNAME=your-ngrok-hostname e.g., bochoi.ngrok.io'; \
+	fi
+	@[[ ! -z "$(NGROK_HOSTNAME)" ]]
+	docker build --build-arg TWILIO_ACCOUNT_SID=$(TWILIO_ACCOUNT_SID) --build-arg TWILIO_AUTH_TOKEN=$(TWILIO_AUTH_TOKEN) \
+	--build-arg REACT_APP_BACKEND_URL=$(TELEHEALTH_HOSTNAME) --build-arg NGROK_URL=$(NGROK_URL) \
+	--no-cache $(DOCKER_EMULATION) --tag $(INSTALLER_NAME) $(GIT_REPO_URL)#main
+
+
+installer-build-local: get-telehealth-domain-name
+	@if [[ -z "$(NGROK_HOSTNAME)" ]]; then \
+  	  echo 'Usage: make installer-build-local NGROK_HOSTNAME=your-ngrok-hostname e.g., bochoi.ngrok.io'; \
+	fi
+	@[[ ! -z "$(NGROK_HOSTNAME)" ]]
+	docker build --build-arg TWILIO_ACCOUNT_SID=$(TWILIO_ACCOUNT_SID) --build-arg TWILIO_AUTH_TOKEN=$(TWILIO_AUTH_TOKEN) \
+	--build-arg REACT_APP_BACKEND_URL=$(TELEHEALTH_HOSTNAME) --build-arg NGROK_URL=$(NGROK_HOSTNAME) \
+	--no-cache $(DOCKER_EMULATION) --tag $(INSTALLER_NAME) .
 
 
 installer-run:
-	docker run --name $(INSTALLER_NAME) --rm -p 3000:3000 -p 3001:3001 \
-	-e ACCOUNT_SID={ACCOUNT_SID} -e AUTH_TOKEN={AUTH_TOKEN} -it $(INSTALLER_NAME)
+	docker run --name $(INSTALLER_NAME) --rm --publish 3000:3000 --publish 3001:3001 $(DOCKER_EMULATION) \
+	--env ACCOUNT_SID=$(TWILIO_ACCOUNT_SID) --env AUTH_TOKEN=$(TWILIO_AUTH_TOKEN) \
+	--interactive --tty $(INSTALLER_NAME)
 
 
 # installer-open:
