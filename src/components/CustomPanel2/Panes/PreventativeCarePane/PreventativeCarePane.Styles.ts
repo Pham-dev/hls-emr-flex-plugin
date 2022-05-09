@@ -43,15 +43,12 @@ export const PreventativeCarePaneStyles = styled('div')
       height: 33.99px;
     }
     .outdated-date {
-      line-height: 10px;
       font-size: 10px;
-      // line-height: 12px;
       color: #E36A19;
     }
     .date-warning {
       font-weight: 700;
-      font-size: 8px;
-      line-height: 10px;
+      font-size: 10px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: #AEB2C1;
