@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PaneHeader from '../PaneHeader/PaneHeader';
 import { TelehealthPaneStyles } from './TelehealthPane.Styles';
 
@@ -26,19 +26,16 @@ const TelehealthPane = ({ nurseName }: TelehealthPaneProps) => {
       .then(res => setPasscode(res.passcode))
       .catch(err => console.error(err));
     };
-    fetchToken();
+    void fetchToken();
   }, []);
   
   return (
-    <div>
-      {passcode ?
         <TelehealthPaneStyles>
-          <PaneHeader text="Telehealth"/>
-          <iframe className="telehealth"  allow="camera; microphone" src={"https://" + process.env.REACT_APP_TELEHEALTH_URL + "/provider/index.html?" + `token=${passcode}&name=${nurseName}&flex_enabled=1`}/>
-        </TelehealthPaneStyles> :
-        <></>
-      }
-    </div>
+          {passcode && <>
+              <PaneHeader text="Telehealth"/>
+              <iframe className="telehealth"  allow="camera; microphone" src={"https://" + process.env.REACT_APP_TELEHEALTH_URL + "/provider/index.html?" + `token=${passcode}&name=${nurseName}&flex_enabled=1`}/>
+            </>}
+        </TelehealthPaneStyles>
   );
 }
 

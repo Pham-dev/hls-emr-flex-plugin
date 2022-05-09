@@ -1,10 +1,17 @@
 import styled from 'react-emotion';
 
 export const TelehealthPaneStyles = styled('div')
-  `
+  ` 
+    width: 400px;
+    height: 569px;
+    border: 1px solid #E1E3E9;
+    box-sizing: border-box;
+    border-radius: 8px;
+    margin-right: 10px;
+    
     .telehealth {
       width: 100%;
-      height: 600px;
+      height: 100%;
     }
     position: relative;
     overflow: hidden;
