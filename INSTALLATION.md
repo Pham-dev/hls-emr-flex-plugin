@@ -32,7 +32,7 @@ When you accept a task in Flex, the name of the customer in the chat is queried 
 1. Build the docker image of this installer by running this command in your terminal. You'll need to get your Account Sid and Auth Token from your Twilio Console:
 
 ```
-docker build --build-arg TWILIO_ACCOUNT_SID={ACCOUNT_SID} --build-arg TWILIO_AUTH_TOKEN={AUTH_TOKEN} --build-arg REACT_APP_TELEHEALTH_URL={REACT_APP_TELEHEALTH_URL} --build-arg NGROK_URL={NGROK_URL} --no-cache --tag hls-flex-plugin https://github.com/Pham-dev/hls-emr-flex-plugin.git#main
+docker build --build-arg TWILIO_ACCOUNT_SID={ACCOUNT_SID} --build-arg TWILIO_AUTH_TOKEN={AUTH_TOKEN} --build-arg REACT_APP_TELEHEALTH_URL={REACT_APP_TELEHEALTH_URL} --build-arg REACT_APP_NGROK_URL={REACT_APP_NGROK_URL} --no-cache --tag hls-flex-plugin https://github.com/Pham-dev/hls-emr-flex-plugin.git#main
 ```
 
 2. Now run the built docker image by executing this command:
