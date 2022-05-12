@@ -47,9 +47,12 @@ exports.handler = JWEValidator(async function (context, event, callback) {
       return callback(null, response);
     }
 
-    await fetch(`http://${context.NGROK_URL}/apis/default/fhir/Patient`, {
-      headers: new Headers({ Authorization: `Bearer ${access_token}` }),
-    })
+    await fetch(
+      `http://${context.REACT_APP_NGROK_URL}/apis/default/fhir/Patient`,
+      {
+        headers: new Headers({ Authorization: `Bearer ${access_token}` }),
+      }
+    )
       .then((resp) => resp.json())
       .then((data) => {
         let patient = null;

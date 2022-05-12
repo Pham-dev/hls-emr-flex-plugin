@@ -18,7 +18,7 @@ import { withTaskContext } from "@twilio/flex-ui";
 import NoTasksPanel2 from "../NoTasksPanel2/NoTasksPanel2";
 import PatientInteractionPane from "./Panes/PatientInteractionPane/PatientInteractionPane";
 import PreventativeCarePane from "./Panes/PreventativeCarePane/PreventativeCarePane";
-import { access } from "fs";
+import { getAccessTokenInfo, getClientId, getPatientInfo } from "../../helpers";
 
 const hasAssignedTask = (tasks) => {
   for (let task of tasks) {
@@ -27,12 +27,6 @@ const hasAssignedTask = (tasks) => {
   }
   return false;
 };
-
-const getAccessTokenInfo = (client_id, Token) =>
-  fetch(`https://${process.env.REACT_APP_BACKEND_URL}/ehr-auth`, {
-    method: "POST",
-    body: new URLSearchParams({ client_id, Token }),
-  }).then((resp) => resp.json());
 
 // It is recommended to keep components stateless and use redux for managing states
 const CustomPanel2 = (props) => {
@@ -55,20 +49,9 @@ const CustomPanel2 = (props) => {
           Token,
         };
 
-        //let client_id = localStorage.getItem("client_id");
-        let client_id;
-        if (!client_id) {
-          console.log("HERE");
-          (async () => {
-            const client_id = await fetch(
-              `https://${process.env.REACT_APP_BACKEND_URL}/register-ehr-client`,
-              { method: "POST", body: new URLSearchParams(body) }
-            )
-              .then((resp) => resp.json())
-              .then(({ client_id }) => {
-                localStorage.setItem("client_id", client_id);
-                return client_id;
-              });
+        (async () => {
+          try {
+            const client_id = await getClientId(body);
 
             //We must get a non null client_id
             if (!client_id) throw new Error();
@@ -78,18 +61,14 @@ const CustomPanel2 = (props) => {
               Token
             );
 
-            const patientResult = await fetch(
-              `https://${process.env.REACT_APP_BACKEND_URL}/patient`,
-              {
-                method: "POST",
-                body: new URLSearchParams({
-                  access_token: access_token_info.access_token,
-                  first_name,
-                  last_name,
-                  Token,
-                }),
-              }
-            ).then((resp) => resp.json());
+            if (!access_token_info) throw new Error();
+
+            const patientResult = await getPatientInfo(
+              access_token_info.access_token,
+              first_name,
+              last_name,
+              Token
+            );
 
             const info = {
               accessTokenInfo: access_token_info,
@@ -98,9 +77,13 @@ const CustomPanel2 = (props) => {
             };
 
             props.fetchingFhirDataSuccess(info);
-          })();
-        }
+          } catch (err) {
+            console.log("FHIR FAILURE, USING DEFAULT");
+            props.fetchingFhirDataFailure();
+          }
+        })();
       } catch (err) {
+        console.log("FHIR FAILURE, USING DEFAULT");
         props.fetchingFhirDataFailure();
       }
     }
@@ -131,7 +114,10 @@ const CustomPanel2 = (props) => {
       />,
       { sortOrder: -1 }
     );
-    if (props.task.workflowName === TRANSFER_TO_NURSE_EDUCATOR && workerSkills.includes(EDUCATION)) {
+    if (
+      props.task.workflowName === TRANSFER_TO_NURSE_EDUCATOR &&
+      workerSkills.includes(EDUCATION)
+    ) {
       return (
         <CustomPanel2Styles>
           {/*{shouldShowTelehealth ?
