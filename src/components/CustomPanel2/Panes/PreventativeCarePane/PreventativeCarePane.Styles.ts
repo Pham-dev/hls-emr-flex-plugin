@@ -37,21 +37,18 @@ export const PreventativeCarePaneStyles = styled('div')
     }
     .outdated {
       font-weight: 600;
-      font-size: 10px;
-      // line-height: 12px;
-      color: #E36A19;
-      display: inline-flex;
-      justify-content: center;
-      // align-items: center;
-      align-items: end;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      height: 33.99px;
     }
     .outdated-date {
-      line-height: 10px;
+      font-size: 10px;
+      color: #E36A19;
     }
     .date-warning {
       font-weight: 700;
-      font-size: 9px;
-      line-height: 10px;
+      font-size: 10px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: #AEB2C1;

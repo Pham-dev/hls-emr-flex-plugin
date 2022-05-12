@@ -92,8 +92,7 @@ const CustomPanel2 = (props) => {
   const workerSkills = props.flexInfo.skills;
   const showTelehealth =
     props.manager.store.getState()["hls-emr"].videoButton.shouldShowTelehealth;
-  const shouldShowTelehealth =
-    process.env.REACT_APP_TELEHEALTH_URL && showTelehealth ? true : false;
+  const shouldShowTelehealth = process.env.REACT_APP_TELEHEALTH_URL && showTelehealth ? true : false;
   if (
     props &&
     props.tasks.size &&
@@ -145,11 +144,12 @@ const CustomPanel2 = (props) => {
                 pendingRequest={props.isFhirRequestPending}
                 skill={SCHEDULING}
               />
-              {shouldShowTelehealth && (
-                <TelehealthPane nurseName={props.flexInfo.full_name} />
-              )}
+              
             </div>
-            <AppointmentSchedulingPane skill={EDUCATION} />
+            <div className="flex-row">
+              {shouldShowTelehealth && <TelehealthPane nurseName={props.flexInfo.full_name} />}
+              <AppointmentSchedulingPane skill={EDUCATION} />
+            </div>
           </div>
         </CustomPanel2Styles>
       );

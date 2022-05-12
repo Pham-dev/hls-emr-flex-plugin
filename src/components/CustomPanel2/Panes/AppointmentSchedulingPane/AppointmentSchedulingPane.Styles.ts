@@ -7,7 +7,8 @@ export const AppointmentSchedulingPaneStyles = styled('div')
     border: 1px solid #E1E3E9;
     box-sizing: border-box;
     border-radius: 8px;
-    width: 1049px;
+    max-width: 1049px;
+    width: 100%;
     height: 569px;
     padding-top: 20px;
     padding-left: 20px;
