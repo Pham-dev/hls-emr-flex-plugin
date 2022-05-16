@@ -6,13 +6,11 @@ import CareManagementPane from "./Panes/CareManagementPane/CareManagementPane";
 import TelehealthPane from "./Panes/TelehealthPane/TelehealthPane";
 import {
   EDUCATION,
-  EDUCATORS_QUEUE_NAME,
   INTAKE_BY_SCHEDULERS,
-  SCHEDULERS_QUEUE_NAME,
   SCHEDULING,
   TRANSFER_TO_NURSE_EDUCATOR,
 } from "../constants";
-import { Grid, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import AppointmentSchedulingPane from "./Panes/AppointmentSchedulingPane/AppointmentSchedulingPane";
 import { withTaskContext } from "@twilio/flex-ui";
 import NoTasksPanel2 from "../NoTasksPanel2/NoTasksPanel2";
@@ -142,7 +140,7 @@ const CustomPanel2 = (props) => {
                 name={props.task.attributes.name}
                 patientInfo={props.patientInfo}
                 pendingRequest={props.isFhirRequestPending}
-                skill={SCHEDULING}
+                skill={EDUCATION}
               />
               
             </div>
