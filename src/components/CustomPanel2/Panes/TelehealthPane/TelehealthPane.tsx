@@ -32,7 +32,8 @@ const TelehealthPane = ({ nurseName }: TelehealthPaneProps) => {
   return (
         <TelehealthPaneStyles>
           {passcode && <>
-              <PaneHeader text="Telehealth"/>
+             {/* <PaneHeader text="Telehealth"/>*/}
+            <p className="title">Telehealth</p>
               <iframe className="telehealth"  allow="camera; microphone" src={"https://" + process.env.REACT_APP_TELEHEALTH_URL + "/provider/index.html?" + `token=${passcode}&name=${nurseName}&flex_enabled=1`}/>
             </>}
         </TelehealthPaneStyles>

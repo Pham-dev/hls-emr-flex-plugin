@@ -2,12 +2,17 @@ import styled from 'react-emotion';
 
 export const TelehealthPaneStyles = styled('div')
   ` 
-    width: 400px;
+    width: 440px;
     height: 569px;
     border: 1px solid #E1E3E9;
     box-sizing: border-box;
     border-radius: 8px;
     margin-right: 10px;
+    .title {
+      font-size: 14px;
+      color: #606B85;
+      font-weight: 700;
+    } 
     
     .telehealth {
       width: 100%;

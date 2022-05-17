@@ -1,8 +1,13 @@
+import {CSSProps} from "@twilio/flex-ui-core";
+
 export const twilioRed = "#F22F46";
 export const twilioWhite = "#FFFFFF";
 export const twilioBlue = "#001489";
 export const lightGray = "#e6e6e6";
+export const lightGray2 = '#F2F2F5';
+export const middleGray = '#8A91A8';
 export const darkGray = "#666666";
+export const darkGray2 = '#3C4760';
 export const black = "#000";
 export const blue = "#0066b2";
 export const teal = "#057d9e";
@@ -25,7 +30,7 @@ export const CustomTheme = {
         },
         Button: {
           color: teal
-        }
+        },
     },
     SideNav: {
         Container: {
@@ -35,7 +40,7 @@ export const CustomTheme = {
           background: teal
         },
         Icon: {
-          color: twilioWhite
+          color: twilioWhite,
         }
     },
     TaskCanvasHeader: {
@@ -49,25 +54,52 @@ export const CustomTheme = {
     TaskList: {
       Filter: {
         Menu: {
-          background: twilioRed
+          background: lightGray2
         },
         Container: {
-          background: twilioWhite
+          background: lightGray2
         },
         EntryButton: {
-          background: twilioWhite
+          background: lightGray2
         }
       },
       Item: {
         Container: {
-          background: twilioWhite
+          background: lightGray2,
+          marginRight: '4px',
+          marginLeft: '4px',
+          //height: '54px'
+          padding: '5px 0 4px 0'
+        },
+        SelectedContainer: {
+          background: darkGray2,
+          borderRadius: '8px',
+          color: twilioWhite
         },
         Icon: {
-          background: teal
+          background: lightGray2,
+          borderRadius: '50%',
         },
-        Buttons: {
-        }
+        Buttons: {}
       }
+    },
+    TaskCard: {
+      Container: {
+        Default: {
+          height: '54px'
+        }
+        /*Selected: CSSProps;
+        Hover: CSSProps;*/
+      },
+      IconArea: {
+        Default: {
+          display: 'none'
+        }
+      },
+      /*ContentArea: {
+        Default: CSSProps;
+        Inactive: CSSProps;
+      },*/
     }
   }
 }

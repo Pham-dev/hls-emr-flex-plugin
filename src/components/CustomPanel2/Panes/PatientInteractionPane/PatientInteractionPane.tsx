@@ -1,6 +1,7 @@
 import { EDUCATION } from "../../../constants";
 import PaneHeader from "../PaneHeader/PaneHeader";
 import { PatientInteractionPaneStyles } from "./PatientInteractionPane.Styles";
+import React from "react";
 
 interface PatientInteractionPaneProps {
   timeStamps: { 
