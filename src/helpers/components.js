@@ -11,7 +11,8 @@ import VideoButtonContainer from '../components/VideoButton/VideoButton.Containe
  * and the task has been assigned.
  */
 export const setUpComponents = (flex, manager, flexInfo) => {
-
+  console.log('flexInfo', flexInfo, flex);
+  //flex.TaskListItem.Content.replace(<span key='any'>Test</span>);
   // Custom Panel 2
   flex.AgentDesktopView.Panel2.Content.add(<CustomPanel2Container key={"CustomPanel2-component"} flexInfo={flexInfo} flex={flex} manager={manager}/> , { sortOrder: -1 });
   flex.AgentDesktopView.defaultProps.splitterOptions = {
