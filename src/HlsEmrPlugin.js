@@ -35,10 +35,9 @@ export default class HlsEmrPlugin extends FlexPlugin {
     // console.log(manager.store.getState());
     this.registerReducers(manager);
     const flexInfo = getFlexObject(manager.workerClient);
-    console.log('flexInfo', flexInfo);
     
     const configuration = {
-      colorTheme: CustomTheme
+      colorTheme: CustomTheme,
     };
     flex.MainHeader.defaultProps.logoUrl = "https://hls-site-4115-dev.twil.io/owlhealth/images/logoOwlHealth.png"
     manager.updateConfig(configuration);

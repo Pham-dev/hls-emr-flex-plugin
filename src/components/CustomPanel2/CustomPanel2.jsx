@@ -91,7 +91,6 @@ const CustomPanel2 = (props) => {
   const showTelehealth =
     props.manager.store.getState()["hls-emr"].videoButton.shouldShowTelehealth;
   const shouldShowTelehealth = process.env.REACT_APP_TELEHEALTH_URL && showTelehealth ? true : false;
-  console.log('props', props);
   
   if (
     props &&
