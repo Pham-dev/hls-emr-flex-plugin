@@ -11,7 +11,7 @@
 FROM twilio/twilio-cli:latest
 ARG TWILIO_ACCOUNT_SID=sid
 ARG TWILIO_AUTH_TOKEN=token
-ARG REACT_APP_TELEHEALTH_URL=url
+ARG REACT_APP_TELEHEALTH_URL=telehealthUrl
 ARG REACT_APP_NGROK_URL=url
 
 # Update React Version to 16.13.1.  By default this plugin is not compatible with the default version (16.5.2)
