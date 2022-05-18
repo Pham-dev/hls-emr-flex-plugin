@@ -30,10 +30,10 @@ COPY . /hls-deploy
 WORKDIR /hls-deploy/plugin-backend
 RUN npm install
 RUN echo "REACT_APP_BACKEND_URL=$(eval twilio serverless:deploy --override-existing-project --runtime node14 -o=json | grep -o '"domain": "[^"]*' | grep -o '[^"]*$')" > .env
-RUN echo "REACT_APP_TELEHEALTH_URL=${REACT_APP_TELEHEALTH_URL}" >> .env
 RUN echo "REACT_APP_NGROK_URL=${REACT_APP_NGROK_URL}" >> .env
 RUN cp .env /hls-deploy
 WORKDIR /hls-deploy
+RUN echo "REACT_APP_TELEHEALTH_URL=${REACT_APP_TELEHEALTH_URL}" >> .env
 RUN npm install
 
 # Run deploy command to get a working version
