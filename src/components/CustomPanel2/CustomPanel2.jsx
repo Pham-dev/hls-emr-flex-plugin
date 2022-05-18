@@ -28,6 +28,7 @@ const hasAssignedTask = (tasks) => {
 
 // It is recommended to keep components stateless and use redux for managing states
 const CustomPanel2 = (props) => {
+  console.log("PROCESS.ENV", process.env);
   useEffect(() => {
     if (props.task) {
       try {
