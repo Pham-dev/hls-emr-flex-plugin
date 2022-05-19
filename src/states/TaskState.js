@@ -1,4 +1,3 @@
-import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import { fetchingState } from "../states";
 
 export const ACTION_FETCHING_FHIR = "FETCHING_FHIR_DATA";
@@ -6,7 +5,7 @@ export const ACTION_FETCHING_FHIR_SUCCESS = "FETCHING_FHIR_DATA_SUCCSS";
 export const ACTION_FETCHING_FHIR_FAILURE = "FETCHING_FHIR_DATA_FAILURE";
 
 const defaultPatient = {
-  id: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+  id: "12345",
   resourceType: "Patient",
   name: [
     {
