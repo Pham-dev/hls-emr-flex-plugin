@@ -1,11 +1,9 @@
 import React from 'react';
 import TransferButton from '../components/TransferButton';
-import { EDUCATION, EDUCATORS_QUEUE_NAME, SCHEDULERS_QUEUE_NAME } from '../components/constants';
+import { EDUCATION, EDUCATORS_QUEUE_NAME } from '../components/constants';
 import CustomPanel2Container from '../components/CustomPanel2/CustomPanel2.Container';
 import VideoButtonContainer from '../components/VideoButton/VideoButton.Container';
-import {TaskListItem} from "@twilio/flex-ui";
 import CustomTask from "../components/CustomTask/CustomTask";
-import {TaskItemIcon} from "../components/icons/TaskItemIcon";
 
 /**
  * This appends new content to the Chat Canvas (adds transfer button near end chat button)
@@ -14,11 +12,8 @@ import {TaskItemIcon} from "../components/icons/TaskItemIcon";
  * and the task has been assigned.
  */
 export const setUpComponents = (flex, manager, flexInfo) => {
-  //flex.TaskListItem.Content.replace(<span key='any'>Test</span>);
-  flex.TaskListItem.Content.add(<CustomTask key='CustomTask-component' />);
-  flex.TaskListItem.defaultProps.iconColor = 'none';
-  //flex.TaskListItem.defaultProps.icon=<TaskItemIcon/>;
-  //flex.TaskListItem.Content.add(<TaskListItem key={'Custom Icon'}/>);
+  
+  // flex.TaskListItem.Content.replace(<CustomTask key='CustomTask-component' flexInfo={flexInfo} flex={flex} manager={manager}/>);
   
   // Custom Panel 2
   flex.AgentDesktopView.Panel2.Content.add(<CustomPanel2Container key={"CustomPanel2-component"} flexInfo={flexInfo} flex={flex} manager={manager}/> , { sortOrder: -1 });

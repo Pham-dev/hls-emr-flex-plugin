@@ -1,5 +1,5 @@
 import { VERSION } from '@twilio/flex-ui';
-import { FlexPlugin } from 'flex-plugin';
+import { FlexPlugin, loadCSS } from 'flex-plugin';
 import reducers, { namespace } from './states';
 import { CustomTheme } from './CustomTheme';
 import { setUpActions, setUpComponents, setUpNotifications } from './helpers';
@@ -32,6 +32,8 @@ export default class HlsEmrPlugin extends FlexPlugin {
    * @param manager { import('@twilio/flex-ui').Manager }
    */
   async init(flex, manager) {
+    loadCSS('./main.css');
+  
     // console.log(manager.store.getState());
     this.registerReducers(manager);
     const flexInfo = getFlexObject(manager.workerClient);
