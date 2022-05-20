@@ -12,6 +12,25 @@ export const blue = "#0066b2";
 export const teal = "#057d9e";
 export const tealHover = "#02627c";
 export const colorTextWeak = '#606B85';
+export const brandColor = "#F4F4F6";
+export const msgInputBgColor = "#0263E0";
+export const brandTextColor2 = "#121C2D";
+
+function brandMessageBubbleColors(bgBubbleColor, bubbleColor) {
+  return {
+    Bubble: {
+      background: bgBubbleColor,
+      color: bubbleColor,
+    },
+    Avatar: {
+      background: bgBubbleColor,
+      color: bubbleColor
+    },
+    Header: {
+      color: bubbleColor
+    }
+  }
+}
 
 export const CustomTheme = {
   baseName: "FlexLight",
@@ -66,14 +85,13 @@ export const CustomTheme = {
       Item: {
         Container: {
           background: lightGray2,
-          /*marginRight: '4px',
-          marginLeft: '4px',
-          padding: '5px 0 4px 0'*/
+          //borderRadius: '8px',
         },
         SelectedContainer: {
           background: darkGray2,
           borderRadius: '8px',
-          color: twilioWhite
+          color: twilioWhite,
+          borderBottom: 'none'
         },
         Icon: {
           //background: lightGray2,
@@ -94,5 +112,17 @@ export const CustomTheme = {
         }
       },
     },
+    Chat: {
+      MessageListItem: {
+        FromMe: brandMessageBubbleColors(darkGray3, twilioWhite),
+        FromOthers: brandMessageBubbleColors(brandColor, brandTextColor2),
+      },
+      MessageInput: {
+        Button: {
+          background: msgInputBgColor,
+          color: twilioWhite,
+        }
+      },
+    }
   }
-}
+};

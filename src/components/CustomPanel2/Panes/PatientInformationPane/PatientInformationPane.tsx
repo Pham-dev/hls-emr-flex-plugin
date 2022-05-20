@@ -89,14 +89,6 @@ const PatientInformationPane = ({
               <span className="value">{"Diabetes, Type 2"}</span>
             </div>
             <div className="column-value">
-              <span className="label">Current Medications</span>
-              <span className="value">
-                {
-                  "Metformin 800mg daily; Lipitor 10mg daily; Lisinopril 10mg daily"
-                }
-              </span>
-            </div>
-            <div className="column-value">
               <span className="label">Allergies</span>
               <span className="value">{"Latex, bee stings"}</span>
             </div>
@@ -106,6 +98,14 @@ const PatientInformationPane = ({
               <span className="label">Problems List</span>
               <span className="value">
                 {"Diabetes, Type 2; Hypertension; Peripheral neuropathy"}
+              </span>
+            </div>
+            <div className="column-value">
+              <span className="label">Current Medications</span>
+              <span className="value">
+                {
+                  "Metformin 800mg daily; Lipitor 10mg daily; Lisinopril 10mg daily"
+                }
               </span>
             </div>
           </div>

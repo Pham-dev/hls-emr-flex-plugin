@@ -2,8 +2,8 @@ import React from "react";
 import {TaskItemIcon} from "../icons/TaskItemIcon";
 import TaskItemActiveIcon from "../icons/TaskItemActiveIcon";
 import {Actions} from "@twilio/flex-ui";
-import styled from 'react-emotion';
 import {ITask} from "@twilio/flex-ui/src/models/CommonModels";
+import styled from "@emotion/styled";
 
 interface CustomTaskStylesProps {
     selected: boolean;

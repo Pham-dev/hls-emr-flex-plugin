@@ -123,7 +123,7 @@ const CustomPanel2 = (props) => {
               <strong>{props.task.attributes.name}</strong>
             </Typography>
             <div className="flex-row">
-              <CareManagementPane manager={props.manager} />
+              <CareManagementPane manager={props.manager}/>
               <PatientInformationPane
                 name={props.task.attributes.name}
                 patientInfo={props.patientInfo}

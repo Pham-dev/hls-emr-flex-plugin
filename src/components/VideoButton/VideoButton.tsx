@@ -1,5 +1,5 @@
 import { IconButton, styled } from '@twilio/flex-ui';
-import React from 'react'
+import React from 'react';
 
 const Button = styled(IconButton)`
   background-color: #606b85;

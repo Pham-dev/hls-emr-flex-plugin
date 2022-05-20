@@ -4,6 +4,7 @@ import { EDUCATION, EDUCATORS_QUEUE_NAME } from '../components/constants';
 import CustomPanel2Container from '../components/CustomPanel2/CustomPanel2.Container';
 import VideoButtonContainer from '../components/VideoButton/VideoButton.Container';
 import CustomTask from "../components/CustomTask/CustomTask";
+import {TaskItemIcon} from "../components/icons/TaskItemIcon";
 
 /**
  * This appends new content to the Chat Canvas (adds transfer button near end chat button)
@@ -14,7 +15,7 @@ import CustomTask from "../components/CustomTask/CustomTask";
 export const setUpComponents = (flex, manager, flexInfo) => {
   
   // flex.TaskListItem.Content.replace(<CustomTask key='CustomTask-component' flexInfo={flexInfo} flex={flex} manager={manager}/>);
-  
+  //flex.TaskListItem.Content.add(<TaskItemIcon key="task item icon"/>, { sortOrder: -1 })
   // Custom Panel 2
   flex.AgentDesktopView.Panel2.Content.add(<CustomPanel2Container key={"CustomPanel2-component"} flexInfo={flexInfo} flex={flex} manager={manager}/> , { sortOrder: -1 });
   flex.AgentDesktopView.defaultProps.splitterOptions = {

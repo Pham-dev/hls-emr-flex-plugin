@@ -4,8 +4,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import React, {useEffect, useState} from "react";
 import { Manager } from "@twilio/flex-ui";
 
-const CareManagementPane = (props: { classes: any; manager: Manager;}) => {
-  const {  manager } = props;
+interface CareManagementProps {
+  classes?: any;
+  manager: Manager;
+}
+
+const CareManagementPane = ({ manager }: CareManagementProps) => {
 
   const [diabetes, setDiabetes] = useState<string>("");
   const [eatingHabits, setEatingHabits] = useState<string>("");
@@ -13,7 +17,6 @@ const CareManagementPane = (props: { classes: any; manager: Manager;}) => {
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEnrolled, setIsEnrolled] = useState<boolean>(false);
-
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;

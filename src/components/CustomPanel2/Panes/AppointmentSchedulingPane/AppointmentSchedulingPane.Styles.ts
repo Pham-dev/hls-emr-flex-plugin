@@ -1,4 +1,4 @@
-import styled from 'react-emotion';
+import styled from "@emotion/styled";
 
 export const AppointmentSchedulingPaneStyles = styled('div')
   `
@@ -12,7 +12,6 @@ export const AppointmentSchedulingPaneStyles = styled('div')
     height: 569px;
     padding-top: 20px;
     padding-left: 20px;
-    
 
     .title {
       font-weight: 700;
@@ -26,5 +25,4 @@ export const AppointmentSchedulingPaneStyles = styled('div')
       height: 530px;
       overflow-x: scroll;
     }
-    
   `;

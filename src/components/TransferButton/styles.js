@@ -1,4 +1,4 @@
-import styled from 'react-emotion';
+import styled from "@emotion/styled";
 
 export const StyledButton = styled('button')`
   display: flex;
@@ -7,7 +7,7 @@ export const StyledButton = styled('button')`
   align-items: center;
   padding: 5px 10px;
   gap: 6px;
-  width: 32px;
+  width: 38px;
   height: 28px;
   background: ${props => props.pressed ? '#4B5671' : '#E1E2E9'};
   border-radius: 39px;
