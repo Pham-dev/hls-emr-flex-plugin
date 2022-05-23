@@ -91,6 +91,7 @@ const CustomPanel2 = (props) => {
   const showTelehealth =
     props.manager.store.getState()["hls-emr"].videoButton.shouldShowTelehealth;
   const shouldShowTelehealth = process.env.REACT_APP_TELEHEALTH_URL && showTelehealth ? true : false;
+  
   if (
     props &&
     props.tasks.size &&
@@ -117,25 +118,12 @@ const CustomPanel2 = (props) => {
     ) {
       return (
         <CustomPanel2Styles>
-          {/*{shouldShowTelehealth ?
-              <Grid container spacing={16} grid-auto-rows={"1fr"}>
-                <Grid item xs={12} sm={4}><CareManagementPane manager={props.manager}/></Grid>
-                <Grid item xs={12} sm={8}><PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/></Grid>
-                <Grid item xs={12} sm={4}><TelehealthPane nurseName={props.flexInfo.full_name}/></Grid>
-                <Grid item xs={12} sm={8}><AppointmentSchedulingPane skill={EDUCATION}/></Grid>
-              </Grid> :
-              <Grid container spacing={16} grid-auto-rows={"1fr"}>
-                <Grid item xs={12} sm={4}><CareManagementPane manager={props.manager}/></Grid>
-                <Grid item xs={12} sm={8}><PatientInformationPane patientName={props.task.attributes.name} skill={EDUCATION}/></Grid>
-                <Grid item xs={12} sm={12}><AppointmentSchedulingPane skill={EDUCATION}/></Grid>
-              </Grid>
-            }*/}
           <div className="flex-col">
             <Typography className="patient-info" component={"h1"}>
               <strong>{props.task.attributes.name}</strong>
             </Typography>
             <div className="flex-row">
-              <CareManagementPane manager={props.manager} />
+              <CareManagementPane manager={props.manager}/>
               <PatientInformationPane
                 name={props.task.attributes.name}
                 patientInfo={props.patientInfo}
