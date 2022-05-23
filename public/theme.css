@@ -123,3 +123,52 @@
 .Twilio-MessageInput-SendButton:disabled {
     opacity: 1 !important;
 }
+
+.Twilio-WorkerDirectory-Popup {
+    width: 350px;
+    height: 303px;
+    position: absolute;
+    top: 303px;
+}
+.Twilio-WorkerDirectory-Header {
+    display: none;
+}
+.Twilio-WorkerDirectory-Popup .Twilio-TabHeader button .Twilio {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #AEB2C1;
+    letter-spacing: normal;
+}
+.Twilio-WorkerDirectoryTabs input[type=text]{
+    background: #F4F4F6;
+    border: 1px solid #E1E3EA;
+    border-radius: 8px;
+    height: 38px;
+}
+.Twilio-WorkerDirectory-Workers, .Twilio-WorkerDirectory-Queues {
+    padding: 0 12px;
+    border: none;
+}
+.Twilio-WorkerDirectory-Worker, .Twilio-WorkerDirectory-Queue {
+    border-bottom: 1px solid grey;
+    background: #fff;
+}
+.Twilio-WorkerDirectory-Worker:hover, .Twilio-WorkerDirectory-Queue:hover {
+    background: #EBF4FF;
+    opacity: 0.8;
+    border-radius: 4px;
+    border: none;
+}
+.Twilio-WorkerDirectory-ButtonContainer .Twilio-IconButton {
+    background: #CCE4FF;
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+}
+.Twilio-WorkerDirectory-ButtonContainer .Twilio-IconButton:hover {
+    background: #0263E0;
+    color: white;
+}

@@ -18,13 +18,13 @@ export const brandTextColor2 = "#121C2D";
 
 function brandMessageBubbleColors(bgBubbleColor, bubbleColor) {
   return {
-    Bubble: {
-      background: bgBubbleColor,
-      color: bubbleColor,
-    },
     Avatar: {
-      background: bgBubbleColor,
+      backgroundColor: bgBubbleColor,
       color: bubbleColor
+    },
+    Bubble: {
+      backgroundColor: bgBubbleColor,
+      color: bubbleColor,
     },
     Header: {
       color: bubbleColor
@@ -38,7 +38,7 @@ export const CustomTheme = {
       base1: twilioWhite,
       base3: lightGray,
       base0: twilioRed,
-      tabSelectedColor: teal,
+      tabSelectedColor: msgInputBgColor,
   },
   overrides: {
     MainHeader: {
@@ -114,7 +114,7 @@ export const CustomTheme = {
     },
     Chat: {
       MessageListItem: {
-        FromMe: brandMessageBubbleColors(darkGray3, twilioWhite),
+       FromMe: brandMessageBubbleColors(darkGray3, twilioWhite),
         FromOthers: brandMessageBubbleColors(brandColor, brandTextColor2),
       },
       MessageInput: {
@@ -123,6 +123,17 @@ export const CustomTheme = {
           color: twilioWhite,
         }
       },
-    }
+    },
+    WorkerDirectory: {
+      Container: {
+        background: twilioWhite,
+        border: '1px solid #E1E3EA',
+        boxShadow: '0px 16px 24px 4px rgba(18, 28, 45, 0.2)',
+        borderRadius: '8px',
+        width: '350px',
+        height: '303px',
+        //marginTop: '334px'
+      },
+    },
   }
 };
