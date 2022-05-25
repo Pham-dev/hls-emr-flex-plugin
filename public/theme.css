@@ -6,6 +6,17 @@
     font-display: block;
 }
 
+/*body {
+    font-family: 'Inter', sans-serif!important;
+    font-style: normal!important;
+}*/
+
+.Twilio-TaskCanvasHeader-default,
+.Twilio-TabHeader,
+.Twilio-IncomingTaskCanvas {
+    font-family: 'Inter', sans-serif;
+}
+
 .Twilio-Splitter-Pane,
 #container > div > div.Twilio-RootContainer-default.css-18ljn0d > div.Twilio.Twilio-MainContainer.css-a9ubwn > div.Twilio-MainContainer-default.css-wct8tc > div.Twilio-MainContainer-Content.css-kspy0u > div > div.Twilio.Twilio-ViewCollection.css-1rz1a0b > div > div.Twilio-AgentDesktopView-default.css-wct8tc > div > div:nth-child(1) > div,
 #container > div > div.Twilio-RootContainer-default.css-18ljn0d > div.Twilio.Twilio-MainContainer.css-a9ubwn > div.Twilio-MainContainer-default.css-wct8tc > div.Twilio-MainContainer-Content.css-kspy0u > div > div.Twilio.Twilio-ViewCollection.css-1rz1a0b > div > div.Twilio-AgentDesktopView-default.css-wct8tc > div > div:nth-child(1) > div > div.Twilio-AgentDesktopView\.Panel1-default.css-18ljn0d,
