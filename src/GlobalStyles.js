@@ -1,153 +1,151 @@
-@font-face {
+import { injectGlobal } from '@emotion/css';
+
+injectGlobal`
+  @font-face {
     font-family: "Inter";
     src: url('https://fonts.googleapis.com/css?family=Inter');
     font-weight: normal;
     font-style: normal;
     font-display: block;
-}
+  }
 
-/*body {
-    font-family: 'Inter', sans-serif!important;
-    font-style: normal!important;
-}*/
-
-.Twilio-TaskCanvasHeader-default,
-.Twilio-TabHeader,
-.Twilio-IncomingTaskCanvas {
+  .Twilio-TaskCanvasHeader-default,
+  .Twilio-TabHeader,
+  .Twilio-IncomingTaskCanvas {
     font-family: 'Inter', sans-serif;
-}
+  }
 
-.Twilio-Splitter-Pane,
-#container > div > div.Twilio-RootContainer-default.css-18ljn0d > div.Twilio.Twilio-MainContainer.css-a9ubwn > div.Twilio-MainContainer-default.css-wct8tc > div.Twilio-MainContainer-Content.css-kspy0u > div > div.Twilio.Twilio-ViewCollection.css-1rz1a0b > div > div.Twilio-AgentDesktopView-default.css-wct8tc > div > div:nth-child(1) > div,
-#container > div > div.Twilio-RootContainer-default.css-18ljn0d > div.Twilio.Twilio-MainContainer.css-a9ubwn > div.Twilio-MainContainer-default.css-wct8tc > div.Twilio-MainContainer-Content.css-kspy0u > div > div.Twilio.Twilio-ViewCollection.css-1rz1a0b > div > div.Twilio-AgentDesktopView-default.css-wct8tc > div > div:nth-child(1) > div > div.Twilio-AgentDesktopView\.Panel1-default.css-18ljn0d,
-#container > div > div.Twilio-RootContainer-default.css-18ljn0d > div.Twilio.Twilio-MainContainer.css-a9ubwn > div.Twilio-MainContainer-default.css-wct8tc > div.Twilio-MainContainer-Content.css-kspy0u > div > div.Twilio.Twilio-ViewCollection.css-1rz1a0b > div > div.Twilio-AgentDesktopView-default.css-wct8tc > div > div:nth-child(1) > div > div.Twilio-AgentDesktopView\.Panel1-default.css-18ljn0d > div.Twilio-Splitter.Twilio-Splitter-Vertical.css-1isopyh{
+  .Twilio-Splitter-Pane,
+  #container > div > div.Twilio-RootContainer-default.css-18ljn0d > div.Twilio.Twilio-MainContainer.css-a9ubwn > div.Twilio-MainContainer-default.css-wct8tc > div.Twilio-MainContainer-Content.css-kspy0u > div > div.Twilio.Twilio-ViewCollection.css-1rz1a0b > div > div.Twilio-AgentDesktopView-default.css-wct8tc > div > div:nth-child(1) > div,
+  #container > div > div.Twilio-RootContainer-default.css-18ljn0d > div.Twilio.Twilio-MainContainer.css-a9ubwn > div.Twilio-MainContainer-default.css-wct8tc > div.Twilio-MainContainer-Content.css-kspy0u > div > div.Twilio.Twilio-ViewCollection.css-1rz1a0b > div > div.Twilio-AgentDesktopView-default.css-wct8tc > div > div:nth-child(1) > div > div.Twilio-AgentDesktopView\.Panel1-default.css-18ljn0d,
+  #container > div > div.Twilio-RootContainer-default.css-18ljn0d > div.Twilio.Twilio-MainContainer.css-a9ubwn > div.Twilio-MainContainer-default.css-wct8tc > div.Twilio-MainContainer-Content.css-kspy0u > div > div.Twilio.Twilio-ViewCollection.css-1rz1a0b > div > div.Twilio-AgentDesktopView-default.css-wct8tc > div > div:nth-child(1) > div > div.Twilio-AgentDesktopView\.Panel1-default.css-18ljn0d > div.Twilio-Splitter.Twilio-Splitter-Vertical.css-1isopyh{
     overflow: visible!important;
-}
+  }
 
-.Twilio-TaskListBaseItem {
+  .Twilio-TaskListBaseItem {
     margin: 1px 4px;
     font-family: 'Inter', sans-serif;
     font-style: normal;
-}
-.Twilio-TaskListBaseItem-Content {
-   /* border-bottom: 1px solid #E1E3E9;*/
-}
+  }
+  .Twilio-TaskListBaseItem-Content {
+    /* border-bottom: 1px solid #E1E3E9;*/
+  }
 
-.Twilio-TaskListBaseItem-IconAreaContainer {
+  .Twilio-TaskListBaseItem-IconAreaContainer {
     background: none!important;
-}
-.Twilio-TaskListBaseItem-IconAreaContainer svg {
+  }
+  .Twilio-TaskListBaseItem-IconAreaContainer svg {
     display: none;
-}
+  }
 
-.Twilio-TaskListBaseItem-IconAreaContainer::before {
+  .Twilio-TaskListBaseItem-IconAreaContainer::before {
     content: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='5' y='5' width='30' height='30' rx='15' fill='%238A91A8'/%3E%3Cpath d='M23.5 18H23V16.5C23 16.1022 22.842 15.7206 22.5607 15.4393C22.2794 15.158 21.8978 15 21.5 15H16.5C16.1022 15 15.7206 15.158 15.4393 15.4393C15.158 15.7206 15 16.1022 15 16.5V22.5C15.0005 22.5987 15.0302 22.6951 15.0854 22.7769C15.1405 22.8588 15.2187 22.9225 15.31 22.96C15.3693 22.988 15.4344 23.0017 15.5 23C15.5658 23.0004 15.631 22.9878 15.692 22.9629C15.7529 22.938 15.8083 22.9013 15.855 22.855L17.26 21.445H18V22.165C18 22.5628 18.158 22.9444 18.4393 23.2257C18.7206 23.507 19.1022 23.665 19.5 23.665H22.96L24.145 24.855C24.1917 24.9013 24.2471 24.938 24.308 24.9629C24.369 24.9878 24.4342 25.0004 24.5 25C24.5656 25.0017 24.6307 24.988 24.69 24.96C24.7813 24.9225 24.8595 24.8588 24.9146 24.7769C24.9698 24.6951 24.9995 24.5987 25 24.5V19.5C25 19.1022 24.842 18.7206 24.5607 18.4393C24.2794 18.158 23.8978 18 23.5 18ZM18 19.5V20.445H17.055C16.9892 20.4446 16.924 20.4572 16.863 20.4821C16.8021 20.507 16.7467 20.5437 16.7 20.59L16 21.295V16.5C16 16.3674 16.0527 16.2402 16.1464 16.1464C16.2402 16.0527 16.3674 16 16.5 16H21.5C21.6326 16 21.7598 16.0527 21.8536 16.1464C21.9473 16.2402 22 16.3674 22 16.5V18H19.5C19.1022 18 18.7206 18.158 18.4393 18.4393C18.158 18.7206 18 19.1022 18 19.5ZM24 23.295L23.5 22.795C23.4537 22.7478 23.3985 22.7102 23.3375 22.6844C23.2766 22.6587 23.2112 22.6453 23.145 22.645H19.5C19.3674 22.645 19.2402 22.5923 19.1464 22.4986C19.0527 22.4048 19 22.2776 19 22.145V19.5C19 19.3674 19.0527 19.2402 19.1464 19.1464C19.2402 19.0527 19.3674 19 19.5 19H23.5C23.6326 19 23.7598 19.0527 23.8536 19.1464C23.9473 19.2402 24 19.3674 24 19.5V23.295Z' fill='white'/%3E%3C/svg%3E");
     width: 40px;
     height: 40px;
-}
+  }
 
-.Twilio-WelcomeMessage {
+  .Twilio-WelcomeMessage {
     color:#606B85 !important;
     font-size: 14px;
     font-family: 'Inter', sans-serif;
     margin-top: 8px !important;
     margin-bottom: 8px !important;
-}
+  }
 
-.Twilio-InlineMessage {
+  .Twilio-InlineMessage {
     margin-top: 8px !important;
     margin-bottom: 8px !important;
-}
+  }
 
-.Twilio-WelcomeMessage-IconContainer {
+  .Twilio-WelcomeMessage-IconContainer {
     width: 14px;
     height: 14px;
     margin-right: 10px;
     /*
     background: url('./images/u_comments.svg');
     */
-}
+  }
 
-.Twilio-WelcomeMessage-IconContainer svg {
+  .Twilio-WelcomeMessage-IconContainer svg {
     display: none;
-}
+  }
 
-.Twilio-MessageBubble {
+  .Twilio-MessageBubble {
     padding-top: 8px;
     padding-bottom: 8px;
     border-radius: 8px !important;
-}
+  }
 
-.Twilio-MessageBubble-Time {
+  .Twilio-MessageBubble-Time {
     color: #a6abb7;
-}
+  }
 
-.Twilio-MessageBubble-Header div {
+  .Twilio-MessageBubble-Header div {
     font-size: 13px !important;
-}
+  }
 
-.Twilio-MessageBubble-Body {
+  .Twilio-MessageBubble-Body {
     font-size: 14px !important;
-}
+  }
 
-.Twilio-MessageListItem-BubbleContainer {
+  .Twilio-MessageListItem-BubbleContainer {
     min-width: 230px !important;
-}
+  }
 
-.Twilio-MessageListItem {
+  .Twilio-MessageListItem {
     margin-top: 12px !important;
-}
+  }
 
-.generatedAnswers {
+  .generatedAnswers {
     width: 100% !important;
     max-width: 280px;
-}
+  }
 
-.generatedAnswerBubble {
+  .generatedAnswerBubble {
     background: #EBF4FF !important;
     border-radius: 8px !important;
     color: #0263E0 !important;
     padding: 12px 12px !important;
     font-weight: 600;
-}
+  }
 
-.Twilio-MessageInput div, textarea {
+  .Twilio-MessageInput div, textarea {
     font-size: 14px !important;
-}
+  }
 
-.Twilio-MessageInputArea-TextArea {
+  .Twilio-MessageInputArea-TextArea {
     min-height: 44px;
     font-family: 'Inter', sans-serif;
     border-radius: 28px !important;
     background: #F4F4F6;
     border: 1px solid #E1E3EA;
-}
+  }
 
-.Twilio-MessageInputArea-TextArea textarea {
+  .Twilio-MessageInputArea-TextArea textarea {
     padding-top: 12px;
     padding-left: 16px;
-}
+  }
 
-.Twilio-MessageInput-SendButton {
+  .Twilio-MessageInput-SendButton {
     height: 44px !important;
     width: 44px !important;
-}
+  }
 
-.Twilio-MessageInput-SendButton:disabled {
+  .Twilio-MessageInput-SendButton:disabled {
     opacity: 1 !important;
-}
+  }
 
-.Twilio-WorkerDirectory-Popup {
+  .Twilio-WorkerDirectory-Popup {
     width: 350px;
     height: 303px;
     position: absolute;
     top: 303px;
     left: 330px;
-}
-/*.Twilio-WorkerDirectory-Header {
-    display: none;
-}*/
-.Twilio-WorkerDirectory-Popup .Twilio-TabHeader button .Twilio {
+  }
+  /*.Twilio-WorkerDirectory-Header {
+			display: none;
+	}*/
+  .Twilio-WorkerDirectory-Popup .Twilio-TabHeader button .Twilio {
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 500;
@@ -155,66 +153,68 @@
     line-height: 15px;
     color: #AEB2C1;
     letter-spacing: normal;
-}
-.Twilio-WorkerDirectoryTabs input[type=text]{
+  }
+  .Twilio-WorkerDirectoryTabs input[type=text]{
     background: #F4F4F6;
     border: 1px solid #E1E3EA;
     border-radius: 8px;
     height: 38px;
-}
-.Twilio-WorkerDirectory-Workers, .Twilio-WorkerDirectory-Queues {
+  }
+  .Twilio-WorkerDirectory-Workers, .Twilio-WorkerDirectory-Queues {
     padding: 0 12px;
     border: none;
-}
-.Twilio-WorkerDirectory-Worker, .Twilio-WorkerDirectory-Queue {
+  }
+  .Twilio-WorkerDirectory-Worker, .Twilio-WorkerDirectory-Queue {
     border-bottom: 1px solid grey;
     background: #fff;
     margin-top: 2px;
-}
-.Twilio-WorkerDirectory-Worker:hover, .Twilio-WorkerDirectory-Queue:hover {
+  }
+  .Twilio-WorkerDirectory-Worker:hover, .Twilio-WorkerDirectory-Queue:hover {
     background: #EBF4FF;
     opacity: 0.8;
     border-radius: 4px;
     border: none;
-}
-.Twilio-WorkerDirectory-ButtonContainer .Twilio-IconButton {
+  }
+  .Twilio-WorkerDirectory-ButtonContainer .Twilio-IconButton {
     background: #CCE4FF;
     width: 24px;
     height: 24px;
     border-radius: 8px;
-}
-.Twilio-WorkerDirectory-ButtonContainer .Twilio-IconButton:hover {
+  }
+  .Twilio-WorkerDirectory-ButtonContainer .Twilio-IconButton:hover {
     background: #0263E0;
     color: white;
-}
-.Twilio-WorkerDirectory-QueueAvatar {
+  }
+  .Twilio-WorkerDirectory-QueueAvatar {
     border-radius: 50%;
     width: 35px;
     height: 35px;
     margin-top: 6px;
     margin-left: 4px;
-}
-.Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Call .Twilio-Icon-Content,
-.Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Transfer .Twilio-Icon-Content {
+  }
+  .Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Call .Twilio-Icon-Content,
+  .Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Transfer .Twilio-Icon-Content {
     display: none;
-}
-.Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Call::before {
+  }
+  .Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Call::before {
     content: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.09992 5.41641C8.00825 5.41641 7.91242 5.38724 7.82075 5.36641C7.63512 5.3255 7.4527 5.27119 7.27492 5.20391C7.08162 5.13359 6.86915 5.13724 6.67838 5.21416C6.48762 5.29108 6.33204 5.43584 6.24159 5.62057L6.14992 5.80807C5.74409 5.58232 5.37116 5.30192 5.04159 4.97474C4.71441 4.64517 4.43401 4.27224 4.20825 3.86641L4.38325 3.74974C4.56799 3.65929 4.71275 3.50371 4.78967 3.31295C4.86659 3.12218 4.87024 2.90971 4.79992 2.71641C4.73376 2.53825 4.67948 2.35591 4.63742 2.17058C4.61659 2.07891 4.59992 1.98308 4.58742 1.88724C4.53682 1.59375 4.3831 1.32797 4.15393 1.13776C3.92476 0.947549 3.63521 0.845412 3.33742 0.849742H2.08742C1.90785 0.848056 1.73002 0.885081 1.56605 0.958296C1.40207 1.03151 1.2558 1.1392 1.13718 1.27403C1.01857 1.40885 0.930393 1.56766 0.878665 1.73962C0.826937 1.91159 0.81287 2.09268 0.83742 2.27057C1.05939 4.01615 1.8566 5.63802 3.10311 6.88001C4.34962 8.12199 5.97438 8.91329 7.72075 9.12891H7.87909C8.18634 9.12936 8.483 9.01663 8.71242 8.81224C8.84424 8.69434 8.94954 8.54982 9.02136 8.38821C9.09319 8.2266 9.12991 8.05159 9.12909 7.87474V6.62474C9.12398 6.33532 9.01859 6.05664 8.83089 5.83627C8.6432 5.6159 8.38484 5.4675 8.09992 5.41641ZM8.30825 7.91641C8.30818 7.97557 8.29551 8.03404 8.27108 8.08792C8.24665 8.1418 8.21103 8.18986 8.16659 8.22891C8.12003 8.26911 8.06559 8.29914 8.00675 8.31707C7.94792 8.33501 7.88598 8.34046 7.82492 8.33308C6.26446 8.13299 4.81502 7.41911 3.70522 6.30403C2.59542 5.18895 1.88842 3.73613 1.69575 2.17474C1.68912 2.11371 1.69493 2.05196 1.71284 1.99324C1.73074 1.93451 1.76037 1.88003 1.79992 1.83308C1.83897 1.78863 1.88703 1.75301 1.94091 1.72858C1.99479 1.70416 2.05326 1.69148 2.11242 1.69141H3.36242C3.45931 1.68925 3.55393 1.72094 3.62998 1.78102C3.70603 1.8411 3.75876 1.92581 3.77909 2.02057C3.79575 2.13446 3.81659 2.24696 3.84159 2.35807C3.88972 2.57772 3.95378 2.79357 4.03325 3.00391L3.44992 3.27474C3.40004 3.29763 3.35518 3.33014 3.3179 3.37041C3.28063 3.41068 3.25167 3.45791 3.2327 3.50941C3.21373 3.5609 3.20512 3.61563 3.20736 3.67046C3.2096 3.72529 3.22265 3.77914 3.24575 3.82891C3.84542 5.11339 4.87794 6.14591 6.16242 6.74558C6.26386 6.78725 6.37764 6.78725 6.47909 6.74558C6.53105 6.72699 6.5788 6.69826 6.61957 6.66107C6.66035 6.62388 6.69332 6.57895 6.71659 6.52891L6.97492 5.94558C7.19032 6.02261 7.41016 6.08661 7.63325 6.13724C7.74436 6.16224 7.85686 6.18308 7.97075 6.19974C8.06552 6.22007 8.15023 6.2728 8.21031 6.34885C8.27039 6.4249 8.30208 6.51951 8.29992 6.61641L8.30825 7.91641Z' fill='%230263E0'/%3E%3C/svg%3E");
     width: 24px;
     height: 16px;
-}
-.Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Transfer::before {
+  }
+  .Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Transfer::before {
     content: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1.66675 4.99967C1.66675 4.76956 1.8533 4.58301 2.08341 4.58301H7.91675C8.14687 4.58301 8.33341 4.76956 8.33341 4.99967C8.33341 5.22979 8.14687 5.41634 7.91675 5.41634H2.08341C1.8533 5.41634 1.66675 5.22979 1.66675 4.99967Z' fill='%230263E0'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4.70529 1.78903C4.86801 1.62631 5.13183 1.62631 5.29455 1.78903L8.21121 4.7057C8.37393 4.86842 8.37393 5.13223 8.21121 5.29495L5.29455 8.21162C5.13183 8.37434 4.86801 8.37434 4.70529 8.21162C4.54257 8.0489 4.54257 7.78508 4.70529 7.62236L7.32733 5.00033L4.70529 2.37829C4.54257 2.21557 4.54257 1.95175 4.70529 1.78903Z' fill='%230263E0'/%3E%3C/svg%3E");
     width: 24px;
     height: 16px;
-}
-.Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Call:hover::before {
+  }
+  .Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Call:hover::before {
     content: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.09992 5.41641C8.00825 5.41641 7.91242 5.38724 7.82075 5.36641C7.63512 5.3255 7.4527 5.27119 7.27492 5.20391C7.08162 5.13359 6.86915 5.13724 6.67838 5.21416C6.48762 5.29108 6.33204 5.43584 6.24159 5.62057L6.14992 5.80807C5.74409 5.58232 5.37116 5.30192 5.04159 4.97474C4.71441 4.64517 4.43401 4.27224 4.20825 3.86641L4.38325 3.74974C4.56799 3.65929 4.71275 3.50371 4.78967 3.31295C4.86659 3.12218 4.87024 2.90971 4.79992 2.71641C4.73376 2.53825 4.67948 2.35591 4.63742 2.17058C4.61659 2.07891 4.59992 1.98308 4.58742 1.88724C4.53682 1.59375 4.3831 1.32797 4.15393 1.13776C3.92476 0.947549 3.63521 0.845412 3.33742 0.849742H2.08742C1.90785 0.848056 1.73002 0.885081 1.56605 0.958296C1.40207 1.03151 1.2558 1.1392 1.13718 1.27403C1.01857 1.40885 0.930393 1.56766 0.878665 1.73962C0.826937 1.91159 0.81287 2.09268 0.83742 2.27057C1.05939 4.01615 1.8566 5.63802 3.10311 6.88001C4.34962 8.12199 5.97438 8.91329 7.72075 9.12891H7.87909C8.18634 9.12936 8.483 9.01663 8.71242 8.81224C8.84424 8.69434 8.94954 8.54982 9.02136 8.38821C9.09319 8.2266 9.12991 8.05159 9.12909 7.87474V6.62474C9.12398 6.33532 9.01859 6.05664 8.83089 5.83627C8.6432 5.6159 8.38484 5.4675 8.09992 5.41641ZM8.30825 7.91641C8.30818 7.97557 8.29551 8.03404 8.27108 8.08792C8.24665 8.1418 8.21103 8.18986 8.16659 8.22891C8.12003 8.26911 8.06559 8.29914 8.00675 8.31707C7.94792 8.33501 7.88598 8.34046 7.82492 8.33308C6.26446 8.13299 4.81502 7.41911 3.70522 6.30403C2.59542 5.18895 1.88842 3.73613 1.69575 2.17474C1.68912 2.11371 1.69493 2.05196 1.71284 1.99324C1.73074 1.93451 1.76037 1.88003 1.79992 1.83308C1.83897 1.78863 1.88703 1.75301 1.94091 1.72858C1.99479 1.70416 2.05326 1.69148 2.11242 1.69141H3.36242C3.45931 1.68925 3.55393 1.72094 3.62998 1.78102C3.70603 1.8411 3.75876 1.92581 3.77909 2.02057C3.79575 2.13446 3.81659 2.24696 3.84159 2.35807C3.88972 2.57772 3.95378 2.79357 4.03325 3.00391L3.44992 3.27474C3.40004 3.29763 3.35518 3.33014 3.3179 3.37041C3.28063 3.41068 3.25167 3.45791 3.2327 3.50941C3.21373 3.5609 3.20512 3.61563 3.20736 3.67046C3.2096 3.72529 3.22265 3.77914 3.24575 3.82891C3.84542 5.11339 4.87794 6.14591 6.16242 6.74558C6.26386 6.78725 6.37764 6.78725 6.47909 6.74558C6.53105 6.72699 6.5788 6.69826 6.61957 6.66107C6.66035 6.62388 6.69332 6.57895 6.71659 6.52891L6.97492 5.94558C7.19032 6.02261 7.41016 6.08661 7.63325 6.13724C7.74436 6.16224 7.85686 6.18308 7.97075 6.19974C8.06552 6.22007 8.15023 6.2728 8.21031 6.34885C8.27039 6.4249 8.30208 6.51951 8.29992 6.61641L8.30825 7.91641Z' fill='white'/%3E%3C/svg%3E");
     width: 24px;
     height: 16px;
-}
-.Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Transfer:hover::before {
+  }
+  .Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Transfer:hover::before {
     content: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1.66675 4.99967C1.66675 4.76956 1.8533 4.58301 2.08341 4.58301H7.91675C8.14687 4.58301 8.33341 4.76956 8.33341 4.99967C8.33341 5.22979 8.14687 5.41634 7.91675 5.41634H2.08341C1.8533 5.41634 1.66675 5.22979 1.66675 4.99967Z' fill='white'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4.70529 1.78903C4.86801 1.62631 5.13183 1.62631 5.29455 1.78903L8.21121 4.7057C8.37393 4.86842 8.37393 5.13223 8.21121 5.29495L5.29455 8.21162C5.13183 8.37434 4.86801 8.37434 4.70529 8.21162C4.54257 8.0489 4.54257 7.78508 4.70529 7.62236L7.32733 5.00033L4.70529 2.37829C4.54257 2.21557 4.54257 1.95175 4.70529 1.78903Z' fill='white'/%3E%3C/svg%3E");
     width: 24px;
     height: 16px;
-}
+  }
+
+`;

@@ -1,7 +1,10 @@
 import { VERSION } from '@twilio/flex-ui';
-import { FlexPlugin, loadCSS } from 'flex-plugin';
+import { FlexPlugin } from 'flex-plugin';
+import './GlobalStyles.js';
+
 import reducers, { namespace } from './states';
 import { CustomTheme } from './CustomTheme';
+
 import { setUpActions, setUpComponents, setUpNotifications } from './helpers';
 
 const PLUGIN_NAME = 'HlsEmrPlugin';
@@ -32,8 +35,8 @@ export default class HlsEmrPlugin extends FlexPlugin {
    * @param manager { import('@twilio/flex-ui').Manager }
    */
   async init(flex, manager) {
-    //loadCSS('https://hls-website-7593-dev.twil.io/static/css/main.f8f6c6ed.chunk.css');
-    loadCSS('/theme.css');
+    //loadCSS('https://almond-penguin-7632.twil.io/assets/theme.css');
+    // loadCSS('/theme.css');
   
     // console.log(manager.store.getState());
     this.registerReducers(manager);
