@@ -14,9 +14,7 @@ injectGlobal`
   .Twilio-IncomingTaskCanvas {
     font-family: 'Inter', sans-serif;
   }
-  /*
-  body > div > div.Twilio-RootContainer-default.css-18ljn0d > div.Twilio.Twilio-MainContainer.css-a9ubwn > div.Twilio-MainContainer-default.css-wct8tc > div.Twilio-MainContainer-Content.css-kspy0u > div > div.Twilio.Twilio-ViewCollection.css-1rz1a0b > div > div.Twilio-AgentDesktopView-default.css-wct8tc > div > div:nth-child(1) > div,
-  */
+
   .Twilio-Splitter-Pane,
   #container > div > div.Twilio-RootContainer-default > div.Twilio.Twilio-MainContainer > div.Twilio-MainContainer-default > div.Twilio-MainContainer-Content > div > div.Twilio.Twilio-ViewCollection > div > div.Twilio-AgentDesktopView-default > div > div:nth-child(1) > div,
   #container > div > div.Twilio-RootContainer-default > div.Twilio.Twilio-MainContainer > div.Twilio-MainContainer-default > div.Twilio-MainContainer-Content > div > div.Twilio.Twilio-ViewCollection > div > div.Twilio-AgentDesktopView-default > div > div:nth-child(1) > div > div.Twilio-AgentDesktopView\.Panel1-default,
