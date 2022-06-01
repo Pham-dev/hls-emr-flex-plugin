@@ -113,7 +113,7 @@ injectGlobal`
   }
 
   .Twilio-MessageInput div, textarea {
-    font-size: 10px !important;
+    font-size: 14px !important;
   }
 
   .Twilio-MessageInputArea-TextArea {
