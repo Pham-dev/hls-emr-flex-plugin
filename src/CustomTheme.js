@@ -25,9 +25,11 @@ function brandMessageBubbleColors(bgBubbleColor, bubbleColor) {
     Bubble: {
       backgroundColor: bgBubbleColor,
       color: bubbleColor,
+      fontFamily: "'Inter', sans-serif"
     },
     Header: {
-      color: bubbleColor
+      color: bubbleColor,
+      fontFamily: "'Inter', sans-serif"
     }
   }
 }
@@ -44,7 +46,8 @@ export const CustomTheme = {
     MainHeader: {
         Container: {
           background: twilioWhite,
-          color: darkGray
+          color: darkGray,
+          fontFamily: "'Inter', sans-serif"
         },
         Button: {
           background: twilioWhite,
@@ -53,7 +56,8 @@ export const CustomTheme = {
     },
     SideNav: {
         Container: {
-          background: darkGray3
+          background: darkGray3,
+          fontFamily: "'Inter', sans-serif"
         },
         Button: {
           background: darkGray3
@@ -114,12 +118,12 @@ export const CustomTheme = {
     },
     Chat: {
       MessageListItem: {
-       FromMe: brandMessageBubbleColors(darkGray3, twilioWhite),
+        FromMe: brandMessageBubbleColors(darkGray3, twilioWhite),
         FromOthers: brandMessageBubbleColors(brandColor, brandTextColor2),
       },
       MessageInput: {
         Button: {
-          background: msgInputBgColor,
+          backgroundColor: msgInputBgColor,
           color: twilioWhite,
         }
       },
@@ -132,6 +136,7 @@ export const CustomTheme = {
         borderRadius: '8px',
         width: '350px',
         height: '303px',
+        fontFamily: "'Inter', sans-serif"
         //marginTop: '334px'
       },
     },

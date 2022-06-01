@@ -28,13 +28,12 @@ export const setUpComponents = (flex, manager, flexInfo) => {
   // video Button
   flex.TaskCanvasHeader.Content.add(<VideoButtonContainer key="video-button"/>, {
     sortOrder: 1,
-    if: (props) => 
-      props.task &&
-      props.task.taskStatus === 'assigned' &&
-      props.task.queueName === EDUCATORS_QUEUE_NAME &&
-      manager.workerClient.attributes.routing && 
-      manager.workerClient.attributes.routing.skills &&
-      manager.workerClient.attributes.routing.skills.includes(EDUCATION)
+    if: (props) => props.task &&
+        props.task.taskStatus === 'assigned' &&
+        props.task.queueName === EDUCATORS_QUEUE_NAME &&
+        manager.workerClient.attributes.routing &&
+        manager.workerClient.attributes.routing.skills &&
+        manager.workerClient.attributes.routing.skills.includes(EDUCATION)
   });
 
   // transfer Button

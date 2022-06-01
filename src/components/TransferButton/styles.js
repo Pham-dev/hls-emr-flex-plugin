@@ -15,4 +15,16 @@ export const StyledButton = styled('button')`
 	border: none;
 	margin-top: 14px;
 	margin-right: 6px;
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: #4B5671; //rgba(0, 0, 0, 0.2);
+    background-blend-mode: color;
+    svg {
+      fill: white;
+    }
+  }
+  svg {
+    fill: #626B83
+  }
 `;
