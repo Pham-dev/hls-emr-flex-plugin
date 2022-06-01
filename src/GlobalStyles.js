@@ -30,6 +30,12 @@ injectGlobal`
   .Twilio-TaskListBaseItem-Content {
     /* border-bottom: 1px solid #E1E3E9;*/
   }
+  .Twilio-TaskListBaseItem-FirstLine {
+	  font-size: 14px;
+  }
+  .Twilio-TaskListBaseItem-SecondLine {
+    font-size: 12px;
+  }
 
   .Twilio-TaskListBaseItem-IconAreaContainer {
     background: none!important;
@@ -107,7 +113,7 @@ injectGlobal`
   }
 
   .Twilio-MessageInput div, textarea {
-    font-size: 14px !important;
+    font-size: 10px !important;
   }
 
   .Twilio-MessageInputArea-TextArea {
@@ -225,11 +231,8 @@ injectGlobal`
 	  left: 50%;
   }
 
-  /*.Twilio-SideNav-Container > div > div.Twilio-SideNav-default > button > div.Twilio-Side-Link-IconContainer > div > svg {
-	  display: none;
-  }*/
 
-  .Twilio-SideNav-Container > div > div.Twilio-SideNav-default > button:nth-child(2) > div.Twilio-Side-Link-IconContainer > div > svg,
+  /*.Twilio-SideNav-Container > div > div.Twilio-SideNav-default > button:nth-child(2) > div.Twilio-Side-Link-IconContainer > div > svg,
   .Twilio-SideNav-Container > div > div.Twilio-SideNav-default > button:nth-child(3) > div.Twilio-Side-Link-IconContainer > div > svg,
   .Twilio-SideNav-Container > div > div.Twilio-SideNav-default > button:nth-child(4) > div.Twilio-Side-Link-IconContainer > div > svg {
     display: none;
@@ -248,5 +251,5 @@ injectGlobal`
   .Twilio-SideNav-Container > div > div.Twilio-SideNav-default > button:nth-child(4) > div.Twilio-Side-Link-IconContainer > div::before {
     content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4.08325 10.5003C4.08325 10.1782 4.34442 9.91699 4.66659 9.91699H12.2499C12.5721 9.91699 12.8333 10.1782 12.8333 10.5003C12.8333 10.8225 12.5721 11.0837 12.2499 11.0837H4.66659C4.34442 11.0837 4.08325 10.8225 4.08325 10.5003Z' fill='%23AEB2C1'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1.16675 10.5003C1.16675 10.1782 1.42792 9.91699 1.75008 9.91699H1.75591C2.07808 9.91699 2.33925 10.1782 2.33925 10.5003C2.33925 10.8225 2.07808 11.0837 1.75591 11.0837H1.75008C1.42792 11.0837 1.16675 10.8225 1.16675 10.5003Z' fill='%23AEB2C1'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4.08325 7.00033C4.08325 6.67816 4.34442 6.41699 4.66659 6.41699H12.2499C12.5721 6.41699 12.8333 6.67816 12.8333 7.00033C12.8333 7.32249 12.5721 7.58366 12.2499 7.58366H4.66659C4.34442 7.58366 4.08325 7.32249 4.08325 7.00033Z' fill='%23AEB2C1'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1.16675 7.00033C1.16675 6.67816 1.42792 6.41699 1.75008 6.41699H1.75591C2.07808 6.41699 2.33925 6.67816 2.33925 7.00033C2.33925 7.32249 2.07808 7.58366 1.75591 7.58366H1.75008C1.42792 7.58366 1.16675 7.32249 1.16675 7.00033Z' fill='%23AEB2C1'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4.08325 3.50033C4.08325 3.17816 4.34442 2.91699 4.66659 2.91699H12.2499C12.5721 2.91699 12.8333 3.17816 12.8333 3.50033C12.8333 3.82249 12.5721 4.08366 12.2499 4.08366H4.66659C4.34442 4.08366 4.08325 3.82249 4.08325 3.50033Z' fill='%23AEB2C1'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1.16675 3.50033C1.16675 3.17816 1.42792 2.91699 1.75008 2.91699H1.75591C2.07808 2.91699 2.33925 3.17816 2.33925 3.50033C2.33925 3.82249 2.07808 4.08366 1.75591 4.08366H1.75008C1.42792 4.08366 1.16675 3.82249 1.16675 3.50033Z' fill='%23AEB2C1'/%3E%3C/svg%3E");
 	  width: 44px;
-  }
+  }*/
 `;
