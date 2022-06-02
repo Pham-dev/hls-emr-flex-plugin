@@ -1,6 +1,8 @@
+import { fetchWithTimeout, getBasePath } from ".";
+
 export const getClientId = (body) =>
   fetchWithTimeout(
-    `https://${process.env.REACT_APP_BACKEND_URL}/register-ehr-client`,
+    `${getBasePath()}/register-ehr-client`,
     { method: "POST", body: new URLSearchParams(body) },
     10000
   )
@@ -9,7 +11,7 @@ export const getClientId = (body) =>
 
 export const getAccessTokenInfo = (client_id, Token) =>
   fetchWithTimeout(
-    `https://${process.env.REACT_APP_BACKEND_URL}/ehr-auth`,
+    `${getBasePath()}/ehr-auth`,
     {
       method: "POST",
       body: new URLSearchParams({ client_id, Token }),
@@ -19,7 +21,7 @@ export const getAccessTokenInfo = (client_id, Token) =>
 
 export const getPatientInfo = (access_token, first_name, last_name, Token) =>
   fetchWithTimeout(
-    `https://${process.env.REACT_APP_BACKEND_URL}/patient`,
+    `${getBasePath()}/patient`,
     {
       method: "POST",
       body: new URLSearchParams({

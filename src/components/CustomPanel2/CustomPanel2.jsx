@@ -28,7 +28,6 @@ const hasAssignedTask = (tasks) => {
 
 // It is recommended to keep components stateless and use redux for managing states
 const CustomPanel2 = (props) => {
-  console.log("PROCESS.ENV", process.env);
   useEffect(() => {
     if (props.task) {
       try {
@@ -91,7 +90,8 @@ const CustomPanel2 = (props) => {
   const workerSkills = props.flexInfo.skills;
   const showTelehealth =
     props.manager.store.getState()["hls-emr"].videoButton.shouldShowTelehealth;
-  const shouldShowTelehealth = process.env.REACT_APP_TELEHEALTH_URL && showTelehealth ? true : false;
+  const shouldShowTelehealth =
+    process.env.REACT_APP_TELEHEALTH_URL && showTelehealth ? true : false;
   if (
     props &&
     props.tasks.size &&
@@ -143,10 +143,11 @@ const CustomPanel2 = (props) => {
                 pendingRequest={props.isFhirRequestPending}
                 skill={EDUCATION}
               />
-              
             </div>
             <div className="flex-row">
-              {shouldShowTelehealth && <TelehealthPane nurseName={props.flexInfo.full_name} />}
+              {shouldShowTelehealth && (
+                <TelehealthPane nurseName={props.flexInfo.full_name} />
+              )}
               <AppointmentSchedulingPane skill={EDUCATION} />
             </div>
           </div>
