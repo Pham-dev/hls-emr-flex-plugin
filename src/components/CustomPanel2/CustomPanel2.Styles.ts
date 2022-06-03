@@ -1,4 +1,4 @@
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
 export const CustomPanel2Styles = styled('div')
   `
@@ -7,6 +7,7 @@ export const CustomPanel2Styles = styled('div')
     padding: 12px;
     font-size: 12px;
     width: 1049px;
+    font-family: 'Inter', sans-serif!important;
 
     .scheduler-panes {}
     

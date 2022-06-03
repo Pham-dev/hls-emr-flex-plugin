@@ -1,7 +1,10 @@
 import { VERSION } from '@twilio/flex-ui';
 import { FlexPlugin } from 'flex-plugin';
+import './GlobalStyles.js';
+
 import reducers, { namespace } from './states';
 import { CustomTheme } from './CustomTheme';
+
 import { setUpActions, setUpComponents, setUpNotifications } from './helpers';
 
 const PLUGIN_NAME = 'HlsEmrPlugin';
@@ -32,11 +35,15 @@ export default class HlsEmrPlugin extends FlexPlugin {
    * @param manager { import('@twilio/flex-ui').Manager }
    */
   async init(flex, manager) {
+    //loadCSS('https://almond-penguin-7632.twil.io/assets/theme.css');
+    // loadCSS('/theme.css');
+  
     // console.log(manager.store.getState());
     this.registerReducers(manager);
     const flexInfo = getFlexObject(manager.workerClient);
+    
     const configuration = {
-      colorTheme: CustomTheme
+      colorTheme: CustomTheme,
     };
     flex.MainHeader.defaultProps.logoUrl = "https://hls-site-4115-dev.twil.io/owlhealth/images/logoOwlHealth.png"
     manager.updateConfig(configuration);
