@@ -1,5 +1,5 @@
+import { getBasePath } from "../../../../helpers";
 import React, { useEffect, useState } from "react";
-import PaneHeader from "../PaneHeader/PaneHeader";
 import { TelehealthPaneStyles } from "./TelehealthPane.Styles";
 
 interface TelehealthPaneProps {
@@ -12,7 +12,7 @@ const TelehealthPane = ({ nurseName }: TelehealthPaneProps) => {
   useEffect(() => {
     const fetchToken = async () => {
       await fetch(
-        `https://${process.env.REACT_APP_TELEHEALTH_URL}/visit/token`,
+        `${getBasePath()}/visit/token`,
         {
           method: "post",
           headers: {
