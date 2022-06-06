@@ -36,6 +36,13 @@ const CustomPanel2 = (props) => {
         //The task must have an associated name!
         if (!name) throw new Error();
 
+        //TODO: When a SMS is in Flex queue, we do not attempt to retreive FHIR info. Currently, bypassing this feature.
+        const hasNumber = /\d/;
+        if (hasNumber.test(name)) {
+          props.fetchingFhirDataFailure();
+          return;
+        }
+
         const names = name.split(" ");
         const first_name = names[0];
         const last_name = names[names.length - 1];

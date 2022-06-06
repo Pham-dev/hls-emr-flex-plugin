@@ -27,6 +27,10 @@ const PatientInformationPane = ({
   }, [patientInfo]);
 
   const email = useMemo(() => {
+    const hasNumber = /\d/;
+    if (hasNumber.test(name)) {
+      return "MaryAnnDoe@gmail.com";
+    }
     const names = name.split(" ");
     return names.join("").concat("@gmail.com");
   }, [name]);
