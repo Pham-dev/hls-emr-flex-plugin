@@ -2,6 +2,7 @@
 const JWEValidator = require("twilio-flex-token-validator").functionValidator;
 const fetch = require("node-fetch");
 const Headers = require("node-fetch").Headers;
+const parsePhoneNumber = require("awesome-phonenumber").parsePhoneNumber;
 
 const defaultPatient = {
   id: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
@@ -36,42 +37,97 @@ exports.handler = JWEValidator(async function (context, event, callback) {
 
   try {
     const access_token = event.access_token;
-    const first_name = event.first_name;
-    const last_name = event.last_name;
 
-    //validation
-    if (!last_name || !first_name || !access_token) {
-      response
-        .setStatusCode(400)
-        .setBody("first_name, last_name, or access_token missing.");
+    if (!event.cmd) {
+      response.setStatusCode(400);
+      response.setBody("No cmd included.");
       return callback(null, response);
     }
 
-    await fetch(
-      `http://${context.REACT_APP_NGROK_URL}/apis/default/fhir/Patient`,
-      {
-        headers: new Headers({ Authorization: `Bearer ${access_token}` }),
+    if (event.cmd === "name") {
+      const first_name = event.first_name;
+      const last_name = event.last_name;
+
+      //validation
+      if (!last_name || !first_name || !access_token) {
+        response
+          .setStatusCode(400)
+          .setBody("first_name, last_name, or access_token missing.");
+        return callback(null, response);
       }
-    )
-      .then((resp) => resp.json())
-      .then((data) => {
-        let patient = null;
-        if (data.total === 0) {
-          patient = defaultPatient;
-        } else if (data.total === 1) {
-          patient = data.entry[0].resource;
-        } else {
-          // multiple match on given OR famiy, so filter
-          const matches = data.entry.filter((e) => {
-            return (
-              e.resource.name[0].family === last_name &&
-              e.resource.name[0].given.includes(first_name)
-            );
-          });
-          patient = matches.length === 0 ? defaultPatient : matches[0].resource;
+
+      await fetch(
+        `http://${context.REACT_APP_NGROK_URL}/apis/default/fhir/Patient`,
+        {
+          headers: new Headers({ Authorization: `Bearer ${access_token}` }),
         }
-        response.setBody(patient);
-      });
+      )
+        .then((resp) => resp.json())
+        .then((data) => {
+          let patient = null;
+          if (data.total === 0) {
+            patient = defaultPatient;
+          } else if (data.total === 1) {
+            patient = data.entry[0].resource;
+          } else {
+            // multiple match on given OR famiy, so filter
+            const matches = data.entry.filter((e) => {
+              return (
+                e.resource.name[0].family === last_name &&
+                e.resource.name[0].given.includes(first_name)
+              );
+            });
+            patient =
+              matches.length === 0 ? defaultPatient : matches[0].resource;
+          }
+          response.setBody(patient);
+        });
+    } else if (event.cmd === "phone") {
+      if (!event.phone || !access_token) {
+        response.setStatusCode(400);
+        response.setBody("phone or access token was not included.");
+        return callback(null, response);
+      }
+
+      const searchPhone = parsePhoneNumber(event.phone, "US");
+      console.log(searchPhone);
+      if (!searchPhone.isValid()) {
+        response.setStatusCode(400);
+        response.setBody("phone number provided is not valid");
+        return callback(null, response);
+      }
+
+      await fetch(
+        `http://${context.REACT_APP_NGROK_URL}/apis/default/fhir/Patient`,
+        {
+          headers: new Headers({ Authorization: `Bearer ${access_token}` }),
+        }
+      )
+        .then((resp) => resp.json())
+        .then((data) => {
+          let patient = null;
+          if (data.total === 0) {
+            patient = defaultPatient;
+          } else if (data.total === 1) {
+            patient = data.entry[0].resource;
+          } else {
+            // multiple match on given OR famiy, so filter
+            const matches = data.entry.filter(
+              (e) =>
+                e.resource.telecom.filter((t) => {
+                  if (!!t.value) {
+                    const emrPhone = parsePhoneNumber(t.value, "US");
+                    return emrPhone.getNumber() === searchPhone.getNumber();
+                  }
+                  return false;
+                }).length > 0
+            );
+            patient =
+              matches.length === 0 ? defaultPatient : matches[0].resource;
+          }
+          response.setBody(patient);
+        });
+    }
 
     return callback(null, response);
   } catch (err) {

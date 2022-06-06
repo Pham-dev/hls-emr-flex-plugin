@@ -1,6 +1,6 @@
 {
   "name": "hls-emr",
-  "version": "4.0.0",
+  "version": "1.0.5",
   "private": true,
   "scripts": {
     "postinstall": "flex-plugin pre-script-check"
@@ -16,6 +16,7 @@
     "@types/node": "17.0.8",
     "@types/react": "17.0.38",
     "@types/react-dom": "17.0.11",
+    "awesome-phonenumber": "3.0.2",
     "dotenv-webpack": "7.1.0",
     "flex-plugin": "^4.3.4",
     "flex-plugin-scripts": "4.2.2",

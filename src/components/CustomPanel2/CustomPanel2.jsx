@@ -16,7 +16,12 @@ import { withTaskContext } from "@twilio/flex-ui";
 import NoTasksPanel2 from "../NoTasksPanel2/NoTasksPanel2";
 import PatientInteractionPane from "./Panes/PatientInteractionPane/PatientInteractionPane";
 import PreventativeCarePane from "./Panes/PreventativeCarePane/PreventativeCarePane";
-import { getAccessTokenInfo, getClientId, getPatientInfo } from "../../helpers";
+import {
+  getAccessTokenInfo,
+  getClientId,
+  getPatientInfoByName,
+  getPatientByPhone,
+} from "../../helpers";
 
 const hasAssignedTask = (tasks) => {
   for (let task of tasks) {
@@ -31,14 +36,11 @@ const CustomPanel2 = (props) => {
   useEffect(() => {
     if (props.task) {
       try {
-        const name = props.task.attributes?.name;
+        console.log(props.task);
+        const nameOrPhone = props.task.attributes?.name;
 
         //The task must have an associated name!
-        if (!name) throw new Error();
-
-        const names = name.split(" ");
-        const first_name = names[0];
-        const last_name = names[names.length - 1];
+        if (!nameOrPhone) throw new Error();
 
         props.fetchingFhirData();
 
@@ -61,20 +63,44 @@ const CustomPanel2 = (props) => {
 
             if (!access_token_info) throw new Error();
 
-            const patientResult = await getPatientInfo(
-              access_token_info.access_token,
-              first_name,
-              last_name,
-              Token
-            );
+            //TODO: Why is this block not getting fired?
+            var hasNumber = /\d/;
+            if (hasNumber.test(nameOrPhone)) {
+              //check if is phone number
 
-            const info = {
-              accessTokenInfo: access_token_info,
-              clientId: client_id,
-              patientInfo: patientResult,
-            };
+              const patientResult = await getPatientByPhone(
+                access_token_info.access_token,
+                nameOrPhone,
+                Token
+              );
 
-            props.fetchingFhirDataSuccess(info);
+              const info = {
+                accessTokenInfo: access_token_info,
+                clientId: client_id,
+                patientInfo: patientResult,
+              };
+
+              props.fetchingFhirDataSuccess(info);
+            } else {
+              const names = nameOrPhone.split(" ");
+              const first_name = names[0];
+              const last_name = names[names.length - 1];
+
+              const patientResult = await getPatientInfoByName(
+                access_token_info.access_token,
+                first_name,
+                last_name,
+                Token
+              );
+
+              const info = {
+                accessTokenInfo: access_token_info,
+                clientId: client_id,
+                patientInfo: patientResult,
+              };
+
+              props.fetchingFhirDataSuccess(info);
+            }
           } catch (err) {
             console.log("FHIR FAILURE, USING DEFAULT");
             props.fetchingFhirDataFailure();
