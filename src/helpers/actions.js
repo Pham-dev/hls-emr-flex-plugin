@@ -5,6 +5,7 @@ import {
   Notifications,
   StateHelper,
 } from "@twilio/flex-ui";
+import { getBasePath } from ".";
 import fetch from "node-fetch";
 
 // Once you publish the chat transfer function, place the returned domain in your version of the plugin.
@@ -48,7 +49,7 @@ export const transferOverride = async (payload, original) => {
   };
 
   // initiate the transfer
-  return fetch(`https://${process.env.REACT_APP_BACKEND_URL}/transfer-chat`, {
+  return fetch(`${getBasePath()}/transfer-chat`, {
     headers: {
       "Content-Type": "application/json",
     },
