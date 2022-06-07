@@ -30,6 +30,9 @@ COPY . /hls-deploy
 WORKDIR /hls-deploy/plugin-backend
 RUN npm install
 RUN echo "REACT_APP_NGROK_URL=${REACT_APP_NGROK_URL}" > .env
+RUN echo "gfAccountKey=6735d87e-1cd1-4b7b-ab00-719ff6f05507" >> .env
+RUN echo "gfAccountSecret=1Eu7MkApmwjvKdSERDLJpnLCVb8BMgaMOaaY1krcH30=" >> .env
+RUN echo "gfApiUrl=https://api.geofluent.com/Translation/v3/" >> .env
 RUN echo "REACT_APP_BACKEND_URL=$(eval twilio serverless:deploy --override-existing-project --runtime node14 -o=json | grep -o '"domain": "[^"]*' | grep -o '[^"]*$')" >> .env
 RUN cp .env /hls-deploy
 WORKDIR /hls-deploy
