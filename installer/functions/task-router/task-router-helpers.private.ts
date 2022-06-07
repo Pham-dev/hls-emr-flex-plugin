@@ -9,6 +9,7 @@ export const SCHEDULERS = "Schedulers";
 export const EDUCATORS = "Educators";
 export const SCHEDULING = "Scheduling";
 export const EDUCATION = "Education";
+export const SPANISH = "language*esxl";
 export const ASSIGN_TO_ANYONE = "Assign to Anyone";
 export const INTAKE_BY_SCHEDULERS = "Intake by Schedulers";
 export const TRANSFER_TO_NURSE_EDUCATOR = "Transfer to Nurse Educator";
@@ -141,7 +142,7 @@ export function getAllWorkers(client: TwilioClient, workspaceSid: string): Promi
 export function giveAllSkillsToWorker(client: TwilioClient, workspaceSid: string, workerSid: string, attributes: string): Promise<WorkerInstance> {
   const jsonAttributes = JSON.parse(attributes);
   jsonAttributes.routing = {
-    skills: [SCHEDULING, EDUCATION],
+    skills: [SCHEDULING, EDUCATION, SPANISH],
     levels: {},
   }
   const worker = client.taskrouter.workspaces(workspaceSid)

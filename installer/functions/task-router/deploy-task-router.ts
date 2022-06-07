@@ -80,7 +80,7 @@ export const handler: ServerlessFunctionSignature = async function(
     }
     const adminWorker = workers[0];
     const w = await giveAllSkillsToWorker(client, workspaceSid, adminWorker.sid, adminWorker.attributes);
-    console.log("Admin Worker given 'Education' and 'Scheduling' skills.  Admin's new attributes: ", w.attributes);
+    console.log("Admin Worker given 'Education', 'language*es-xl', and 'Scheduling' skills.  Admin's new attributes: ", w.attributes);
     
     response.setBody({Message: 'HLS Flex Plugin Account Setup completed'});
     response.setStatusCode(200);
