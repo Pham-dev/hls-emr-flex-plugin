@@ -3,20 +3,35 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import React, {useEffect, useState} from "react";
 import { Manager } from "@twilio/flex-ui";
+import { getBasePath } from "../../../../helpers";
 
 interface CareManagementProps {
   classes?: any;
   manager: Manager;
 }
-
+interface ITelecom {
+  system: string;
+  value: string;
+  use: string;
+}
 const CareManagementPane = ({ manager }: CareManagementProps) => {
 
-  const [diabetes, setDiabetes] = useState<string>("");
-  const [eatingHabits, setEatingHabits] = useState<string>("");
-  const [exercise, setExercise] = useState<string>("");
+  const [diabetes, setDiabetes] = useState<string|undefined>(undefined);
+  const [eatingHabits, setEatingHabits] = useState<string|undefined>(undefined);
+  const [exercise, setExercise] = useState<string|undefined>(undefined);
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEnrolled, setIsEnrolled] = useState<boolean>(false);
+
+  useEffect(() => {
+    const taskState = manager.store.getState()['hls-emr'].taskState;
+    if (taskState && taskState.patientInfo) {
+      const patientInfo = taskState.patientInfo;
+      const mobileNumber:ITelecom = patientInfo.telecom.find((number: ITelecom) => !!number.value);
+      setPhoneNumber(mobileNumber?.value || "111-222-3333");
+    }
+  }, [manager.store.getState()['hls-emr'].taskState])
+
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
@@ -39,11 +54,11 @@ const CareManagementPane = ({ manager }: CareManagementProps) => {
     setIsLoading(true);
     const body = {
       Token: manager.user.token,
-      textBody: diabetes + eatingHabits + exercise,
+      textBody: [diabetes, eatingHabits, exercise],
       phoneNumber: phoneNumber // Need to get this phoneNumber to send to patient
     }
     event.preventDefault();
-    await fetch(`https://${process.env.REACT_APP_BACKEND_URL!}/send-care-management`, {
+    await fetch(`${getBasePath()}/send-care-management`, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -85,7 +100,7 @@ const CareManagementPane = ({ manager }: CareManagementProps) => {
       setExercise("");
     }
   }
-  const isDisabled = isEnrolled || !(diabetes || exercise || eatingHabits);
+  const isDisabled = !phoneNumber || (isEnrolled || !(diabetes || exercise || eatingHabits));
   const svgColor = isDisabled ? '#AEB2C1' : '#0263E0';
 
   return (

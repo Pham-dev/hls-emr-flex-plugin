@@ -34,9 +34,8 @@ const hasAssignedTask = (tasks) => {
 // It is recommended to keep components stateless and use redux for managing states
 const CustomPanel2 = (props) => {
   useEffect(() => {
-    if (props.task) {
+    if (props.task && props.task.attributes && props.task.attributes.name) {
       try {
-        console.log(props.task);
         const nameOrPhone = props.task.attributes?.name;
 
         //The task must have an associated name!
@@ -63,7 +62,6 @@ const CustomPanel2 = (props) => {
 
             if (!access_token_info) throw new Error();
 
-            //TODO: Why is this block not getting fired?
             var hasNumber = /\d/;
             if (hasNumber.test(nameOrPhone)) {
               //check if is phone number

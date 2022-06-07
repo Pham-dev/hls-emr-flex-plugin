@@ -40,8 +40,8 @@ export const getPatientInfoByName = (
     10000
   ).then((resp) => resp.json());
 
-export const getPatientByPhone = (access_token, phone, Token) =>
-  fetchWithTimeout(
+export const getPatientByPhone = (access_token, phone, Token) => {
+  return fetchWithTimeout(
     `${getBasePath()}/patient`,
     {
       method: "POST",
@@ -53,4 +53,10 @@ export const getPatientByPhone = (access_token, phone, Token) =>
       }),
     },
     10000
-  ).then((resp) => resp.json());
+  )
+    .then((resp) => resp.json())
+    .then((res) => {
+      console.log("HERE2");
+      return res;
+    });
+};

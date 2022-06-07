@@ -27,19 +27,23 @@ const PatientInformationPane = ({
   }, [patientInfo]);
 
   const email = useMemo(() => {
-    try {
-      console.log(name);
-      var hasNumber = /\d/;
-      if (!hasNumber.test(name)) {
-        const names = name.split(" ");
-        return names.join("").concat("@gmail.com");
-      } else {
-        return "maryAnnDoe@gmail.com";
-      }
-    } catch (err) {
-      return "maryAnnDoe@gmail.com";
+    if (patientInfo && patientInfo.name && patientInfo.name.length > 0) {
+      const name = patientInfo.name[0];
+      const lastName = name.family;
+      const firstName = name.given.find((e: string) => !!e);
+      return `${firstName}${lastName}@gmail.com`;
     }
-  }, [name]);
+    return "MaryAnnDoe@gmail.com";
+  }, [patientInfo]);
+
+  /*   const email = useMemo(() => {
+    const hasNumber = /\d/;
+    if (hasNumber.test(name)) {
+      return "MaryAnnDoe@gmail.com";
+    }
+    const names = name.split(" ");
+    return names.join("").concat("@gmail.com");
+  }, [name]); */
 
   return (
     <PatientInformationPaneBodyStyles>
