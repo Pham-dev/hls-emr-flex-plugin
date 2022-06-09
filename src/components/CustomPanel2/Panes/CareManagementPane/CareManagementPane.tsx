@@ -2,7 +2,7 @@ import { CareManagementPaneStyles } from "./CareManagementPane.Styles";
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import React, {useEffect, useState} from "react";
-import { FlexState, Manager } from "@twilio/flex-ui";
+import { Manager } from "@twilio/flex-ui";
 import { getBasePath } from "../../../../helpers";
 import { useSelector } from "react-redux";
 import { mobilePhone as mobilePhoneSelector } from "../../../../states/selectors";
@@ -22,7 +22,7 @@ const CareManagementPane = ({ manager }: CareManagementProps) => {
   const [diabetes, setDiabetes] = useState<string|undefined>(undefined);
   const [eatingHabits, setEatingHabits] = useState<string|undefined>(undefined);
   const [exercise, setExercise] = useState<string|undefined>(undefined);
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string | unknown>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEnrolled, setIsEnrolled] = useState<boolean>(false);
   const mobilePhone = useSelector(mobilePhoneSelector);
