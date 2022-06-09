@@ -74,6 +74,20 @@ export const transferOverride = async (payload, original) => {
   });
 };
 
+export const startOutboundCall = async (payload, original) => {
+  const manager = Manager.getInstance();
+  console.log("manager", manager);
+  console.log("PAYLOAD", payload);
+  console.log("ORIGINAL", original);
+  const newPayload = payload;
+ 
+  delete newPayload.taskAttributes.channelSid;
+  delete newPayload.taskAttributes.conversationSid;
+  newPayload.taskAttributes.channelType = 'voice';
+  console.log("newPayload", newPayload);
+  original(newPayload);
+}
+
 /**
  * This replaces Flex's default TransferTask action with our own implementation.
  * The great thing about replacing Flex actions is that you get access to the original action,
@@ -86,4 +100,8 @@ export const setUpActions = () => {
   Actions.replaceAction("TransferTask", (payload, original) =>
     transferOverride(payload, original)
   );
+
+  Actions.replaceAction("StartOutboundCall", (payload, original) => {
+    startOutboundCall(payload, original);
+  });
 };

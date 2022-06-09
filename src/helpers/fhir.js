@@ -56,7 +56,6 @@ export const getPatientByPhone = (access_token, phone, Token) => {
   )
     .then((resp) => resp.json())
     .then((res) => {
-      console.log("HERE2");
       return res;
     });
 };

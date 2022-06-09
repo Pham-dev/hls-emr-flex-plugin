@@ -5,6 +5,7 @@ import CustomPanel2Container from '../components/CustomPanel2/CustomPanel2.Conta
 import VideoButtonContainer from '../components/VideoButton/VideoButton.Container';
 import CustomTask from "../components/CustomTask/CustomTask";
 import {TaskItemIcon} from "../components/icons/TaskItemIcon";
+import CallButton from "../components/CallButton";
 
 /**
  * This appends new content to the Chat Canvas (adds transfer button near end chat button)
@@ -24,6 +25,19 @@ export const setUpComponents = (flex, manager, flexInfo) => {
     initialFirstPanelSize: "440px"
   }
   flex.CRMContainer.Content.replace(<div key="empty-div-component"/>,  { sortOrder: -1 });
+  
+  // CallButton
+  flex.TaskCanvasHeader.Content.add(
+    <CallButton key="callbutton" flex={flex} />,
+    {
+      sortOrder: 1,
+      if: (props) =>
+        props.task &&
+        props.task.taskStatus === 'assigned' &&
+        props.task.taskChannelUniqueName !== 'voice' &&
+        props.task.attributes,
+    },
+  )
 
   // video Button
   flex.TaskCanvasHeader.Content.add(<VideoButtonContainer key="video-button"/>, {
