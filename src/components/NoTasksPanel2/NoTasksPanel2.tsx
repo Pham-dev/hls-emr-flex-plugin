@@ -1,10 +1,10 @@
 import { NoTasksPanel2Styles } from "./NoTasksPanel2.Styles";
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import { black, twilioRed } from "../../CustomTheme";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     secondary: {
       main: black

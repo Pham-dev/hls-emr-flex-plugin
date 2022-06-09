@@ -13,6 +13,10 @@ exports.handler = JWEValidator(async function(context, event, callback) {
     'Content-Type, Authorization, Content-Length, X-Requested-With, User-Agent',
   );
   response.setStatusCode(200);
+  const phoneNumbers = await client.incomingPhoneNumbers
+    .list()
+    .then(incomingPhoneNumbers => incomingPhoneNumbers);
+  const flexNumber = phoneNumbers[0].phoneNumber;
   const { textBody, phoneNumber } = event;
   try {
     const text = "You are enrolled in the following programs: ";
@@ -26,7 +30,7 @@ exports.handler = JWEValidator(async function(context, event, callback) {
     await client.messages
       .create({
         body: text + programs.join(", "), 
-        from: context.ADMINISTRATOR_PHONE,
+        from: flexNumber,
         to: pn.getNumber(),
       })
       .then(message => {

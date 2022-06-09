@@ -1,43 +1,59 @@
 import * as React from "react";
 import { withTaskContext, IconButton, styled, Actions } from "@twilio/flex-ui";
+import ThreeWayCallIcon from "../icons/ThreeWayCallIcon";
+import { useSelector } from "react-redux";
+import { mobilePhone as patientPhoneSelector } from "../../states/selectors";
+import CallIcon from '@material-ui/icons/Call';
 
-import Call from "@material-ui/icons/Call";
-
-const Button = styled(IconButton)`
-  background-color: #4caf50;
-  color: white;
-  padding: 2px;
-  margin-right: 2px;
-  margin-left: 8px;
+const Button = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  gap: 6px;
+  width: 38px;
+  height: 28px;
+  background: ${props => props.pressed ? '#4B5671' : '#E1E2E9'};
+  border-radius: 39px;
+	cursor: pointer;
+	border: none;
+	margin-top: 14px;
+	margin-right: 6px;
   &:hover,
-  &:active {
-    background-color: rgba(0, 0, 0, 0.2);
-    background-blend-mode: color;
-  }
+  &:active,
   &:focus {
-    background-color: #4caf50;
-    border: 1px solid;
-    box-shadow: 0 0 0 2px;
+    background-color: #4B5671; //rgba(0, 0, 0, 0.2);
+    background-blend-mode: color;
+    svg {
+      fill: white;
+    }
+  }
+  svg {
+    fill: #626B83
   }
 `;
 
-export class CallButton extends React.Component {
-  render() {
-    const { attributes } = this.props.task;
-    console.log("HEllo props", this.props);
+export const CallButton = (props) => {
+    const { attributes } = props.task;
+    const patientNumber = useSelector(patientPhoneSelector);
+    console.log("HELLO PROPS", props);
     return (
-      <Button
-        icon={<Call />}
-        onClick={() => {
-          console.log("starting outbound call with attributes", attributes);
-          Actions.invokeAction("StartOutboundCall", {
-            destination: attributes.from,
-            taskAttributes: { ...attributes },
-          });
-        }}
-      />
+      <div>
+        <Button
+          onClick={() => {
+            console.log("starting outbound call with attributes", attributes, patientNumber);
+            Actions.invokeAction("StartOutboundCall", {
+              // Payload below
+              destination: patientNumber,
+              taskAttributes: { ...attributes },
+            });
+          }}
+        >
+          <CallIcon/>
+        </Button>
+      </div>
     );
-  }
 }
 
 export default withTaskContext(CallButton);
