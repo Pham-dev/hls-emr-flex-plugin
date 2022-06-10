@@ -72,3 +72,5 @@ build/
 
 # plugin-backend
 .twiliodeployinfo
+
+package-lock.json

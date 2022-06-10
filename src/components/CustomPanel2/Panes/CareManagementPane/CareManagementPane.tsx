@@ -4,34 +4,35 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import React, {useEffect, useState} from "react";
 import { Manager } from "@twilio/flex-ui";
 import { getBasePath } from "../../../../helpers";
+import { useSelector } from "react-redux";
+import { mobilePhone as mobilePhoneSelector } from "../../../../states/selectors";
 
 interface CareManagementProps {
   classes?: any;
   manager: Manager;
 }
-interface ITelecom {
+export interface ITelecom {
   system: string;
   value: string;
   use: string;
 }
+
 const CareManagementPane = ({ manager }: CareManagementProps) => {
 
   const [diabetes, setDiabetes] = useState<string|undefined>(undefined);
   const [eatingHabits, setEatingHabits] = useState<string|undefined>(undefined);
   const [exercise, setExercise] = useState<string|undefined>(undefined);
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string | unknown>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEnrolled, setIsEnrolled] = useState<boolean>(false);
-
+  const mobilePhone = useSelector(mobilePhoneSelector);
+  
   useEffect(() => {
-    const taskState = manager.store.getState()['hls-emr'].taskState;
-    if (taskState && taskState.patientInfo) {
-      const patientInfo = taskState.patientInfo;
-      const mobileNumber:ITelecom = patientInfo.telecom.find((number: ITelecom) => !!number.value);
-      setPhoneNumber(mobileNumber?.value || "111-222-3333");
+    console.log("Care STUFF", mobilePhone);
+    if (mobilePhone) {
+      setPhoneNumber(mobilePhone);
     }
-  }, [manager.store.getState()['hls-emr'].taskState])
-
+  }, [mobilePhone]);
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;

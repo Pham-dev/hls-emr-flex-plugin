@@ -12,7 +12,7 @@ const TelehealthPane = ({ nurseName }: TelehealthPaneProps) => {
   useEffect(() => {
     const fetchToken = async () => {
       await fetch(
-        `${getBasePath()}/visit/token`,
+        `https://${process.env.REACT_APP_TELEHEALTH_URL}/visit/token`,
         {
           method: "post",
           headers: {
