@@ -18,6 +18,11 @@ ARG REACT_APP_NGROK_URL=url
 RUN twilio plugins:install @twilio-labs/plugin-serverless
 RUN twilio plugins:install @twilio-labs/plugin-flex
 
+RUN curl -X POST 'https://flex-api.twilio.com/v1/Configuration' \
+    -u ${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN} \
+    -H 'Content-Type: application/json' \
+    -d "{\"account_sid\":\"${TWILIO_ACCOUNT_SID}\",\"ui_dependencies\":{\"react\":\"~17.0.2\",\"react-dom\":\"~17.0.2\"}}"
+
 # Copy directory over to /hls-deploy folder
 WORKDIR /hls-deploy
 COPY . /hls-deploy
