@@ -1,9 +1,9 @@
-import { VERSION } from '@twilio/flex-ui';
+import {Manager, VERSION} from '@twilio/flex-ui';
 import { FlexPlugin } from '@twilio/flex-plugin';
 import './GlobalStyles.js';
 
 import reducers, { namespace } from './states';
-import { CustomTheme } from './CustomTheme';
+import {componentThemeOverrides, CustomTheme} from './CustomTheme';
 
 import { setUpActions, setUpComponents, setUpNotifications } from './helpers';
 
@@ -37,19 +37,22 @@ export default class HlsEmrPlugin extends FlexPlugin {
   async init(flex, manager) {
     //loadCSS('https://almond-penguin-7632.twil.io/assets/theme.css');
     // loadCSS('/theme.css');
-  
+    
     // console.log(manager.store.getState());
     this.registerReducers(manager);
     const flexInfo = getFlexObject(manager.workerClient);
     
     const configuration = {
       colorTheme: CustomTheme,
+      theme: {
+        componentThemeOverrides
+      }
     };
     flex.MainHeader.defaultProps.logoUrl = "https://hls-site-4115-dev.twil.io/owlhealth/images/logoOwlHealth.png"
     manager.updateConfig(configuration);
     manager.strings.NoTasksTitle = "Task Status";
     manager.strings.NoTasks = "No Patient Tasks";
-
+    
     //console.log("overall state", manager.store.getState());
     setUpComponents(flex, manager, flexInfo);
     setUpNotifications();
@@ -59,7 +62,7 @@ export default class HlsEmrPlugin extends FlexPlugin {
   /**
    * Registers the plugin reducers
    *
-   * @param manager { Flex.Manager }
+   * @param manager {ManagerForOutside}
    */
   registerReducers(manager) {
     if (!manager.store.addReducer) {
