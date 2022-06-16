@@ -32,6 +32,10 @@ injectGlobal`
 	  border-radius: 8px;
   }
 
+  .Twilio-TaskListBaseItem .Twilio-Badge-OuterCircle {
+	  z-index: 0;
+  }
+
   .Twilio-TaskListBaseItem:hover {
     background: #3C4760;
 	  color: white;
@@ -79,6 +83,7 @@ injectGlobal`
     padding: 6px 10px;
 		gap: 6px;
 		background: #FF0000;
+	  color: white;
 		border-radius: 39px;
 		height: 28px;
 		width: 84px;
@@ -168,7 +173,7 @@ injectGlobal`
   .Twilio-MessageInputV2-default > .Twilio-MessageInputActions > .Twilio-MessageInputActions-end > button{
     height: 44px !important;
     width: 44px !important;
-	  border-radius: 50%;
+	  border-radius: 50% !important;
   }
 
   .Twilio-MessageInput-SendButton:disabled,
@@ -233,6 +238,7 @@ injectGlobal`
     width: 24px;
     height: 24px;
     border-radius: 8px;
+	  border: none;
   }
   .Twilio-WorkerDirectory-ButtonContainer .Twilio-IconButton:hover {
     background: #0263E0;
