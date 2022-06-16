@@ -84,7 +84,9 @@ injectGlobal`
 		gap: 6px;
 		background: #FF0000;
 	  color: white;
-		border-radius: 39px;
+    font-family: 'Inter', sans-serif;
+		font-size: 13px;
+    border-radius: 39px;
 		height: 28px;
 		width: 84px;
   }
@@ -173,6 +175,7 @@ injectGlobal`
   .Twilio-MessageInputV2-default > .Twilio-MessageInputActions > .Twilio-MessageInputActions-end > button{
     height: 44px !important;
     width: 44px !important;
+    min-width: 44px !important;
 	  border-radius: 50% !important;
   }
 
@@ -278,6 +281,10 @@ injectGlobal`
     content: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1.66675 4.99967C1.66675 4.76956 1.8533 4.58301 2.08341 4.58301H7.91675C8.14687 4.58301 8.33341 4.76956 8.33341 4.99967C8.33341 5.22979 8.14687 5.41634 7.91675 5.41634H2.08341C1.8533 5.41634 1.66675 5.22979 1.66675 4.99967Z' fill='white'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4.70529 1.78903C4.86801 1.62631 5.13183 1.62631 5.29455 1.78903L8.21121 4.7057C8.37393 4.86842 8.37393 5.13223 8.21121 5.29495L5.29455 8.21162C5.13183 8.37434 4.86801 8.37434 4.70529 8.21162C4.54257 8.0489 4.54257 7.78508 4.70529 7.62236L7.32733 5.00033L4.70529 2.37829C4.54257 2.21557 4.54257 1.95175 4.70529 1.78903Z' fill='white'/%3E%3C/svg%3E");
     width: 22px;
     height: 22px;
+  }
+
+  .Twilio-WorkerDirectory-ButtonContainer > .Twilio-IconButton {
+	  margin-right: 4px;
   }
   
   /*AGENT DESKTOP VIEW*/
