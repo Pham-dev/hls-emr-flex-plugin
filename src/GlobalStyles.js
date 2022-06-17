@@ -89,6 +89,7 @@ injectGlobal`
     border-radius: 39px;
 		height: 28px;
 		width: 84px;
+    text-transform: capitalize;
   }
 
   .Twilio-InlineMessage {
