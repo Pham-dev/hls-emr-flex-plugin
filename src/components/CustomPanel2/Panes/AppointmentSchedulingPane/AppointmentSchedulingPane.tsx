@@ -11,7 +11,7 @@ const AppointmentSchedulingPane = ({ skill }: AppointmentSchedulingPaneProps) =>
     <AppointmentSchedulingPaneStyles> 
       <p className="title">{skill === EDUCATION ? "Care Information" : "Appointment Scheduling"}</p>
       <div className="open-emr">
-          <iframe className="open-emr" src="http://localhost/interface/main/main_screen.php?auth=login&site=default" allow="fullscreen"/>      </div>
+          <iframe className="open-emr" src={`http://${process.env.REACT_APP_NGROK_URL}/interface/main/main_screen.php?auth=login&site=default`} allow="fullscreen"/>      </div>
     </AppointmentSchedulingPaneStyles>
 
   );
