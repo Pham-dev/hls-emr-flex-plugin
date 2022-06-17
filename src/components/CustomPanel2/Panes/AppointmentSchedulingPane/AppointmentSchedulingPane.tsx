@@ -6,17 +6,37 @@ interface AppointmentSchedulingPaneProps {
   skill: string;
 }
 
-const AppointmentSchedulingPane = ({ skill }: AppointmentSchedulingPaneProps) => {
-  return (
-    <AppointmentSchedulingPaneStyles> 
-      <p className="title">{skill === EDUCATION ? "Care Information" : "Appointment Scheduling"}</p>
-      <div className="open-emr">
-          <iframe className="open-emr" src={`http://${process.env.REACT_APP_NGROK_URL}/interface/main/main_screen.php?auth=login&site=default`} allow="fullscreen"/>      </div>
-    </AppointmentSchedulingPaneStyles>
-
-  );
+function getNgrokBasePath() {
+  if (process.env.REACT_APP_NGROK_URL) {
+    if (process.env.REACT_APP_NGROK_URL.includes("localhost")) {
+      return `http://${process.env.REACT_APP_NGROK_URL}`;
+    } else {
+      return `https://${process.env.REACT_APP_NGROK_URL}`;
+    }
+  } else {
+    console.error("No REACT_APP_NGROK_URL set");
+  }
 }
 
-AppointmentSchedulingPane.displayName = 'OpenEMR';
+const AppointmentSchedulingPane = ({
+  skill,
+}: AppointmentSchedulingPaneProps) => {
+  return (
+    <AppointmentSchedulingPaneStyles>
+      <p className="title">
+        {skill === EDUCATION ? "Care Information" : "Appointment Scheduling"}
+      </p>
+      <div className="open-emr">
+        <iframe
+          className="open-emr"
+          src={`${getNgrokBasePath()}/interface/main/main_screen.php?auth=login&site=default`}
+          allow="fullscreen"
+        />{" "}
+      </div>
+    </AppointmentSchedulingPaneStyles>
+  );
+};
+
+AppointmentSchedulingPane.displayName = "OpenEMR";
 
 export default AppointmentSchedulingPane;
