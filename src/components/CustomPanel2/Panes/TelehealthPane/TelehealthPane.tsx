@@ -36,8 +36,6 @@ const TelehealthPane = ({ nurseName }: TelehealthPaneProps) => {
     <TelehealthPaneStyles>
       {passcode && (
         <>
-          {/* <PaneHeader text="Telehealth"/>*/}
-          <p className="title">Telehealth</p>
           <iframe
             className="telehealth"
             allow="camera; microphone"

@@ -156,7 +156,7 @@ const CustomPanel2 = (props) => {
                 skill={EDUCATION}
               />
             </div>
-            <div className="flex-row">
+            <div className="flex-row second-row">
               {shouldShowTelehealth && (
                 <TelehealthPane nurseName={props.flexInfo.full_name} />
               )}
