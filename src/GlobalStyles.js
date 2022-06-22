@@ -21,12 +21,30 @@ injectGlobal`
   .Twilio-AgentDesktopView-default > div > div:nth-child(1) > div > div.Twilio-AgentDesktopView\.Panel1-default > div.Twilio-Splitter.Twilio-Splitter-Vertical{
     overflow: visible!important;
   }
+  
+  /*TASK LIST & TASK ITEM*/
 
   .Twilio-TaskListBaseItem {
     margin: 1px 4px;
     font-family: 'Inter', sans-serif;
     font-style: normal;
+	  //background: #F2F2F5;
+	  border-radius: 8px;
   }
+
+  .Twilio-TaskListBaseItem .Twilio-Badge-OuterCircle {
+	  z-index: 0;
+  }
+
+  .Twilio-TaskListBaseItem:hover {
+    background: #3C4760;
+	  color: white;
+  }
+  
+  .Twilio-TaskListBaseItem::before {
+	  content: none;
+  }
+  
   .Twilio-TaskListBaseItem-Content {
     /* border-bottom: 1px solid #E1E3E9;*/
   }
@@ -40,7 +58,8 @@ injectGlobal`
   .Twilio-TaskListBaseItem-IconAreaContainer {
     background: none!important;
   }
-  .Twilio-TaskListBaseItem-IconAreaContainer svg {
+  .Twilio-TaskListBaseItem-IconAreaContainer svg,
+  .Twilio-TaskListBaseItem-IconAreaContainer > button {
     display: none;
   }
 
@@ -49,6 +68,8 @@ injectGlobal`
     width: 40px;
     height: 40px;
   }
+  
+  /*CHAT*/
 
   .Twilio-WelcomeMessage {
     color:#606B85 !important;
@@ -56,6 +77,19 @@ injectGlobal`
     font-family: 'Inter', sans-serif;
     margin-top: 8px !important;
     margin-bottom: 8px !important;
+  }
+
+  .Twilio-TaskCanvas-default > .Twilio-TaskCanvasHeader > .Twilio-TaskCanvasHeader-default > .Twilio-TaskCanvasHeader-EndButton {
+    padding: 6px 10px;
+		gap: 6px;
+		background: #FF0000;
+	  color: white;
+    font-family: 'Inter', sans-serif;
+		font-size: 13px;
+    border-radius: 39px;
+		height: 28px;
+		width: 84px;
+    text-transform: capitalize;
   }
 
   .Twilio-InlineMessage {
@@ -116,6 +150,10 @@ injectGlobal`
     font-size: 14px !important;
   }
 
+  .Twilio-MessageInputV2 > .Twilio-MessageInputV2-default > div {
+	  border: none;
+  }
+
   .Twilio-MessageInputArea-TextArea {
     min-height: 44px;
     font-family: 'Inter', sans-serif;
@@ -129,14 +167,35 @@ injectGlobal`
     padding-left: 16px;
   }
 
+  /*for FLEX 1.31*/
   .Twilio-MessageInput-SendButton {
     height: 44px !important;
     width: 44px !important;
   }
+  
+  .Twilio-MessageInputV2-default > .Twilio-MessageInputActions > .Twilio-MessageInputActions-end > button{
+    height: 44px !important;
+    width: 44px !important;
+    min-width: 44px !important;
+	  border-radius: 50% !important;
+  }
 
-  .Twilio-MessageInput-SendButton:disabled {
+  .Twilio-MessageInput-SendButton:disabled,
+  .Twilio-MessageInputV2-default > .Twilio-MessageInputActions > .Twilio-MessageInputActions-end > button:disabled{
     opacity: 1 !important;
   }
+
+  .Twilio-MessageInputV2-default > .Twilio-MessageInputActions > .Twilio-MessageInputActions-end > button > span {
+	  display: none
+  }
+  
+  .Twilio-MessageInputV2-default > .Twilio-MessageInputActions > .Twilio-MessageInputActions-end > button::before {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' class='Twilio-Icon-Content'%3E%3Cpath d='M19.641 4c.164 0 .27.064.317.193.047.13.023.305-.07.528l-7.19 16.77a.761.761 0 01-.237.36.501.501 0 01-.308.114.494.494 0 01-.281-.097.989.989 0 01-.264-.29L8.76 16.92a4.609 4.609 0 00-.73-.905 5.269 5.269 0 00-.904-.747L2.38 12.314c-.27-.175-.396-.372-.378-.588.017-.217.172-.39.465-.519l16.788-7.12c.07-.023.137-.043.202-.06A.701.701 0 0119.64 4zM7.723 14.266c.117.07.238.155.36.255.124.1.25.208.379.325l8.314-8.455-12.902 5.484 3.85 2.39zm4.342 5.818l5.52-12.92-8.332 8.473c.105.117.202.234.29.351.088.117.16.235.22.352l2.302 3.744z' fill='white' stroke='none' stroke-width='1' fill-rule='evenodd'%3E%3C/path%3E%3C/svg%3E");
+	  width: 24px;
+    height: 24px;
+  }
+  
+  /*WORKER DIRECTORY*/
 
   .Twilio-WorkerDirectory-Popup {
     width: 350px;
@@ -159,9 +218,9 @@ injectGlobal`
   }
   .Twilio-WorkerDirectoryTabs input[type=text]{
     background: #F4F4F6;
-    border: 1px solid #E1E3EA;
+    /*border: 1px solid #E1E3EA;
     border-radius: 8px;
-    height: 38px;
+    height: 38px;*/
   }
   .Twilio-WorkerDirectory-Workers, .Twilio-WorkerDirectory-Queues {
     padding: 0 12px;
@@ -183,6 +242,7 @@ injectGlobal`
     width: 24px;
     height: 24px;
     border-radius: 8px;
+	  border: none;
   }
   .Twilio-WorkerDirectory-ButtonContainer .Twilio-IconButton:hover {
     background: #0263E0;
@@ -199,26 +259,36 @@ injectGlobal`
   .Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Transfer .Twilio-Icon-Content {
     display: none;
   }
+  
   .Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Call::before {
     content: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.09992 5.41641C8.00825 5.41641 7.91242 5.38724 7.82075 5.36641C7.63512 5.3255 7.4527 5.27119 7.27492 5.20391C7.08162 5.13359 6.86915 5.13724 6.67838 5.21416C6.48762 5.29108 6.33204 5.43584 6.24159 5.62057L6.14992 5.80807C5.74409 5.58232 5.37116 5.30192 5.04159 4.97474C4.71441 4.64517 4.43401 4.27224 4.20825 3.86641L4.38325 3.74974C4.56799 3.65929 4.71275 3.50371 4.78967 3.31295C4.86659 3.12218 4.87024 2.90971 4.79992 2.71641C4.73376 2.53825 4.67948 2.35591 4.63742 2.17058C4.61659 2.07891 4.59992 1.98308 4.58742 1.88724C4.53682 1.59375 4.3831 1.32797 4.15393 1.13776C3.92476 0.947549 3.63521 0.845412 3.33742 0.849742H2.08742C1.90785 0.848056 1.73002 0.885081 1.56605 0.958296C1.40207 1.03151 1.2558 1.1392 1.13718 1.27403C1.01857 1.40885 0.930393 1.56766 0.878665 1.73962C0.826937 1.91159 0.81287 2.09268 0.83742 2.27057C1.05939 4.01615 1.8566 5.63802 3.10311 6.88001C4.34962 8.12199 5.97438 8.91329 7.72075 9.12891H7.87909C8.18634 9.12936 8.483 9.01663 8.71242 8.81224C8.84424 8.69434 8.94954 8.54982 9.02136 8.38821C9.09319 8.2266 9.12991 8.05159 9.12909 7.87474V6.62474C9.12398 6.33532 9.01859 6.05664 8.83089 5.83627C8.6432 5.6159 8.38484 5.4675 8.09992 5.41641ZM8.30825 7.91641C8.30818 7.97557 8.29551 8.03404 8.27108 8.08792C8.24665 8.1418 8.21103 8.18986 8.16659 8.22891C8.12003 8.26911 8.06559 8.29914 8.00675 8.31707C7.94792 8.33501 7.88598 8.34046 7.82492 8.33308C6.26446 8.13299 4.81502 7.41911 3.70522 6.30403C2.59542 5.18895 1.88842 3.73613 1.69575 2.17474C1.68912 2.11371 1.69493 2.05196 1.71284 1.99324C1.73074 1.93451 1.76037 1.88003 1.79992 1.83308C1.83897 1.78863 1.88703 1.75301 1.94091 1.72858C1.99479 1.70416 2.05326 1.69148 2.11242 1.69141H3.36242C3.45931 1.68925 3.55393 1.72094 3.62998 1.78102C3.70603 1.8411 3.75876 1.92581 3.77909 2.02057C3.79575 2.13446 3.81659 2.24696 3.84159 2.35807C3.88972 2.57772 3.95378 2.79357 4.03325 3.00391L3.44992 3.27474C3.40004 3.29763 3.35518 3.33014 3.3179 3.37041C3.28063 3.41068 3.25167 3.45791 3.2327 3.50941C3.21373 3.5609 3.20512 3.61563 3.20736 3.67046C3.2096 3.72529 3.22265 3.77914 3.24575 3.82891C3.84542 5.11339 4.87794 6.14591 6.16242 6.74558C6.26386 6.78725 6.37764 6.78725 6.47909 6.74558C6.53105 6.72699 6.5788 6.69826 6.61957 6.66107C6.66035 6.62388 6.69332 6.57895 6.71659 6.52891L6.97492 5.94558C7.19032 6.02261 7.41016 6.08661 7.63325 6.13724C7.74436 6.16224 7.85686 6.18308 7.97075 6.19974C8.06552 6.22007 8.15023 6.2728 8.21031 6.34885C8.27039 6.4249 8.30208 6.51951 8.29992 6.61641L8.30825 7.91641Z' fill='%230263E0'/%3E%3C/svg%3E");
-    width: 24px;
-    height: 16px;
+    width: 22px;
+    height: 22px;
   }
+  
   .Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Transfer::before {
     content: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1.66675 4.99967C1.66675 4.76956 1.8533 4.58301 2.08341 4.58301H7.91675C8.14687 4.58301 8.33341 4.76956 8.33341 4.99967C8.33341 5.22979 8.14687 5.41634 7.91675 5.41634H2.08341C1.8533 5.41634 1.66675 5.22979 1.66675 4.99967Z' fill='%230263E0'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4.70529 1.78903C4.86801 1.62631 5.13183 1.62631 5.29455 1.78903L8.21121 4.7057C8.37393 4.86842 8.37393 5.13223 8.21121 5.29495L5.29455 8.21162C5.13183 8.37434 4.86801 8.37434 4.70529 8.21162C4.54257 8.0489 4.54257 7.78508 4.70529 7.62236L7.32733 5.00033L4.70529 2.37829C4.54257 2.21557 4.54257 1.95175 4.70529 1.78903Z' fill='%230263E0'/%3E%3C/svg%3E");
-    width: 24px;
-    height: 16px;
+    width: 22px;
+    height: 22px;
   }
+  
   .Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Call:hover::before {
     content: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.09992 5.41641C8.00825 5.41641 7.91242 5.38724 7.82075 5.36641C7.63512 5.3255 7.4527 5.27119 7.27492 5.20391C7.08162 5.13359 6.86915 5.13724 6.67838 5.21416C6.48762 5.29108 6.33204 5.43584 6.24159 5.62057L6.14992 5.80807C5.74409 5.58232 5.37116 5.30192 5.04159 4.97474C4.71441 4.64517 4.43401 4.27224 4.20825 3.86641L4.38325 3.74974C4.56799 3.65929 4.71275 3.50371 4.78967 3.31295C4.86659 3.12218 4.87024 2.90971 4.79992 2.71641C4.73376 2.53825 4.67948 2.35591 4.63742 2.17058C4.61659 2.07891 4.59992 1.98308 4.58742 1.88724C4.53682 1.59375 4.3831 1.32797 4.15393 1.13776C3.92476 0.947549 3.63521 0.845412 3.33742 0.849742H2.08742C1.90785 0.848056 1.73002 0.885081 1.56605 0.958296C1.40207 1.03151 1.2558 1.1392 1.13718 1.27403C1.01857 1.40885 0.930393 1.56766 0.878665 1.73962C0.826937 1.91159 0.81287 2.09268 0.83742 2.27057C1.05939 4.01615 1.8566 5.63802 3.10311 6.88001C4.34962 8.12199 5.97438 8.91329 7.72075 9.12891H7.87909C8.18634 9.12936 8.483 9.01663 8.71242 8.81224C8.84424 8.69434 8.94954 8.54982 9.02136 8.38821C9.09319 8.2266 9.12991 8.05159 9.12909 7.87474V6.62474C9.12398 6.33532 9.01859 6.05664 8.83089 5.83627C8.6432 5.6159 8.38484 5.4675 8.09992 5.41641ZM8.30825 7.91641C8.30818 7.97557 8.29551 8.03404 8.27108 8.08792C8.24665 8.1418 8.21103 8.18986 8.16659 8.22891C8.12003 8.26911 8.06559 8.29914 8.00675 8.31707C7.94792 8.33501 7.88598 8.34046 7.82492 8.33308C6.26446 8.13299 4.81502 7.41911 3.70522 6.30403C2.59542 5.18895 1.88842 3.73613 1.69575 2.17474C1.68912 2.11371 1.69493 2.05196 1.71284 1.99324C1.73074 1.93451 1.76037 1.88003 1.79992 1.83308C1.83897 1.78863 1.88703 1.75301 1.94091 1.72858C1.99479 1.70416 2.05326 1.69148 2.11242 1.69141H3.36242C3.45931 1.68925 3.55393 1.72094 3.62998 1.78102C3.70603 1.8411 3.75876 1.92581 3.77909 2.02057C3.79575 2.13446 3.81659 2.24696 3.84159 2.35807C3.88972 2.57772 3.95378 2.79357 4.03325 3.00391L3.44992 3.27474C3.40004 3.29763 3.35518 3.33014 3.3179 3.37041C3.28063 3.41068 3.25167 3.45791 3.2327 3.50941C3.21373 3.5609 3.20512 3.61563 3.20736 3.67046C3.2096 3.72529 3.22265 3.77914 3.24575 3.82891C3.84542 5.11339 4.87794 6.14591 6.16242 6.74558C6.26386 6.78725 6.37764 6.78725 6.47909 6.74558C6.53105 6.72699 6.5788 6.69826 6.61957 6.66107C6.66035 6.62388 6.69332 6.57895 6.71659 6.52891L6.97492 5.94558C7.19032 6.02261 7.41016 6.08661 7.63325 6.13724C7.74436 6.16224 7.85686 6.18308 7.97075 6.19974C8.06552 6.22007 8.15023 6.2728 8.21031 6.34885C8.27039 6.4249 8.30208 6.51951 8.29992 6.61641L8.30825 7.91641Z' fill='white'/%3E%3C/svg%3E");
-    width: 24px;
-    height: 16px;
+    width: 22px;
+    height: 22px;
   }
+  
   .Twilio-WorkerDirectory-ButtonContainer .Twilio-Icon-Transfer:hover::before {
     content: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1.66675 4.99967C1.66675 4.76956 1.8533 4.58301 2.08341 4.58301H7.91675C8.14687 4.58301 8.33341 4.76956 8.33341 4.99967C8.33341 5.22979 8.14687 5.41634 7.91675 5.41634H2.08341C1.8533 5.41634 1.66675 5.22979 1.66675 4.99967Z' fill='white'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4.70529 1.78903C4.86801 1.62631 5.13183 1.62631 5.29455 1.78903L8.21121 4.7057C8.37393 4.86842 8.37393 5.13223 8.21121 5.29495L5.29455 8.21162C5.13183 8.37434 4.86801 8.37434 4.70529 8.21162C4.54257 8.0489 4.54257 7.78508 4.70529 7.62236L7.32733 5.00033L4.70529 2.37829C4.54257 2.21557 4.54257 1.95175 4.70529 1.78903Z' fill='white'/%3E%3C/svg%3E");
-    width: 24px;
-    height: 16px;
+    width: 22px;
+    height: 22px;
   }
+
+  .Twilio-WorkerDirectory-ButtonContainer > .Twilio-IconButton {
+	  margin-right: 4px;
+  }
+  
+  /*AGENT DESKTOP VIEW*/
 
   .Twilio-AgentDesktopView\\.Panel1 [role=separator] svg {
 	  display: none;
@@ -227,11 +297,24 @@ injectGlobal`
   .Twilio-AgentDesktopView\\.Panel1 [role=separator]::before {
     content: url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.25 1.75C3.25 1.45333 3.16203 1.16332 2.9972 0.916644C2.83238 0.66997 2.59812 0.477711 2.32403 0.36418C2.04994 0.250648 1.74834 0.220943 1.45737 0.278821C1.16639 0.336699 0.899119 0.47956 0.68934 0.689339C0.479562 0.899118 0.3367 1.16639 0.278823 1.45736C0.220945 1.74834 0.25065 2.04993 0.364181 2.32402C0.477713 2.59811 0.669972 2.83238 0.916645 2.9972C1.16332 3.16203 1.45333 3.25 1.75 3.25C2.14783 3.25 2.52936 3.09196 2.81066 2.81066C3.09197 2.52935 3.25 2.14782 3.25 1.75ZM10.75 1.75C10.75 2.04667 10.838 2.33668 11.0028 2.58335C11.1676 2.83003 11.4019 3.02229 11.676 3.13582C11.9501 3.24935 12.2517 3.27905 12.5426 3.22118C12.8336 3.1633 13.1009 3.02044 13.3107 2.81066C13.5204 2.60088 13.6633 2.33361 13.7212 2.04263C13.7791 1.75166 13.7494 1.45006 13.6358 1.17597C13.5223 0.901884 13.33 0.667616 13.0834 0.502794C12.8367 0.337972 12.5467 0.249999 12.25 0.249999C11.8522 0.249999 11.4706 0.408034 11.1893 0.689339C10.908 0.970643 10.75 1.35217 10.75 1.75ZM5.5 1.75C5.5 2.04667 5.58797 2.33668 5.7528 2.58335C5.91762 2.83003 6.15189 3.02229 6.42598 3.13582C6.70007 3.24935 7.00166 3.27905 7.29264 3.22118C7.58361 3.1633 7.85088 3.02044 8.06066 2.81066C8.27044 2.60088 8.4133 2.33361 8.47118 2.04263C8.52906 1.75166 8.49935 1.45006 8.38582 1.17597C8.27229 0.901885 8.08003 0.667617 7.83336 0.502794C7.58668 0.337972 7.29667 0.249999 7 0.249999C6.60218 0.249999 6.22065 0.408034 5.93934 0.689339C5.65804 0.970644 5.5 1.35217 5.5 1.75Z' fill='%238A91A8'/%3E%3Cpath d='M3.25 6.25C3.25 5.95333 3.16203 5.66332 2.9972 5.41664C2.83238 5.16997 2.59812 4.97771 2.32403 4.86418C2.04994 4.75065 1.74834 4.72094 1.45737 4.77882C1.16639 4.8367 0.899119 4.97956 0.68934 5.18934C0.479562 5.39912 0.3367 5.66639 0.278823 5.95736C0.220945 6.24834 0.25065 6.54993 0.364181 6.82402C0.477713 7.09811 0.669972 7.33238 0.916645 7.4972C1.16332 7.66203 1.45333 7.75 1.75 7.75C2.14783 7.75 2.52936 7.59196 2.81066 7.31066C3.09197 7.02935 3.25 6.64782 3.25 6.25ZM10.75 6.25C10.75 6.54667 10.838 6.83668 11.0028 7.08335C11.1676 7.33003 11.4019 7.52229 11.676 7.63582C11.9501 7.74935 12.2517 7.77905 12.5426 7.72118C12.8336 7.6633 13.1009 7.52044 13.3107 7.31066C13.5204 7.10088 13.6633 6.83361 13.7212 6.54263C13.7791 6.25166 13.7494 5.95006 13.6358 5.67597C13.5223 5.40188 13.33 5.16762 13.0834 5.00279C12.8367 4.83797 12.5467 4.75 12.25 4.75C11.8522 4.75 11.4706 4.90803 11.1893 5.18934C10.908 5.47064 10.75 5.85217 10.75 6.25ZM5.5 6.25C5.5 6.54667 5.58797 6.83668 5.7528 7.08335C5.91762 7.33003 6.15189 7.52229 6.42598 7.63582C6.70007 7.74935 7.00166 7.77905 7.29264 7.72118C7.58361 7.6633 7.85088 7.52044 8.06066 7.31066C8.27044 7.10088 8.4133 6.83361 8.47118 6.54263C8.52906 6.25166 8.49935 5.95006 8.38582 5.67597C8.27229 5.40188 8.08003 5.16762 7.83336 5.00279C7.58668 4.83797 7.29667 4.75 7 4.75C6.60218 4.75 6.22065 4.90803 5.93934 5.18934C5.65804 5.47064 5.5 5.85217 5.5 6.25Z' fill='%238A91A8'/%3E%3C/svg%3E");
 	  width: 24px;
-	  top: 20%;
-	  left: 50%;
+	  top: 8%;
+	  left: 48%;
   }
-
-
+  
+  /*SIDE BAR*/
+  
+  .Twilio-SideNav-Container > .Twilio-SideNav {
+    background: #4B5671;
+  }
+  .Twilio-SideNav-Container > div > .Twilio-SideNav-default > button {
+	  background: #4B5671;
+  }
+  .Twilio-SideNav-Container > div > .Twilio-SideNav-default > button > .Twilio-Side-Link-IconContainer > div,
+  .Twilio-SideNav-Container > div > .Twilio-SideNav-default > button > div > span{
+    color: white;
+    font-family: 'Inter', sans-serif;
+  }
+  
   /*.Twilio-SideNav-Container > div > div.Twilio-SideNav-default > button:nth-child(2) > div.Twilio-Side-Link-IconContainer > div > svg,
   .Twilio-SideNav-Container > div > div.Twilio-SideNav-default > button:nth-child(3) > div.Twilio-Side-Link-IconContainer > div > svg,
   .Twilio-SideNav-Container > div > div.Twilio-SideNav-default > button:nth-child(4) > div.Twilio-Side-Link-IconContainer > div > svg {
