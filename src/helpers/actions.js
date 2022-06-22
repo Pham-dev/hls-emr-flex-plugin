@@ -80,13 +80,13 @@ export const startOutboundCall = async (payload, original) => {
   console.log("PAYLOAD", payload);
   console.log("ORIGINAL", original);
   const newPayload = payload;
- 
+
   delete newPayload.taskAttributes.channelSid;
   delete newPayload.taskAttributes.conversationSid;
-  newPayload.taskAttributes.channelType = 'voice';
+  newPayload.taskAttributes.channelType = "voice";
   console.log("newPayload", newPayload);
   original(newPayload);
-}
+};
 
 /**
  * This replaces Flex's default TransferTask action with our own implementation.
@@ -103,5 +103,32 @@ export const setUpActions = () => {
 
   Actions.replaceAction("StartOutboundCall", (payload, original) => {
     startOutboundCall(payload, original);
+  });
+
+  Actions.replaceAction("SelectTask", (payload, original) => {
+    if (payload.task && payload.task.attributes)
+      payload.task.attributes.name = "Bob Johnson";
+    console.log("LOLOLOL0", "Selected task");
+    original(payload);
+  });
+
+  Actions.replaceAction("SetWorkerActivity", (payload, original) => {
+    console.log("LOLOLOL", payload);
+    original(payload);
+  });
+
+  Actions.replaceAction("SetWorkerAttributes", (payload, original) => {
+    console.log("LOLOLOL2", payload);
+    original(payload);
+  });
+
+  Actions.replaceAction("SetTaskAttributes", (payload, original) => {
+    console.log("LOLOLOL3", payload);
+    original(payload);
+  });
+
+  Actions.replaceAction("SetActivity", (payload, original) => {
+    console.log("LOLOLOL4", payload);
+    original(payload);
   });
 };

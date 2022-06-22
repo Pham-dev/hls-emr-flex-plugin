@@ -1,13 +1,13 @@
-import { VERSION } from '@twilio/flex-ui';
-import { FlexPlugin } from '@twilio/flex-plugin';
-import './GlobalStyles.js';
+import { VERSION } from "@twilio/flex-ui";
+import { FlexPlugin } from "@twilio/flex-plugin";
+import "./GlobalStyles.js";
 
-import reducers, { namespace } from './states';
-import { CustomTheme } from './CustomTheme';
+import reducers, { namespace } from "./states";
+import { CustomTheme } from "./CustomTheme";
 
-import { setUpActions, setUpComponents, setUpNotifications } from './helpers';
+import { setUpActions, setUpComponents, setUpNotifications } from "./helpers";
 
-const PLUGIN_NAME = 'HlsEmrPlugin';
+const PLUGIN_NAME = "HlsEmrPlugin";
 
 function getFlexObject(workerClient) {
   return {
@@ -18,8 +18,8 @@ function getFlexObject(workerClient) {
     workspaceSid: workerClient.workspaceSid,
     token: workerClient._config.token,
     accountSid: workerClient.accountSid,
-    sid: workerClient.sid
-  }
+    sid: workerClient.sid,
+  };
 }
 
 export default class HlsEmrPlugin extends FlexPlugin {
@@ -37,18 +37,39 @@ export default class HlsEmrPlugin extends FlexPlugin {
   async init(flex, manager) {
     //loadCSS('https://almond-penguin-7632.twil.io/assets/theme.css');
     // loadCSS('/theme.css');
-  
+
     // console.log(manager.store.getState());
     this.registerReducers(manager);
     const flexInfo = getFlexObject(manager.workerClient);
-    
+
     const configuration = {
       colorTheme: CustomTheme,
     };
-    flex.MainHeader.defaultProps.logoUrl = "https://hls-site-4115-dev.twil.io/owlhealth/images/logoOwlHealth.png"
+    flex.MainHeader.defaultProps.logoUrl =
+      "https://hls-site-4115-dev.twil.io/owlhealth/images/logoOwlHealth.png";
     manager.updateConfig(configuration);
     manager.strings.NoTasksTitle = "Task Status";
     manager.strings.NoTasks = "No Patient Tasks";
+
+    manager.workerClient.on("reservationCreated", async function (reservation) {
+      console.log(
+        reservation.task.sid,
+        "<====== TASK SID ==========================="
+      );
+      console.log(
+        reservation.task.taskChannelSid,
+        "<====== TASK CHANNEL SID ==========================="
+      );
+      console.log(
+        reservation.task.attributes,
+        "<====== TASK ATTRIBUTES ==========================="
+      );
+
+      const taskSid = reservation.task.sid;
+      const workspaceSid = flex.si;
+
+      console.log("Workspace sid?", reservation.workspaceSid);
+    });
 
     //console.log("overall state", manager.store.getState());
     setUpComponents(flex, manager, flexInfo);
@@ -64,7 +85,9 @@ export default class HlsEmrPlugin extends FlexPlugin {
   registerReducers(manager) {
     if (!manager.store.addReducer) {
       // eslint-disable-next-line
-      console.error(`You need FlexUI > 1.9.0 to use built-in redux; you are currently on ${VERSION}`);
+      console.error(
+        `You need FlexUI > 1.9.0 to use built-in redux; you are currently on ${VERSION}`
+      );
       return;
     }
 
