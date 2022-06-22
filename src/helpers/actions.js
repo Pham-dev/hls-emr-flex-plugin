@@ -80,13 +80,13 @@ export const startOutboundCall = async (payload, original) => {
   console.log("PAYLOAD", payload);
   console.log("ORIGINAL", original);
   const newPayload = payload;
- 
+
   delete newPayload.taskAttributes.channelSid;
   delete newPayload.taskAttributes.conversationSid;
-  newPayload.taskAttributes.channelType = 'voice';
+  newPayload.taskAttributes.channelType = "voice";
   console.log("newPayload", newPayload);
   original(newPayload);
-}
+};
 
 /**
  * This replaces Flex's default TransferTask action with our own implementation.

@@ -16,12 +16,7 @@ import { withTaskContext } from "@twilio/flex-ui";
 import NoTasksPanel2 from "../NoTasksPanel2/NoTasksPanel2";
 import PatientInteractionPane from "./Panes/PatientInteractionPane/PatientInteractionPane";
 import PreventativeCarePane from "./Panes/PreventativeCarePane/PreventativeCarePane";
-import {
-  getAccessTokenInfo,
-  getClientId,
-  getPatientInfoByName,
-  getPatientByPhone,
-} from "../../helpers";
+import { getPatientInfoByName, getPatientByPhone } from "../../helpers";
 
 const hasAssignedTask = (tasks) => {
   for (let task of tasks) {
@@ -33,6 +28,7 @@ const hasAssignedTask = (tasks) => {
 
 // It is recommended to keep components stateless and use redux for managing states
 const CustomPanel2 = (props) => {
+  //Fetches patient information out of OpenEMR via phone number or patient name.
   useEffect(() => {
     if (props.task && props.task.attributes && props.task.attributes.name) {
       try {
@@ -44,60 +40,38 @@ const CustomPanel2 = (props) => {
         props.fetchingFhirData();
 
         const Token = props.manager.user.token;
-        const body = {
-          Token,
-        };
 
         (async () => {
           try {
-            const client_id = await getClientId(body);
-
-            //We must get a non null client_id
-            if (!client_id) throw new Error();
-
-            const access_token_info = await getAccessTokenInfo(
-              client_id,
-              Token
-            );
-
-            if (!access_token_info) throw new Error();
-
             var hasNumber = /\d/;
             if (hasNumber.test(nameOrPhone)) {
               //check if is phone number
 
-              const patientResult = await getPatientByPhone(
-                access_token_info.access_token,
-                nameOrPhone,
-                Token
-              );
+              const patientResult = await getPatientByPhone(nameOrPhone, Token);
 
-              const info = {
-                accessTokenInfo: access_token_info,
-                clientId: client_id,
-                patientInfo: patientResult,
-              };
+              if (patientResult.error) {
+                props.fetchingFhirDataFailure();
+                return;
+              }
 
-              props.fetchingFhirDataSuccess(info);
+              props.fetchingFhirDataSuccess(patientResult.result);
             } else {
               const names = nameOrPhone.split(" ");
               const first_name = names[0];
               const last_name = names[names.length - 1];
 
               const patientResult = await getPatientInfoByName(
-                access_token_info.access_token,
                 first_name,
                 last_name,
                 Token
               );
 
-              const info = {
-                accessTokenInfo: access_token_info,
-                clientId: client_id,
-                patientInfo: patientResult,
-              };
+              if (patientResult.error) {
+                props.fetchingFhirDataFailure();
+                return;
+              }
 
-              props.fetchingFhirDataSuccess(info);
+              props.fetchingFhirDataSuccess(patientResult.result);
             }
           } catch (err) {
             console.log("FHIR FAILURE, USING DEFAULT");
