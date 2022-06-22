@@ -41,104 +41,58 @@ export const CustomTheme = {
       base3: lightGray,
       base0: twilioRed,
       tabSelectedColor: msgInputBgColor,
-  },
-  overrides: {
-    MainHeader: {
-        Container: {
-          background: twilioWhite,
-          color: darkGray,
-          fontFamily: "'Inter', sans-serif"
-        },
-        Button: {
-          background: twilioWhite,
-          color: darkGray3
-        },
-    },
-    SideNav: {
-        Container: {
-          background: darkGray3,
-          fontFamily: "'Inter', sans-serif"
-        },
-        Button: {
-          background: darkGray3
-        },
-        Icon: {
-          color: twilioWhite,
-        }
-    },
-    TaskCanvasHeader: {
-      EndTaskButton: {
-        background: twilioBlue,
-      },
-      WrapUpTaskButton: {
-        background: twilioRed,
-      }
-    },
-    TaskList: {
-      Filter: {
-        Menu: {
-          background: lightGray2
-        },
-        Container: {
-          background: lightGray2
-        },
-        EntryButton: {
-          background: lightGray2
-        }
-      },
-      Item: {
-        Container: {
-          background: lightGray2,
-          //borderRadius: '8px',
-        },
-        SelectedContainer: {
-          background: darkGray2,
-          borderRadius: '8px',
-          color: twilioWhite,
-          borderBottom: 'none'
-        },
-        Icon: {
-          //background: lightGray2,
-          borderRadius: '50%',
-        },
-        Buttons: {}
-      }
-    },
-    TaskCard: {
-      Container: {
-        Default: {
-          //height: '54px'
-        }
-      },
-      IconArea: {
-        Default: {
-          display: 'none'
-        }
-      },
-    },
-    Chat: {
-      MessageListItem: {
-        FromMe: brandMessageBubbleColors(darkGray3, twilioWhite),
-        FromOthers: brandMessageBubbleColors(brandColor, brandTextColor2),
-      },
-      MessageInput: {
-        Button: {
-          backgroundColor: msgInputBgColor,
-          color: twilioWhite,
-        }
-      },
-    },
-    WorkerDirectory: {
-      Container: {
-        background: twilioWhite,
-        border: '1px solid #E1E3EA',
-        boxShadow: '0px 16px 24px 4px rgba(18, 28, 45, 0.2)',
-        borderRadius: '8px',
-        width: '350px',
-        height: '303px',
-        fontFamily: "'Inter', sans-serif"
-        //marginTop: '334px'
-      },
-    },
   }
 };
+
+export const componentThemeOverrides = {
+  MainHeader: {
+    Container: {
+      background: twilioWhite,
+      color: darkGray,
+      fontFamily: "'Inter', sans-serif"
+    },
+  },
+  TaskList: {
+    Filter: {
+      Menu: {
+        Item: {
+          background: lightGray2
+        },
+      },
+      Container: {
+        background: lightGray2
+      },
+    },
+    Item: {
+      Container: {
+        background: lightGray2,
+        //borderRadius: '8px',
+      },
+      SelectedContainer: {
+        background: darkGray2,
+        borderRadius: '8px',
+        color: twilioWhite,
+        borderBottom: 'none'
+      },
+    }
+  },
+  Chat: {
+    MessageListItem: {
+      FromMe: brandMessageBubbleColors(darkGray3, twilioWhite),
+      FromOthers: brandMessageBubbleColors(brandColor, brandTextColor2),
+    },
+  },
+  WorkerDirectory: {
+    Container: {
+      background: twilioWhite,
+      border: '1px solid #E1E3EA',
+      boxShadow: '0px 16px 24px 4px rgba(18, 28, 45, 0.2)',
+      borderRadius: '8px',
+      width: '350px',
+      height: '303px',
+      fontFamily: "'Inter', sans-serif"
+      //marginTop: '334px'
+    },
+  },
+};
+

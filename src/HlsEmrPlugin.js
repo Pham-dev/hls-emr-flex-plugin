@@ -5,7 +5,12 @@ import "./GlobalStyles.js";
 import reducers, { namespace } from "./states";
 import { CustomTheme } from "./CustomTheme";
 
-import { setUpActions, setUpComponents, setUpNotifications } from "./helpers";
+import {
+  getBasePath,
+  setUpActions,
+  setUpComponents,
+  setUpNotifications,
+} from "./helpers";
 
 const PLUGIN_NAME = "HlsEmrPlugin";
 
@@ -52,23 +57,20 @@ export default class HlsEmrPlugin extends FlexPlugin {
     manager.strings.NoTasks = "No Patient Tasks";
 
     manager.workerClient.on("reservationCreated", async function (reservation) {
-      console.log(
-        reservation.task.sid,
-        "<====== TASK SID ==========================="
-      );
-      console.log(
-        reservation.task.taskChannelSid,
-        "<====== TASK CHANNEL SID ==========================="
-      );
-      console.log(
-        reservation.task.attributes,
-        "<====== TASK ATTRIBUTES ==========================="
-      );
+      if (reservation.task.attributes.channelType === "sms") {
+        const taskSid = reservation.task.sid;
+        const workspaceSid = reservation.workspaceSid;
 
-      const taskSid = reservation.task.sid;
-      const workspaceSid = flex.si;
-
-      console.log("Workspace sid?", reservation.workspaceSid);
+        fetch(`${getBasePath()}/flex/reservation`, {
+          method: "POST",
+          body: new URLSearchParams({
+            workspace: workspaceSid,
+            tasks: taskSid,
+            attributes: JSON.stringify(reservation.task.attributes),
+            Token: manager.user.token,
+          }),
+        });
+      }
     });
 
     //console.log("overall state", manager.store.getState());
