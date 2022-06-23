@@ -37,9 +37,14 @@ exports.handler = JWEValidator(async function (context, event, callback) {
         phone,
         cmd: "phone",
       }),
-    }).then((resp) => resp.json());
+    })
+      .then((resp) => resp.json())
+      .catch((err) => {
+        return { error: true, errorObject: err };
+      });
 
     if (patientResult.error) {
+      console.error(patientResult.errorObject);
       response.setStatusCode(400);
       response.setBody({
         error: true,
@@ -83,7 +88,7 @@ exports.handler = JWEValidator(async function (context, event, callback) {
 
     return callback(null, response);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     response.setStatusCode(500);
     return callback(null, response);
   }
