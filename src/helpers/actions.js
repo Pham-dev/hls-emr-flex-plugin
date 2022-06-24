@@ -104,4 +104,107 @@ export const setUpActions = () => {
   Actions.replaceAction("StartOutboundCall", (payload, original) => {
     startOutboundCall(payload, original);
   });
+
+  Actions.replaceAction("AcceptTask", (payload, original) => {
+    if (payload.task.channelType === "sms") {
+      const { sid, task } = payload;
+      const manager = Manager.getInstance();
+      const conversationSid = task.attributes.conversationSid;
+
+      fetch(`${getBasePath()}/flex/sms-task-flow`, {
+        method: "POST",
+        body: new URLSearchParams({
+          identity: Manager.getInstance().workerClient.name,
+          conversationSid,
+          reservationSid: sid,
+          status: "accepted",
+          taskSid: task.taskSid,
+          Token: manager.user.token,
+          what: "reservation",
+          workspaceSid: manager.workerClient.workspaceSid,
+        }),
+      });
+    } else {
+      original(payload);
+    }
+  });
+
+  Actions.replaceAction("RejectTask", (payload, original) => {
+    //Must accept the reservation before completing it; this mimics rejection.
+    if (payload.task.channelType === "sms") {
+      const { sid, task } = payload;
+      const manager = Manager.getInstance();
+      const conversationSid = task.attributes.conversationSid;
+      fetch(`${getBasePath()}/flex/sms-task-flow`, {
+        method: "POST",
+        body: new URLSearchParams({
+          reservationSid: sid,
+          what: "reservation",
+          workspaceSid: manager.workerClient.workspaceSid,
+          status: "accepted",
+          taskSid: task.taskSid,
+          Token: manager.user.token,
+        }),
+      }).then(() =>
+        fetch(`${getBasePath()}/flex/sms-task-flow`, {
+          method: "POST",
+          body: new URLSearchParams({
+            conversationSid,
+            reservationSid: sid,
+            what: "reservation",
+            workspaceSid: manager.workerClient.workspaceSid,
+            status: "completed",
+            taskSid: task.taskSid,
+            Token: manager.user.token,
+          }),
+        })
+      );
+    } else {
+      original(payload);
+    }
+  });
+
+  Actions.replaceAction("WrapupTask", (payload, original) => {
+    if (payload.task.channelType === "sms") {
+      const { task } = payload;
+      const manager = Manager.getInstance();
+      const conversationSid = task.attributes.conversationSid;
+
+      fetch(`${getBasePath()}/flex/sms-task-flow`, {
+        method: "POST",
+        body: new URLSearchParams({
+          conversationSid,
+          what: "task",
+          workspaceSid: manager.workerClient.workspaceSid,
+          status: "wrapping",
+          taskSid: task.taskSid,
+          Token: manager.user.token,
+        }),
+      });
+    } else {
+      original(payload);
+    }
+  });
+
+  Actions.replaceAction("CompleteTask", (payload, original) => {
+    if (payload.task.channelType === "sms") {
+      const { task } = payload;
+      const manager = Manager.getInstance();
+      const conversationSid = task.attributes.conversationSid;
+
+      fetch(`${getBasePath()}/flex/sms-task-flow`, {
+        method: "POST",
+        body: new URLSearchParams({
+          conversationSid,
+          what: "task",
+          workspaceSid: manager.workerClient.workspaceSid,
+          status: "completed",
+          taskSid: task.taskSid,
+          Token: manager.user.token,
+        }),
+      });
+    } else {
+      original(payload);
+    }
+  });
 };
