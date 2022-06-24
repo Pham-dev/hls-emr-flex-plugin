@@ -178,8 +178,11 @@ const getPatient = (context, access_token_info, client_id, event) => {
           // multiple match on given OR famiy, so filter
           const matches = data.entry.filter((e) => {
             return (
-              e.resource.name[0].family === last_name &&
-              e.resource.name[0].given.includes(first_name)
+              e.resource.name[0].family?.toLowerCase() ===
+                last_name.toLowerCase() &&
+              e.resource.name[0].given
+                ?.toLowerCase()
+                .includes(first_name.toLowerCase())
             );
           });
           patient = matches.length === 0 ? defaultPatient : matches[0].resource;
