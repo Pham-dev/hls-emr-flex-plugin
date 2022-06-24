@@ -1,6 +1,6 @@
 {
   "name": "hls-emr",
-  "version": "3.0.2",
+  "version": "1.0.4",
   "private": true,
   "scripts": {
     "postinstall": "flex-plugin pre-script-check"

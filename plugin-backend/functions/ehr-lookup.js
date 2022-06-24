@@ -177,11 +177,18 @@ const getPatient = (context, access_token_info, client_id, event) => {
         } else {
           // multiple match on given OR famiy, so filter
           const matches = data.entry.filter((e) => {
+            if (
+              !e.resource?.name[0]?.family ||
+              !e.resource?.name[0]?.given[0]
+            ) {
+              return false;
+            }
+
             return (
-              e.resource.name[0].family?.toLowerCase() ===
+              e.resource.name[0].family.toLowerCase() ===
                 last_name.toLowerCase() &&
-              e.resource.name[0].given
-                ?.toLowerCase()
+              e.resource.name[0].given[0]
+                .toLowerCase()
                 .includes(first_name.toLowerCase())
             );
           });
