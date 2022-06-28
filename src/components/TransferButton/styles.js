@@ -9,7 +9,7 @@ export const StyledButton = styled('button')`
   gap: 6px;
   width: 38px;
   height: 28px;
-  background: ${props => props.pressed ? '#4B5671' : '#E1E2E9'};
+  background: ${props => props.inverted ? '#4B5671' : '#E1E2E9'};
   border-radius: 39px;
 	cursor: pointer;
 	border: none;
@@ -25,6 +25,6 @@ export const StyledButton = styled('button')`
     }
   }
   svg {
-    fill: #626B83
+    fill: ${props => props.inverted ? 'white' : '#626B83'};
   }
 `;
