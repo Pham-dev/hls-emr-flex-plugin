@@ -79,6 +79,16 @@ injectGlobal`
     margin-bottom: 8px !important;
   }
 
+  .Twilio-TaskCanvas-default > .Twilio-TaskCanvasTabs > .Twilio-Tabs-Labels {
+	  display: flex;
+	  justify-content: center;
+  }
+
+  .Twilio-TaskCanvas-default > .Twilio-TaskCanvasTabs > .Twilio-Tabs-Labels > div > button > span {
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+
   .Twilio-TaskCanvas-default > .Twilio-TaskCanvasHeader > .Twilio-TaskCanvasHeader-default > .Twilio-TaskCanvasHeader-EndButton {
     padding: 6px 10px;
 		gap: 6px;
@@ -90,6 +100,7 @@ injectGlobal`
 		height: 28px;
 		width: 84px;
     text-transform: capitalize;
+	  font-weight: bold;
   }
 
   .Twilio-InlineMessage {
@@ -194,6 +205,18 @@ injectGlobal`
 	  width: 24px;
     height: 24px;
   }
+  .Twilio-MessagingCanvas > .Twilio-MessagingCanvas-default > .Twilio-MessageInputV2 > .Twilio-MessageInputV2-default {
+	  flex-direction: row;
+  }
+
+  .Twilio-MessageInputV2 > .Twilio-MessageInputV2-default > div:nth-child(1) {
+	  width: 85%;
+  }
+  
+  .Twilio-MessageInputV2 > .Twilio-MessageInputV2-default > div:nth-child(2) {
+    width: 15%;
+    margin-bottom: 0;
+  }
   
   /*WORKER DIRECTORY*/
 
@@ -222,6 +245,21 @@ injectGlobal`
     border-radius: 8px;
     height: 38px;*/
   }
+
+  .Twilio-WorkerDirectory-Workers .Twilio-UserCard-InfoContainer-FirstLine span{
+	  font-size: 12px;
+    color: #4B5671;
+	  font-weight: 600;
+  }
+  .Twilio-WorkerDirectory-Workers .Twilio-UserCard-InfoContainer-SecondLine span {
+	  font-size: 8px;
+    text-transform: uppercase;
+  }
+  .Twilio-WorkerDirectory-Queues > div > .Twilio-WorkerDirectory-QueueContent span{
+    font-weight: 600;
+    font-size: 12px;
+    color: #606B85;
+  }
   .Twilio-WorkerDirectory-Workers, .Twilio-WorkerDirectory-Queues {
     padding: 0 12px;
     border: none;
@@ -236,6 +274,12 @@ injectGlobal`
     opacity: 0.8;
     border-radius: 4px;
     border: none;
+  }
+  .Twilio-WorkerDirectory-Worker:hover .Twilio-UserCard-InfoContainer-FirstLine span,
+  .Twilio-WorkerDirectory-Worker:hover .Twilio-UserCard-InfoContainer-SecondLine span,
+  .Twilio-WorkerDirectory-Queue:hover .Twilio-WorkerDirectory-QueueContent span,
+  .Twilio-WorkerDirectory-Queue:hover .Twilio-WorkerDirectory-QueueAvatar {
+	  color: #0263E0;
   }
   .Twilio-WorkerDirectory-ButtonContainer .Twilio-IconButton {
     background: #CCE4FF;
