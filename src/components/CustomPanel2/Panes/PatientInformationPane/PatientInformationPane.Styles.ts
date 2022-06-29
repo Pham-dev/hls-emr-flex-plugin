@@ -4,7 +4,7 @@ export const PatientInformationPaneBodyStyles = styled('div')
   `
     padding: 20px;
     max-width: 519px;
-    width: 49%;
+    width: 50%;
     height: 201px;
     border: 1px solid #E1E3E9;
     box-sizing: border-box;

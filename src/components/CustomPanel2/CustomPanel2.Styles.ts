@@ -21,7 +21,7 @@ export const CustomPanel2Styles = styled("div")`
 
   .first-row {
     display: flex;
-    gap: 22px;
+    gap: 10px;
   }
 
   .flex-item {
@@ -37,15 +37,8 @@ export const CustomPanel2Styles = styled("div")`
   .flex-row {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     // gap: 22px;
     padding: 12px 0;
-  }
-
-  .first-row {
-    display: flex;
-    //gap: 22px;
-    height: 80%;
   }
 
   .second-row {

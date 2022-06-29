@@ -121,7 +121,7 @@ const CustomPanel2 = (props) => {
             <Typography className="patient-info" component={"h1"}>
               <strong>{props.task.attributes.name}</strong>
             </Typography>
-            <div className="flex-row">
+            <div className="flex-row first-row">
               <CareManagementPane manager={props.manager} />
               <PatientInformationPane
                 name={props.task.attributes.name}
@@ -149,7 +149,7 @@ const CustomPanel2 = (props) => {
             <Typography className="patient-info" component={"h1"}>
               <strong>{props.task.attributes.name}</strong>
             </Typography>
-            <div className="flex-row">
+            <div className="flex-row first-row">
               <PatientInformationPane
                 name={props.task.attributes.name}
                 patientInfo={props.patientInfo}

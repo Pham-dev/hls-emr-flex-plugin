@@ -234,7 +234,7 @@ injectGlobal`
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 15px;
     color: #AEB2C1;
     letter-spacing: normal;

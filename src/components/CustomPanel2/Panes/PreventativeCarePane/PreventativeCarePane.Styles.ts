@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const PreventativeCarePaneStyles = styled('div')
   `
     max-width: 519px;
-    width: 49%;
+    width: 50%;
     height: 201px;
     border: 1px solid #E1E3E9;
     box-sizing: border-box;
